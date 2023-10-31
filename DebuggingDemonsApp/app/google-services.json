@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924702992194",
+    "project_id": "inventory-38916",
+    "storage_bucket": "inventory-38916.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924702992194:android:349e226d2d1e7d72bccadb",
+        "android_client_info": {
+          "package_name": "com.example.debuggingdemonsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXDqY7lZJ6vPrzXD42o48ufY0PNPoSdls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

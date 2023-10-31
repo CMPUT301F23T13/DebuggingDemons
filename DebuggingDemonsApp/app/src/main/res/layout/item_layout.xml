@@ -3,14 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/item_description"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:text="Description" />
 
-    <!-- TODO: Add views for other item fields -->
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date of Purchase" />
+
+    <!-- ... add other TextViews for make, model, serialNumber, estimatedValue, comment ... -->
 
 </LinearLayout>

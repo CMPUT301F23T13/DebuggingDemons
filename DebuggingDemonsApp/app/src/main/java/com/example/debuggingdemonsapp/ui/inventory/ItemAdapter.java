@@ -1,37 +1,37 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.databinding.ItemLayoutBinding;
 import com.example.debuggingdemonsapp.model.Item;
+import java.util.ArrayList;
 
-import java.util.List;
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
-    private List<Item> items;
+    private final ArrayList<Item> items;
+    private final LayoutInflater layoutInflater;
 
-    public ItemAdapter(List<Item> items) {
+    public ItemAdapter(Context context, ArrayList<Item> items) {
         this.items = items;
+        this.layoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        return new ViewHolder(view);
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemLayoutBinding binding = ItemLayoutBinding.inflate(layoutInflater, parent, false);
+        return new ItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.description.setText(item.getDescription());
-        // TODO: Bind other item fields
+        holder.binding.textViewDescription.setText(item.getDescription());
+        holder.binding.textViewDate.setText(item.getDateOfPurchase());
+        // ... set other fields here ...
     }
 
     @Override
@@ -39,14 +39,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return items.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView description;
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
+        final ItemLayoutBinding binding;
 
-        public ViewHolder(View view) {
-            super(view);
-            description = view.findViewById(R.id.item_description);
-            // TODO: Find and initialize other views
+        ItemViewHolder(ItemLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }
-
