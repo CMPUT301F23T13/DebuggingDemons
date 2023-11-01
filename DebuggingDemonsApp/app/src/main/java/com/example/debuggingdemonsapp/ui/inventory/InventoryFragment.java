@@ -5,74 +5,74 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.debuggingdemonsapp.R;
-import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
+import com.example.debuggingdemonsapp.ui.inventory.ItemAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
-public class InventoryFragment extends Fragment {
+public class InventoryFragment extends Fragment implements AddInventoryFragment.OnFragmentInteractionListener {
 
-    private InventoryViewModel inventoryViewModel;
-    private FragmentInventoryBinding binding;
-    private final ArrayList<Item> itemsList = new ArrayList<>();
+    private ArrayList<Item> itemList;
     private ItemAdapter itemAdapter;
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inventoryViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
-
-        binding = FragmentInventoryBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        // Setup RecyclerView
-        RecyclerView recyclerView = binding.itemsRecyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
 
         db = FirebaseFirestore.getInstance();
         itemsRef = db.collection("items");
-        itemAdapter = new ItemAdapter(getContext(), itemsList);
-        recyclerView.setAdapter(itemAdapter);
+        itemList = new ArrayList<>();
+        itemAdapter = new ItemAdapter(getContext(), itemList);
 
-        itemsRef.addSnapshotListener((value, error) -> {
-            if (error != null) {
-                Log.e("Firestore", error.toString());
-                return;
-            }
+        RecyclerView itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
+        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        itemsRecyclerView.setAdapter(itemAdapter);
 
-            if (value != null) {
-                itemsList.clear();
-                for (QueryDocumentSnapshot doc : value) {
-                    Item item = doc.toObject(Item.class);
-                    itemsList.add(item);
+        FloatingActionButton addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(v -> {
+            AddInventoryFragment addInventoryFragment = new AddInventoryFragment();
+            addInventoryFragment.show(getChildFragmentManager(), "ADD_ITEM");
+        });
+
+        itemsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot querySnapshots, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.e("Firestore", error.toString());
+                    return;
                 }
-                itemAdapter.notifyDataSetChanged();
+                if (querySnapshots != null) {
+                    itemList.clear();
+                    for (QueryDocumentSnapshot doc : querySnapshots) {
+                        Item item = doc.toObject(Item.class);
+                        itemList.add(item);
+                    }
+                    itemAdapter.notifyDataSetChanged();
+                }
             }
         });
 
-        binding.addButton.setOnClickListener(v ->
-                NavHostFragment.findNavController(InventoryFragment.this)
-                        .navigate(R.id.action_inventoryFragment_to_addItemFragment)
-        );
-
-        return root;
+        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onOKPressed(Item item) {
+        itemList.add(item);
+        itemAdapter.notifyDataSetChanged();
     }
 }

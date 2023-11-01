@@ -2,36 +2,43 @@ package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.debuggingdemonsapp.databinding.ItemLayoutBinding;
+
+import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private final ArrayList<Item> items;
-    private final LayoutInflater layoutInflater;
+    private final Context context;
+    private ArrayList<Item> items;
 
     public ItemAdapter(Context context, ArrayList<Item> items) {
+        this.context = context;
         this.items = items;
-        this.layoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemLayoutBinding binding = ItemLayoutBinding.inflate(layoutInflater, parent, false);
-        return new ItemViewHolder(binding);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.inventory_content, parent, false);
+        return new ItemViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.binding.textViewDescription.setText(item.getDescription());
-        holder.binding.textViewDate.setText(item.getDateOfPurchase());
-        // ... set other fields here ...
+        holder.description.setText(item.getDescription());
+        holder.dateOfPurchase.setText(item.getDateOfPurchase());
+        holder.make.setText(item.getMake());
+        holder.model.setText(item.getModel());
+        holder.serialNumber.setText(item.getSerialNumber());
+        holder.estimatedValue.setText(item.getEstimatedValue());
+        holder.comment.setText(item.getComment());
     }
 
     @Override
@@ -39,12 +46,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return items.size();
     }
 
-    static class ItemViewHolder extends RecyclerView.ViewHolder {
-        final ItemLayoutBinding binding;
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+        public TextView description;
+        public TextView dateOfPurchase;
+        public TextView make;
+        public TextView model;
+        public TextView serialNumber;
+        public TextView estimatedValue;
+        public TextView comment;
 
-        ItemViewHolder(ItemLayoutBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            description = itemView.findViewById(R.id.description);
+            dateOfPurchase = itemView.findViewById(R.id.dateOfPurchase);
+            make = itemView.findViewById(R.id.make);
+            model = itemView.findViewById(R.id.model);
+            serialNumber = itemView.findViewById(R.id.serialNumber);
+            estimatedValue = itemView.findViewById(R.id.estimatedValue);
+            comment = itemView.findViewById(R.id.comment);
         }
     }
 }
