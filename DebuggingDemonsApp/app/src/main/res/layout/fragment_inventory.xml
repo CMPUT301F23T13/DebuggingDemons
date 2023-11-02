@@ -44,7 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:clickable="true"
-        android:layout_marginBottom="55dp"
         android:text="@string/title_tag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +52,6 @@
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
         android:clickable="true"
         android:text="@string/title_delete"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,9 +62,8 @@
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="55dp"
+        android:clickable="true"
         android:text="@string/title_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

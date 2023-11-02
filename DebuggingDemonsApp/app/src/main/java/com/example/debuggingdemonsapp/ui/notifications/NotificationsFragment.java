@@ -1,4 +1,4 @@
-package com.example.debuggingdemonsapp.ui.tag;
+package com.example.debuggingdemonsapp.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +12,20 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.debuggingdemonsapp.databinding.FragmentNotificationsBinding;
 
-public class TagFragment extends Fragment {
+public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        TagViewModel tagViewModel =
-                new ViewModelProvider(this).get(TagViewModel.class);
+        NotificationsViewModel notificationsViewModel =
+                new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        tagViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -1,14 +1,14 @@
-package com.example.debuggingdemonsapp.ui.tag;
+package com.example.debuggingdemonsapp.ui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TagViewModel extends ViewModel {
+public class NotificationsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public TagViewModel() {
+    public NotificationsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }
