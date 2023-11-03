@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +10,11 @@
     android:layout_height="match_parent"
     android:background="#E5E5E5"
     android:backgroundTint="#FEFEFE"
+<<<<<<< Updated upstream
     tools:context=".ui.camera.CameraFragment">
+=======
+    tools:context=".ui.camera.PhotoPreview">
+>>>>>>> Stashed changes
 
 
     <ImageView
@@ -16,11 +24,45 @@
 
         android:adjustViewBounds="true"
         android:rotation="90"
+<<<<<<< Updated upstream
         android:scaleType="fitCenter"
+=======
+        android:scaleType="center"
+>>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< Updated upstream
         app:srcCompat="@drawable/ic_launcher_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+        />
+
+    <Button
+        android:id="@+id/retake_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:text="@string/retake_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save_button"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:text="@string/save_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> Stashed changes

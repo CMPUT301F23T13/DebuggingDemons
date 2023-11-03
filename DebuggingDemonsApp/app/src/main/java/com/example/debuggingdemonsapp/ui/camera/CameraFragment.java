@@ -1,11 +1,23 @@
 package com.example.debuggingdemonsapp.ui.camera;
 
+<<<<<<< Updated upstream
+=======
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+>>>>>>> Stashed changes
 import androidx.camera.core.*;
 import androidx.camera.core.Camera;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
+<<<<<<< Updated upstream
+=======
+
+import com.example.debuggingdemonsapp.MainActivity;
+import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
+>>>>>>> Stashed changes
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
 import com.google.common.util.concurrent.ListenableFuture;
 import android.os.Bundle;
@@ -23,7 +35,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
+<<<<<<< Updated upstream
 // Used https://developer.android.com/training/camerax/preview for in-app camera
+=======
+import static androidx.navigation.Navigation.findNavController;
+
+// Used https://developer.android.com/training/camerax/preview for in-app camera
+
+/**
+ * Class is used to display the in-app Camera as a fragment
+ */
+>>>>>>> Stashed changes
 public class CameraFragment extends Fragment {
 
     private FragmentCameraBinding binding;
@@ -73,6 +95,7 @@ public class CameraFragment extends Fragment {
                 takePhoto.takePicture(cameraExector, new ImageCapture.OnImageCapturedCallback() {
 
                     public void onCaptureSuccess(@NonNull @NotNull ImageProxy image) {
+<<<<<<< Updated upstream
 //                        binding2.imageView.setRotation(90);
 //                        binding2.imageView.setImageBitmap(image.toBitmap());
 //                        View root2 = binding2.getRoot();
@@ -83,6 +106,19 @@ public class CameraFragment extends Fragment {
                     }
                         }
                     );
+=======
+                        // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("Image", image.toBitmap());
+                        System.out.println("image");
+                        ActivityMainBinding main = ActivityMainBinding.inflate(inflater,container,false);
+
+                        findNavController(container).navigate(R.id.navigation_photo, bundle);
+
+                    }
+                }
+                );
+>>>>>>> Stashed changes
             }});
 
         return root;
@@ -109,7 +145,10 @@ public class CameraFragment extends Fragment {
             }
         }, ContextCompat.getMainExecutor(requireActivity()));
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -135,6 +174,10 @@ public class CameraFragment extends Fragment {
         takePhoto = new ImageCapture.Builder()
                 .setTargetRotation(requireView().getDisplay().getRotation())
                 .build();
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         // Creates a new camera object using the cameraProvider which is bound to the 'selectCamera'
         //      and the 'preview' Preview object that was created in this method
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, selectCamera, takePhoto, preview);
