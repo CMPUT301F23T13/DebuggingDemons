@@ -48,7 +48,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (document.exists()) {
                             Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show();
                         } else {
-                            db.collection("users").document(username).set(new HashMap<>())
+                            HashMap<String, Object> userMap = new HashMap<>();
+                            userMap.put("username", username);
+                            db.collection("users").document(username).set(userMap)
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                         navigateToMainActivity();
