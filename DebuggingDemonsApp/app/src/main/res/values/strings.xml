@@ -9,4 +9,7 @@
     <string name="title_tag">TAGS</string>
     <string name="title_delete">DELETE</string>
     <string name="title_add">ADD</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>

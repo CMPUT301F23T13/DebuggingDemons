@@ -1,13 +1,20 @@
 package com.example.debuggingdemonsapp;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -37,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
 
         if (username.isEmpty()) {
-            Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+            showMessageDialog("Username cannot be empty", null);
             return;
         }
 
@@ -46,19 +53,23 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show();
+                            showMessageDialog("Username already exists", null);
                         } else {
                             HashMap<String, Object> userMap = new HashMap<>();
                             userMap.put("username", username);
                             db.collection("users").document(username).set(userMap)
                                     .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                                        navigateToMainActivity();
+                                        showMessageDialog("Register Successfully", () ->
+                                                new Handler(Looper.getMainLooper()).postDelayed(
+                                                        this::navigateToMainActivity,
+                                                        1000
+                                                )
+                                        );
                                     })
-                                    .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                    .addOnFailureListener(e -> showMessageDialog("Error: " + e.getMessage(), null));
                         }
                     } else {
-                        Toast.makeText(this, "Error checking username", Toast.LENGTH_SHORT).show();
+                        showMessageDialog("Error checking username", null);
                     }
                 });
     }
@@ -67,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
 
         if (username.isEmpty()) {
-            Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
+            showMessageDialog("Username cannot be empty", null);
             return;
         }
 
@@ -76,13 +87,14 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
-                            navigateToMainActivity();
+                            showMessageDialog("Logged in successfully", () -> {
+                                new Handler(Looper.getMainLooper()).postDelayed(this::navigateToMainActivity, 1000);
+                            });
                         } else {
-                            Toast.makeText(this, "Username does not exist", Toast.LENGTH_SHORT).show();
+                            showMessageDialog("Username does not exist", null);
                         }
                     } else {
-                        Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show();
+                        showMessageDialog("Error logging in", null);
                     }
                 });
     }
@@ -92,5 +104,18 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void showMessageDialog(String message, Runnable onDismiss) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    if (onDismiss != null) {
+                        onDismiss.run();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
 }
 
