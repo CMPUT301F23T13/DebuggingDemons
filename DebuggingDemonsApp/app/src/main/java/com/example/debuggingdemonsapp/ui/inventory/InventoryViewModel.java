@@ -3,27 +3,40 @@ package com.example.debuggingdemonsapp.ui.inventory;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.debuggingdemonsapp.model.Item;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryViewModel extends ViewModel {
 
-    // LiveData for the list of items (assuming it's a list of Strings for simplicity)
-    private final MutableLiveData<List<String>> items = new MutableLiveData<>();
+    // LiveData for the list of items
+    private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
 
-    // Constructor (optional, but you can initialize data here if needed)
     public InventoryViewModel() {
-        // For example: setItems(Arrays.asList("Item 1", "Item 2", "Item 3"));
+        // 初始化 items
+        items.setValue(new ArrayList<>());
     }
 
     // Getters for the LiveData
-    public LiveData<List<String>> getItems() {
+    public LiveData<ArrayList<Item>> getItems() {
         return items;
     }
 
     // Methods to update the data
-    public void setItems(List<String> newItems) {
+    public void setItems(ArrayList<Item> newItems) {
         items.setValue(newItems);
     }
 
-    // If needed, you can add other methods to manage other pieces of data or business logic
+    // Add method to add a single item
+    public void addItem(Item item) {
+        ArrayList<Item> currentItems = items.getValue();
+        if (currentItems != null) {
+            currentItems.add(item);
+            items.setValue(currentItems);
+        }
+    }
+
+    // Remove item, update item, etc. methods can be added as needed
 }
