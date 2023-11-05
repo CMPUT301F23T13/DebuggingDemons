@@ -49,11 +49,11 @@ public class LoginActivityTest {
 
     @Test
     public void testRegisterButton_withEmptyUsername() {
-        // 输入空用户名
+        // input the empty username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
-        // 点击注册按钮
+        // click register button
         onView(withId(R.id.registerButton)).perform(click());
-        // 检查对话框消息
+        // We expect to see a Username cannot be empty message
         onView(withText("Username cannot be empty"))
                 .inRoot(isDialog()) // 使用 isDialog() 来确保我们在对话框中查找
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -62,11 +62,11 @@ public class LoginActivityTest {
 
     @Test
     public void testLoginButton_withEmptyUsername() {
-        // 输入空用户名
+        // input the empty username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
-        // 点击注册按钮
+        // click login button
         onView(withId(R.id.loginButton)).perform(click());
-        // 检查对话框消息
+        // We expect to see a Username cannot be empty message
         onView(withText("Username cannot be empty"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -104,7 +104,7 @@ public class LoginActivityTest {
         // Assume "newuser" is already in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
-        // We expect to see a successful registration message
+        // We expect to see a user already exits message
         onView(withText("Username already exists"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -117,7 +117,7 @@ public class LoginActivityTest {
         // Assume "bonobo" is not in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("bonobo"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
-        // We expect to see a successful login message
+        // We expect to see a username does not exist message
         onView(withText("Username does not exist"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
