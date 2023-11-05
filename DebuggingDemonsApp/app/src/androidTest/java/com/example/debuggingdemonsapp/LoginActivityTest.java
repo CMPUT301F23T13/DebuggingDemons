@@ -55,7 +55,7 @@ public class LoginActivityTest {
         onView(withId(R.id.registerButton)).perform(click());
         // We expect to see a Username cannot be empty message
         onView(withText("Username cannot be empty"))
-                .inRoot(isDialog()) // 使用 isDialog() 来确保我们在对话框中查找
+                .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
 
     }
@@ -108,8 +108,6 @@ public class LoginActivityTest {
         onView(withText("Username already exists"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-        // After the message is shown, we expect to navigate to the MainActivity
-        // This may need to wait for the navigation to happen, potentially with an IdlingResource
     }
 
     @Test
@@ -121,7 +119,6 @@ public class LoginActivityTest {
         onView(withText("Username does not exist"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-        // Also, expect navigation to MainActivity after successful login
     }
 
     @Test
