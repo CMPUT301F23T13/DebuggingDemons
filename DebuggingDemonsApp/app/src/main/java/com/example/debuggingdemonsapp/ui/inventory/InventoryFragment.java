@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ public class InventoryFragment extends Fragment {
 
     private FragmentInventoryBinding binding;
     private InventoryViewModel inventoryViewModel;
-    private ItemAdapter adapter; // 为RecyclerView定义一个适配器变量
+    private ItemAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,8 +33,8 @@ public class InventoryFragment extends Fragment {
         adapter = new ItemAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), items -> {
-            adapter.setItems(items);
+        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), newItems -> {
+            adapter.setItems(newItems);
             adapter.notifyDataSetChanged();
         });
 

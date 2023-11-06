@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -43,7 +45,7 @@ public class InventoryViewModel extends ViewModel {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     newItems.add(document.toObject(Item.class));
                 }
-                items.setValue(newItems);
+                items.postValue(newItems);
             }
         });
     }

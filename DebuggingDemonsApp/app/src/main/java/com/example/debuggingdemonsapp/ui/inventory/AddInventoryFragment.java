@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -56,11 +58,13 @@ public class AddInventoryFragment extends DialogFragment {
         builder.setView(view)
                 .setTitle("Add Item")
                 .setNegativeButton("Cancel", (dialog, id) -> {
-                    NavHostFragment.findNavController(AddInventoryFragment.this)
-                            .popBackStack();
+                    NavController navController = NavHostFragment.findNavController(AddInventoryFragment.this);
+                    navController.navigate(R.id.navigation_inventory);
                 })
                 .setPositiveButton("OK", (dialog, id) -> {
                     addItemToDatabase();
+                    NavController navController = NavHostFragment.findNavController(AddInventoryFragment.this);
+                    navController.navigate(R.id.navigation_inventory);
                 });
 
         return builder.create();
@@ -86,22 +90,16 @@ public class AddInventoryFragment extends DialogFragment {
 
         itemsRef.add(newItem)
                 .addOnSuccessListener(documentReference -> {
-                    if (isAdded()) { // Check if Fragment is currently added to its activity.
-                        if (getActivity() != null) {
-                            Toast.makeText(getActivity(), "Item added successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        // Now use the view's NavController to navigate
-                        View view = getView();
-                        if (view != null) {
-                            Navigation.findNavController(view).popBackStack();
-                        }
+                    if (isAdded() && getActivity() != null) {
+                        Toast.makeText(getActivity(), "Item added successfully", Toast.LENGTH_SHORT).show();
+
+                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                        viewModel.fetchItems();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    if (isAdded()) { // Check if Fragment is currently added to its activity.
-                        if (getActivity() != null) {
-                            Toast.makeText(getActivity(), "Error adding item", Toast.LENGTH_SHORT).show();
-                        }
+                    if (isAdded() && getActivity() != null) {
+                        Toast.makeText(getActivity(), "Error adding item", Toast.LENGTH_SHORT).show();
                     }
                 });
 
