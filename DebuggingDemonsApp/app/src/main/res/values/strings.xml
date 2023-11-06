@@ -4,13 +4,14 @@
     <string name="title_camera">Camera</string>
     <string name="title_notifications">Notifications</string>
     <string name="add_item">Add</string>
-
     <string name="title_filter">FILTER</string>
     <string name="title_sort">SORT BY</string>
     <string name="title_tag">TAGS</string>
     <string name="title_delete">DELETE</string>
     <string name="title_add">ADD</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
     <string name="retake_button">Retake Photo</string>
     <string name="save_button">Save Photo</string>
-
 </resources>
