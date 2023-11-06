@@ -1,78 +1,60 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.debuggingdemonsapp.R;
-import com.example.debuggingdemonsapp.model.Item;
-import com.example.debuggingdemonsapp.ui.inventory.ItemAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import java.util.ArrayList;
+import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 
-public class InventoryFragment extends Fragment implements AddInventoryFragment.OnFragmentInteractionListener {
+public class InventoryFragment extends Fragment {
 
-    private ArrayList<Item> itemList;
-    private ItemAdapter itemAdapter;
-    private FirebaseFirestore db;
-    private CollectionReference itemsRef;
+    private FragmentInventoryBinding binding;
+    private InventoryViewModel inventoryViewModel;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        inventoryViewModel =
+                new ViewModelProvider(this).get(InventoryViewModel.class);
 
-        db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
-        itemList = new ArrayList<>();
-        itemAdapter = new ItemAdapter(getContext(), itemList);
+        binding = FragmentInventoryBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        RecyclerView itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        itemsRecyclerView.setAdapter(itemAdapter);
+        RecyclerView recyclerView = binding.recyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        FloatingActionButton addButton = view.findViewById(R.id.addButton);
-        addButton.setOnClickListener(v -> {
-            AddInventoryFragment addInventoryFragment = new AddInventoryFragment();
-            addInventoryFragment.show(getChildFragmentManager(), "ADD_ITEM");
+        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), items -> {
+            ItemAdapter adapter = new ItemAdapter(getContext(), items);
+            recyclerView.setAdapter(adapter);
         });
 
-        itemsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot querySnapshots, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("Firestore", error.toString());
-                    return;
-                }
-                if (querySnapshots != null) {
-                    itemList.clear();
-                    for (QueryDocumentSnapshot doc : querySnapshots) {
-                        Item item = doc.toObject(Item.class);
-                        itemList.add(item);
-                    }
-                    itemAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+        binding.addButton.setOnClickListener(v -> openAddItemDialog());
 
-        return view;
+        binding.tagButton.setOnClickListener(v -> openEquipTagDialog());
+
+        return root;
+    }
+
+    private void openAddItemDialog() {
+        // Create and show the dialog.
+        AddInventoryFragment newFragment = new AddInventoryFragment();
+        newFragment.show(getParentFragmentManager(), "add_item");
+    }
+
+    private void openEquipTagDialog() {
+        // Create and show the dialog.
+        EquipTagsFragment newFragment = new EquipTagsFragment();
+        newFragment.show(getParentFragmentManager(), "equip_tags");
     }
 
     @Override
-    public void onOKPressed(Item item) {
-        itemList.add(item);
-        itemAdapter.notifyDataSetChanged();
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

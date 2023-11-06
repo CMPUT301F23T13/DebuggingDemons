@@ -14,25 +14,8 @@
     <fragment
         android:id="@+id/navigation_inventory"
         android:name="com.example.debuggingdemonsapp.ui.inventory.InventoryFragment"
-        android:label="Inventory"
-        tools:layout="@layout/fragment_inventory">
-        <!-- The action to navigate from InventoryFragment to AddItemFragment -->
-        <action
-            android:id="@+id/action_inventoryFragment_to_addItemFragment"
-            app:destination="@id/navigation_addItem" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_addItem"
-        android:name="com.example.debuggingdemonsapp.ui.inventory.AddItemFragment"
-        android:label="Add Item"
-        tools:layout="@layout/fragment_add_item">
-
-        <!-- The action to navigate from AddItemFragment back to InventoryFragment -->
-        <action
-            android:id="@+id/action_addItemFragment_to_inventoryFragment"
-            app:destination="@id/navigation_inventory" />
-    </fragment>
+        android:label="@string/title_inventory"
+        tools:layout="@layout/fragment_inventory" />
 
     <fragment
         android:id="@+id/navigation_camera"
@@ -45,5 +28,11 @@
         android:name="com.example.debuggingdemonsapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_tag"
+        android:name="com.example.debuggingdemonsapp.ui.tag.TagFragment"
+        android:label="@string/title_tag_tab"
+        tools:layout="@layout/fragment_tag" />
 
 </navigation>

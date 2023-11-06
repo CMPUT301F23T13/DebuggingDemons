@@ -11,19 +11,32 @@ import java.util.List;
 
 public class InventoryViewModel extends ViewModel {
 
-    private final MutableLiveData<List<Item>> items;
+    // LiveData for the list of items
+    private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
 
     public InventoryViewModel() {
-        items = new MutableLiveData<>(new ArrayList<Item>());
+        // 初始化 items
+        items.setValue(new ArrayList<>());
     }
 
-    public LiveData<List<Item>> getItems() {
+    // Getters for the LiveData
+    public LiveData<ArrayList<Item>> getItems() {
         return items;
     }
 
-    public void addItem(Item item) {
-        List<Item> currentItems = items.getValue();
-        currentItems.add(item);
-        items.setValue(currentItems);
+    // Methods to update the data
+    public void setItems(ArrayList<Item> newItems) {
+        items.setValue(newItems);
     }
+
+    // Add method to add a single item
+    public void addItem(Item item) {
+        ArrayList<Item> currentItems = items.getValue();
+        if (currentItems != null) {
+            currentItems.add(item);
+            items.setValue(currentItems);
+        }
+    }
+
+    // Remove item, update item, etc. methods can be added as needed
 }
