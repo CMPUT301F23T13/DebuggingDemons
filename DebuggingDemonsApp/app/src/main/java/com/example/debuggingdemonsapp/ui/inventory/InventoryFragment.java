@@ -11,26 +11,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 
+import java.util.ArrayList;
+
 public class InventoryFragment extends Fragment {
 
     private FragmentInventoryBinding binding;
     private InventoryViewModel inventoryViewModel;
+    private ItemAdapter adapter; // 为RecyclerView定义一个适配器变量
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        inventoryViewModel =
-                new ViewModelProvider(this).get(InventoryViewModel.class);
-
+        inventoryViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
         binding = FragmentInventoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         RecyclerView recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        adapter = new ItemAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
         inventoryViewModel.getItems().observe(getViewLifecycleOwner(), items -> {
-            ItemAdapter adapter = new ItemAdapter(getContext(), items);
-            recyclerView.setAdapter(adapter);
+            adapter.setItems(items);
+            adapter.notifyDataSetChanged();
         });
 
         binding.addButton.setOnClickListener(v -> openAddItemDialog());
@@ -39,7 +43,6 @@ public class InventoryFragment extends Fragment {
     }
 
     private void openAddItemDialog() {
-        // Create and show the dialog.
         AddInventoryFragment newFragment = new AddInventoryFragment();
         newFragment.show(getParentFragmentManager(), "add_item");
     }

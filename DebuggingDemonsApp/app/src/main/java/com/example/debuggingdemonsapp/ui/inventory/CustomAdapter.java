@@ -27,8 +27,8 @@ public class CustomAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_item, parent, false);
-        TextView textView = rowView.findViewById(R.id.textView);
-        CheckBox checkBox = rowView.findViewById(R.id.checkBox);
+        TextView textView = rowView.findViewById(R.id.item_name);
+        CheckBox checkBox = rowView.findViewById(R.id.item_checkbox);
 
         textView.setText(values.get(position));
 
