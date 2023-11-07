@@ -1,69 +1,79 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
+
 import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private final Context context;
     private ArrayList<Item> items;
 
-    public ItemAdapter(Context context, ArrayList<Item> items) {
-        this.context = context;
+    public ItemAdapter(ArrayList<Item> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.inventory_content, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new ItemViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.description.setText(item.getDescription());
-        holder.dateOfPurchase.setText(item.getDateOfPurchase());
-        holder.make.setText(item.getMake());
-        holder.model.setText(item.getModel());
-        holder.serialNumber.setText(item.getSerialNumber());
-        holder.estimatedValue.setText(item.getEstimatedValue());
-        holder.comment.setText(item.getComment());
+        holder.itemName.setText(item.getDescription());
+        //holder.itemCheckbox.setChecked();
+
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+            builder.setTitle("Item Details")
+                    .setMessage(createItemDetailMessage(item))
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show();
+        });
     }
+
+    private String createItemDetailMessage(Item item) {
+        return "Description: " + item.getDescription() + "\n" +
+                "Date of Purchase: " + item.getDateOfPurchase() + "\n" +
+                "Make: " + item.getMake() + "\n" +
+                "Model: " + item.getModel() + "\n" +
+                "Serial Number: " + item.getSerialNumber() + "\n" +
+                "Estimated Value: " + item.getEstimatedValue() + "\n" +
+                "Comment: " + item.getComment();
+    }
+
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items != null ? items.size() : 0;
+    }
+
+    public void setItems(ArrayList<Item> newItems) {
+        this.items = newItems;
+        notifyDataSetChanged();
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        public TextView description;
-        public TextView dateOfPurchase;
-        public TextView make;
-        public TextView model;
-        public TextView serialNumber;
-        public TextView estimatedValue;
-        public TextView comment;
+        public TextView itemName;
+        public CheckBox itemCheckbox;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            description = itemView.findViewById(R.id.description);
-            dateOfPurchase = itemView.findViewById(R.id.dateOfPurchase);
-            make = itemView.findViewById(R.id.make);
-            model = itemView.findViewById(R.id.model);
-            serialNumber = itemView.findViewById(R.id.serialNumber);
-            estimatedValue = itemView.findViewById(R.id.estimatedValue);
-            comment = itemView.findViewById(R.id.comment);
+            itemName = itemView.findViewById(R.id.item_name);
+            itemCheckbox = itemView.findViewById(R.id.item_checkbox);
         }
     }
 }

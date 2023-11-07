@@ -1,42 +1,52 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.debuggingdemonsapp.model.Item;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryViewModel extends ViewModel {
 
-    // LiveData for the list of items
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference itemsRef = db.collection("items");
 
     public InventoryViewModel() {
-        // 初始化 items
         items.setValue(new ArrayList<>());
+        fetchItems();
     }
 
-    // Getters for the LiveData
     public LiveData<ArrayList<Item>> getItems() {
         return items;
     }
 
-    // Methods to update the data
     public void setItems(ArrayList<Item> newItems) {
         items.setValue(newItems);
     }
 
-    // Add method to add a single item
     public void addItem(Item item) {
-        ArrayList<Item> currentItems = items.getValue();
-        if (currentItems != null) {
-            currentItems.add(item);
-            items.setValue(currentItems);
-        }
+        ArrayList<Item> currentItems = new ArrayList<>(items.getValue());
+        currentItems.add(item);
+        items.setValue(currentItems);
     }
 
-    // Remove item, update item, etc. methods can be added as needed
+    public void fetchItems() {
+        itemsRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ArrayList<Item> newItems = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    newItems.add(document.toObject(Item.class));
+                }
+                items.postValue(newItems);
+            }
+        });
+    }
 }

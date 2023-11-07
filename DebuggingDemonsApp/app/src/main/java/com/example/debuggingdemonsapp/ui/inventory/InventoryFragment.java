@@ -7,41 +7,44 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
+
+import java.util.ArrayList;
 
 public class InventoryFragment extends Fragment {
 
     private FragmentInventoryBinding binding;
     private InventoryViewModel inventoryViewModel;
+    private ItemAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        inventoryViewModel =
-                new ViewModelProvider(this).get(InventoryViewModel.class);
-
+        inventoryViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
         binding = FragmentInventoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         RecyclerView recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), items -> {
-            ItemAdapter adapter = new ItemAdapter(getContext(), items);
-            recyclerView.setAdapter(adapter);
+        adapter = new ItemAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), newItems -> {
+            adapter.setItems(newItems);
+            adapter.notifyDataSetChanged();
+        });
+//
+        binding.addButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
         });
 
-        binding.addButton.setOnClickListener(v -> openAddItemDialog());
-
         return root;
-    }
-
-    private void openAddItemDialog() {
-        // Create and show the dialog.
-        AddInventoryFragment newFragment = new AddInventoryFragment();
-        newFragment.show(getParentFragmentManager(), "add_item");
     }
 
     @Override

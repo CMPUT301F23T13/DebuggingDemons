@@ -1,15 +1,16 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -20,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddInventoryFragment extends DialogFragment {
+public class AddInventoryFragment extends Fragment {
 
     private EditText editTextDateOfPurchase;
     private EditText editTextDescription;
@@ -33,17 +34,13 @@ public class AddInventoryFragment extends DialogFragment {
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
-    @NonNull
     @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         itemsRef = db.collection("items");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_add_item, null);
+        View view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
         editTextDateOfPurchase = view.findViewById(R.id.editTextDateOfPurchase);
         editTextDescription = view.findViewById(R.id.editTextDescription);
@@ -53,17 +50,18 @@ public class AddInventoryFragment extends DialogFragment {
         editTextEstimatedValue = view.findViewById(R.id.editTextEstimatedValue);
         editTextComment = view.findViewById(R.id.editTextComment);
 
-        builder.setView(view)
-                .setTitle("Add Item")
-                .setNegativeButton("Cancel", (dialog, id) -> {
-                    NavHostFragment.findNavController(AddInventoryFragment.this)
-                            .popBackStack();
-                })
-                .setPositiveButton("OK", (dialog, id) -> {
-                    addItemToDatabase();
-                });
+        view.findViewById(R.id.button_cancel).setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.navigation_inventory);
+        });
 
-        return builder.create();
+        view.findViewById(R.id.button_ok).setOnClickListener(v -> {
+            addItemToDatabase();
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.navigation_inventory);
+        });
+
+        return view;
     }
 
     private void addItemToDatabase() {
@@ -86,22 +84,19 @@ public class AddInventoryFragment extends DialogFragment {
 
         itemsRef.add(newItem)
                 .addOnSuccessListener(documentReference -> {
-                    if (isAdded()) { // Check if Fragment is currently added to its activity.
-                        if (getActivity() != null) {
-                            Toast.makeText(getActivity(), "Item added successfully", Toast.LENGTH_SHORT).show();
-                        }
-                        // Now use the view's NavController to navigate
-                        View view = getView();
-                        if (view != null) {
-                            Navigation.findNavController(view).popBackStack();
-                        }
+                    if (isAdded()) {
+                        Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
+
+                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                        viewModel.fetchItems();
+
+                        NavController navController = Navigation.findNavController(getView());
+                        navController.navigate(R.id.navigation_inventory);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    if (isAdded()) { // Check if Fragment is currently added to its activity.
-                        if (getActivity() != null) {
-                            Toast.makeText(getActivity(), "Error adding item", Toast.LENGTH_SHORT).show();
-                        }
+                    if (isAdded()) {
+                        Toast.makeText(requireContext(), "Error adding item", Toast.LENGTH_SHORT).show();
                     }
                 });
 
