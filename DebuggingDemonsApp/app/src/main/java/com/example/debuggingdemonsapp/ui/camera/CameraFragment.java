@@ -99,7 +99,7 @@ public class CameraFragment extends Fragment {
 
                 takePhoto.takePicture(cameraExector, new ImageCapture.OnImageCapturedCallback() {
                     @OptIn(markerClass = ExperimentalGetImage.class) public void onCaptureSuccess(@NonNull @NotNull ImageProxy image) {
-                        
+
 
                     // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
                     Bundle bundle = new Bundle();
