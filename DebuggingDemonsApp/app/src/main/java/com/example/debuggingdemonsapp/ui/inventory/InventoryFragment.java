@@ -39,7 +39,7 @@ public class InventoryFragment extends Fragment {
             adapter.setItems(newItems);
             adapter.notifyDataSetChanged();
         });
-
+//
         binding.addButton.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
         });
