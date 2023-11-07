@@ -123,6 +123,9 @@ public class LoginActivityTest {
 
     @Test
     public void testRegisterButton_withValidUsername_navigatesToMainActivity() {
+
+        // Haven't figure out why this test failed
+
         // Type the new username
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
 
