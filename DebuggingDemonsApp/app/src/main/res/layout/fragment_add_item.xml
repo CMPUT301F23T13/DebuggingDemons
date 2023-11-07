@@ -66,19 +66,6 @@
             android:inputType="textMultiLine" />
 
 
-        <Button
-            android:id="@+id/button_ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="OK" />
-
-        <Button
-            android:id="@+id/button_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cancel" />
-
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -86,32 +73,45 @@
             android:text="Photos"
             android:textSize="18sp" />
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="143dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/imageButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="170dp"
+                android:src="@android:drawable/ic_menu_add" />
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:src="@android:drawable/ic_menu_add" />
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:src="@android:drawable/ic_menu_add" />
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:src="@android:drawable/ic_menu_add" />
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:src="@android:drawable/ic_menu_add" />
+        </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:src="@android:drawable/ic_menu_add" />
-            </LinearLayout>
-        </ScrollView>
+    </ScrollView>
+    <Button
+    android:id="@+id/button_ok"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="OK" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
     </LinearLayout>
