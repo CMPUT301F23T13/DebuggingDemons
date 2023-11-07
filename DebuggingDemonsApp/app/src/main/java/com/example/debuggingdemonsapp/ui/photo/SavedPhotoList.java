@@ -16,7 +16,7 @@ public class SavedPhotoList {
    }
 
    public void addPhoto(Photograph newPhoto){
-      this.photos.add(newPhoto);
+      this.photos.add(0,newPhoto);
    }
 
    public void deletePhoto(Photograph photo){

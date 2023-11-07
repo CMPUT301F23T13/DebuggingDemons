@@ -1,14 +1,24 @@
 package com.example.debuggingdemonsapp.ui.camera;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.ActivityResultLauncherKt;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.OptIn;
 import androidx.camera.core.*;
 import androidx.camera.core.Camera;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
 
@@ -37,7 +47,7 @@ import static androidx.navigation.Navigation.findNavController;
 // Used https://developer.android.com/training/camerax/preview for in-app camera
 
 /**
- * Class is used to display the in-app Camera as a fragment
+ * Class is used to display the in-app Camera's page
  */
 
 public class CameraFragment extends Fragment {
@@ -45,7 +55,7 @@ public class CameraFragment extends Fragment {
     private FragmentCameraBinding binding;
     private ProcessCameraProvider cameraProvider;
     private FragmentPictureBinding binding2;
-    private PhotoPreview photoPreviewFragment;
+
     private ImageCapture takePhoto;
     private ListenableFuture<ProcessCameraProvider> cameraProviderLF; //LF = Listenable Future
 
@@ -88,12 +98,13 @@ public class CameraFragment extends Fragment {
                 };
 
                 takePhoto.takePicture(cameraExector, new ImageCapture.OnImageCapturedCallback() {
-                    public void onCaptureSuccess(@NonNull @NotNull ImageProxy image) {
+                    @OptIn(markerClass = ExperimentalGetImage.class) public void onCaptureSuccess(@NonNull @NotNull ImageProxy image) {
+                        
 
                     // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("Image", image.toBitmap());
-                    System.out.println("image");
+
                     ActivityMainBinding main = ActivityMainBinding.inflate(inflater,container,false);
                     findNavController(container).navigate(R.id.navigation_photoPreview, bundle);
 
@@ -155,10 +166,15 @@ public void onDestroyView() {
         // Used to select the back camera as the one that is used
         CameraSelector selectCamera = CameraSelector.DEFAULT_BACK_CAMERA;
 
+        // Necessary class builder called to allow image capturing
         takePhoto = new ImageCapture.Builder()
         .setTargetRotation(requireView().getDisplay().getRotation())
         .build();
 
+        // Asks user for permission to use the phone's camera
+        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CAMERA}, 7);
+        }
         // Creates a new camera object using the cameraProvider which is bound to the 'selectCamera'
         //      and the 'preview' Preview object that was created in this method
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, selectCamera, takePhoto, preview);

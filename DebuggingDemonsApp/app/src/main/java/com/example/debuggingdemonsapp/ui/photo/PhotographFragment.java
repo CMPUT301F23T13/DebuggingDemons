@@ -1,46 +1,56 @@
 package com.example.debuggingdemonsapp.ui.photo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.databinding.FragmentSavedBinding;
+import com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment;
+import com.example.debuggingdemonsapp.ui.inventory.InventoryFragment;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import static androidx.navigation.Navigation.findNavController;
 
+/**
+ * Class creates a fragment which displays all the photos that the user saved in the app
+ */
 public class PhotographFragment extends Fragment {
 
 
     private FragmentSavedBinding binding;
+    private FragmentInventoryBinding inventoryBinding;
     private SavedPhotoList photoList;
     ArrayList<ImageButton> imageButtons;
 
-
-
     /**
      *
-     * @param inflater The LayoutInflater object that can be used to inflate
-     * any views in the fragment,
-     * @param container If non-null, this is the parent view that the fragment's
-     * UI should be attached to.  The fragment should not add the view itself,
-     * but this can be used to generate the LayoutParams of the view.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
+     * @param savedInstanceState The last saved instance state of the Fragment,
+     * or null if this is a freshly created Fragment.
      *
-     * @return View  The view which displays content from the fragment_saved.xml file
+     * @return
      */
+
+
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSavedBinding.inflate(inflater,container,false);
-        imageButtons = new ArrayList<ImageButton>();
+
+        imageButtons = new ArrayList<>();
 
         View root = binding.getRoot();
         photoList =  ((MainActivity) getActivity()).appPhotos;
@@ -53,15 +63,14 @@ public class PhotographFragment extends Fragment {
 
             }
         }
-        System.out.println(imageButtons.size());
+
         for (ImageButton imageButton : imageButtons){
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    System.out.println(imageButtons.indexOf(imageButton));
-
-                    findNavController(container).navigate(R.id.action_navigation_photosList_to_navigation_addItem);
+                    Toast.makeText(getContext(),"Photo selected", Toast.LENGTH_LONG).show();
+//                  findNavController(container).navigate(R.id.navigation_photosList);
                 }
             });
         }
@@ -71,12 +80,15 @@ public class PhotographFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                findNavController(container).popBackStack();
+              findNavController(container).popBackStack();
 
             }
         });
+
         return root;
+
     }
+
 
     /**
      * Used to add ImageViews to the 'Photos' page when photos are taken with the app's camera

@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         db.collection("users").document(username).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
+                        DocumentSnapshot document =  task.getResult();
                         if (document.exists()) {
                             showMessageDialog("Username already exists", null);
                         } else {

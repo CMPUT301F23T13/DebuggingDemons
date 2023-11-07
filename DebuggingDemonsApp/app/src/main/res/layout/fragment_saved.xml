@@ -9,42 +9,40 @@
         android:id="@+id/photoList_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
-        android:text="back"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.842"
+        android:text="Back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/photoList_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.077">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/photoContainer"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/photoContainer"
+        android:layout_width="426dp"
+        android:layout_height="662dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="628dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photoList_back"
+        app:layout_constraintVertical_bias="0.055"
+        tools:layout_editor_absoluteX="-7dp">
+
+        <ImageButton
+            android:id="@+id/image1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/image1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:outlineProvider="none"
-                android:visibility="gone"
-                tools:visibility="gone" />
-        </LinearLayout>
-    </ScrollView>
+            android:outlineProvider="none"
+            android:visibility="gone"
+            tools:visibility="gone" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
