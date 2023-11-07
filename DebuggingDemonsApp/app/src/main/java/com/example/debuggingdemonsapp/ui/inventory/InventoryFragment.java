@@ -1,15 +1,17 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 
 import java.util.ArrayList;
@@ -38,14 +40,11 @@ public class InventoryFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 
-        binding.addButton.setOnClickListener(v -> openAddItemDialog());
+        binding.addButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
+        });
 
         return root;
-    }
-
-    private void openAddItemDialog() {
-        AddInventoryFragment newFragment = new AddInventoryFragment();
-        newFragment.show(getParentFragmentManager(), "add_item");
     }
 
     @Override

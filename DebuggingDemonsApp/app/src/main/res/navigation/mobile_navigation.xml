@@ -15,9 +15,17 @@
         android:id="@+id/navigation_inventory"
         android:name="com.example.debuggingdemonsapp.ui.inventory.InventoryFragment"
         android:label="Inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory">
+        <action
+            android:id="@+id/action_inventoryFragment_to_addInventoryFragment"
+            app:destination="@id/addInventoryFragment" />
+    </fragment>
 
-    <!-- Remove the fragment and action definitions related to AddInventoryFragment -->
+    <fragment
+        android:id="@+id/addInventoryFragment"
+        android:name="com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment"
+        android:label="Add Inventory Item"
+        tools:layout="@layout/fragment_add_item" />
 
     <fragment
         android:id="@+id/navigation_camera"
