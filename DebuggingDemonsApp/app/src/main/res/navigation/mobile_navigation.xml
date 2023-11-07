@@ -27,6 +27,24 @@
         android:label="Add Inventory Item"
         tools:layout="@layout/fragment_add_item" />
 
+    <!-- Remove the fragment and action definitions related to AddInventoryFragment -->
+
+    <fragment
+        android:id="@+id/navigation_addItem"
+        android:name="com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment"
+        android:label="Add Item"
+        tools:layout="@layout/fragment_add_item">
+
+        <!-- The action to navigate from AddItemFragment back to InventoryFragment -->
+        <action
+            android:id="@+id/action_addItemFragment_to_inventoryFragment"
+            app:destination="@id/navigation_inventory" />
+        <action
+            android:id="@+id/action_navigation_addItem_to_navigation_photosList"
+            app:destination="@id/navigation_photosList" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/navigation_camera"
         android:name="com.example.debuggingdemonsapp.ui.camera.CameraFragment"
@@ -34,9 +52,26 @@
         tools:layout="@layout/fragment_camera" />
 
     <fragment
+        android:id="@+id/navigation_photoPreview"
+        android:name="com.example.debuggingdemonsapp.ui.camera.PhotoPreview"
+        android:label="Photo"
+        tools:layout="@layout/fragment_picture">
+        <action
+            android:id="@+id/action_navigation_photo_to_navigation_camera2"
+            app:destination="@id/navigation_camera" />
+    </fragment>
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.debuggingdemonsapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_photosList"
+        android:name="com.example.debuggingdemonsapp.ui.photo.PhotographFragment"
+        android:label="PhotographFragment" >
+        <action
+            android:id="@+id/action_navigation_photosList_to_navigation_addItem"
+            app:destination="@id/navigation_addItem" />
+    </fragment>
 
 </navigation>
