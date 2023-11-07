@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.debuggingdemonsapp.R;
@@ -24,10 +24,10 @@ public final class FragmentTagBinding implements ViewBinding {
   public final Button addTagButton;
 
   @NonNull
-  public final ListView tagList;
+  public final RecyclerView tagList;
 
   private FragmentTagBinding(@NonNull LinearLayout rootView, @NonNull Button addTagButton,
-      @NonNull ListView tagList) {
+      @NonNull RecyclerView tagList) {
     this.rootView = rootView;
     this.addTagButton = addTagButton;
     this.tagList = tagList;
@@ -67,7 +67,7 @@ public final class FragmentTagBinding implements ViewBinding {
       }
 
       id = R.id.tag_list;
-      ListView tagList = ViewBindings.findChildViewById(rootView, id);
+      RecyclerView tagList = ViewBindings.findChildViewById(rootView, id);
       if (tagList == null) {
         break missingId;
       }

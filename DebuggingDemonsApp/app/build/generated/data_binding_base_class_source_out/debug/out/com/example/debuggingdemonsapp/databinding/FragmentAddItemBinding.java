@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -41,23 +39,10 @@ public abstract class FragmentAddItemBinding extends ViewDataBinding {
   @NonNull
   public final LinearLayout fragmentContainer;
 
-  @NonNull
-  public final ImageButton imageButton;
-
-  @NonNull
-  public final ImageButton imageButton2;
-
-  @NonNull
-  public final ImageButton imageButton3;
-
-  @NonNull
-  public final TextView textView;
-
   protected FragmentAddItemBinding(Object _bindingComponent, View _root, int _localFieldCount,
       EditText editTextComment, EditText editTextDateOfPurchase, EditText editTextDescription,
       EditText editTextEstimatedValue, EditText editTextMake, EditText editTextModel,
-      EditText editTextSerialNumber, LinearLayout fragmentContainer, ImageButton imageButton,
-      ImageButton imageButton2, ImageButton imageButton3, TextView textView) {
+      EditText editTextSerialNumber, LinearLayout fragmentContainer) {
     super(_bindingComponent, _root, _localFieldCount);
     this.editTextComment = editTextComment;
     this.editTextDateOfPurchase = editTextDateOfPurchase;
@@ -67,10 +52,6 @@ public abstract class FragmentAddItemBinding extends ViewDataBinding {
     this.editTextModel = editTextModel;
     this.editTextSerialNumber = editTextSerialNumber;
     this.fragmentContainer = fragmentContainer;
-    this.imageButton = imageButton;
-    this.imageButton2 = imageButton2;
-    this.imageButton3 = imageButton3;
-    this.textView = textView;
   }
 
   @NonNull

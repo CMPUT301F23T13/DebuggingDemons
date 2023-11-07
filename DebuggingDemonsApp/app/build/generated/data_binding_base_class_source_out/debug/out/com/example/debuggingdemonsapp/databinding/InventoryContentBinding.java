@@ -4,7 +4,6 @@ package com.example.debuggingdemonsapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,9 +23,6 @@ public final class InventoryContentBinding implements ViewBinding {
   public final TextView comment;
 
   @NonNull
-  public final TextView comment2;
-
-  @NonNull
   public final TextView dateOfPurchase;
 
   @NonNull
@@ -34,18 +30,6 @@ public final class InventoryContentBinding implements ViewBinding {
 
   @NonNull
   public final TextView estimatedValue;
-
-  @NonNull
-  public final ImageView itemImage1;
-
-  @NonNull
-  public final ImageView itemImage2;
-
-  @NonNull
-  public final ImageView itemImage3;
-
-  @NonNull
-  public final ImageView itemImage4;
 
   @NonNull
   public final TextView make;
@@ -57,20 +41,14 @@ public final class InventoryContentBinding implements ViewBinding {
   public final TextView serialNumber;
 
   private InventoryContentBinding(@NonNull LinearLayout rootView, @NonNull TextView comment,
-      @NonNull TextView comment2, @NonNull TextView dateOfPurchase, @NonNull TextView description,
-      @NonNull TextView estimatedValue, @NonNull ImageView itemImage1,
-      @NonNull ImageView itemImage2, @NonNull ImageView itemImage3, @NonNull ImageView itemImage4,
-      @NonNull TextView make, @NonNull TextView model, @NonNull TextView serialNumber) {
+      @NonNull TextView dateOfPurchase, @NonNull TextView description,
+      @NonNull TextView estimatedValue, @NonNull TextView make, @NonNull TextView model,
+      @NonNull TextView serialNumber) {
     this.rootView = rootView;
     this.comment = comment;
-    this.comment2 = comment2;
     this.dateOfPurchase = dateOfPurchase;
     this.description = description;
     this.estimatedValue = estimatedValue;
-    this.itemImage1 = itemImage1;
-    this.itemImage2 = itemImage2;
-    this.itemImage3 = itemImage3;
-    this.itemImage4 = itemImage4;
     this.make = make;
     this.model = model;
     this.serialNumber = serialNumber;
@@ -109,12 +87,6 @@ public final class InventoryContentBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.comment2;
-      TextView comment2 = ViewBindings.findChildViewById(rootView, id);
-      if (comment2 == null) {
-        break missingId;
-      }
-
       id = R.id.dateOfPurchase;
       TextView dateOfPurchase = ViewBindings.findChildViewById(rootView, id);
       if (dateOfPurchase == null) {
@@ -130,30 +102,6 @@ public final class InventoryContentBinding implements ViewBinding {
       id = R.id.estimatedValue;
       TextView estimatedValue = ViewBindings.findChildViewById(rootView, id);
       if (estimatedValue == null) {
-        break missingId;
-      }
-
-      id = R.id.itemImage1;
-      ImageView itemImage1 = ViewBindings.findChildViewById(rootView, id);
-      if (itemImage1 == null) {
-        break missingId;
-      }
-
-      id = R.id.itemImage2;
-      ImageView itemImage2 = ViewBindings.findChildViewById(rootView, id);
-      if (itemImage2 == null) {
-        break missingId;
-      }
-
-      id = R.id.itemImage3;
-      ImageView itemImage3 = ViewBindings.findChildViewById(rootView, id);
-      if (itemImage3 == null) {
-        break missingId;
-      }
-
-      id = R.id.itemImage4;
-      ImageView itemImage4 = ViewBindings.findChildViewById(rootView, id);
-      if (itemImage4 == null) {
         break missingId;
       }
 
@@ -175,9 +123,8 @@ public final class InventoryContentBinding implements ViewBinding {
         break missingId;
       }
 
-      return new InventoryContentBinding((LinearLayout) rootView, comment, comment2, dateOfPurchase,
-          description, estimatedValue, itemImage1, itemImage2, itemImage3, itemImage4, make, model,
-          serialNumber);
+      return new InventoryContentBinding((LinearLayout) rootView, comment, dateOfPurchase,
+          description, estimatedValue, make, model, serialNumber);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

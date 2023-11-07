@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.debuggingdemonsapp.databinding.FragmentTagBinding;
 import com.example.debuggingdemonsapp.model.Tag;
-import com.example.debuggingdemonsapp.ui.inventory.ItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,23 +36,22 @@ public class TagFragment extends Fragment implements AddTagFragment.OnFragmentIn
         binding = FragmentTagBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        tagAdapter = new TagAdapter(root.getContext(), tagViewModel.getTags().getValue());
+        RecyclerView tagList = binding.tagList;
+        tagList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ListView tagListView = binding.tagList;
-        tagListView.setAdapter(tagAdapter);
+        tagAdapter = new TagAdapter(new ArrayList<>());
+        tagList.setAdapter(tagAdapter);
 
-        tagViewModel.getTags().observe(getViewLifecycleOwner(), new Observer<List<Tag>>() {
-            public void onChanged(List<Tag> tagList) {
-                tagAdapter.setTags(tagList);
+        tagViewModel.getTags().observe(getViewLifecycleOwner(), newTags -> {
+                tagAdapter.setTags(newTags);
                 tagAdapter.notifyDataSetChanged();
-            }
         });
 
         Button addButton = binding.addTagButton;
 
         addButton.setOnClickListener(v -> {
             AddTagFragment addTagFragment = new AddTagFragment();
-            addTagFragment.show(getChildFragmentManager(), "ADD_TAG");
+            addTagFragment.show(getChildFragmentManager(), "add_tag");
         });
 
         return root;

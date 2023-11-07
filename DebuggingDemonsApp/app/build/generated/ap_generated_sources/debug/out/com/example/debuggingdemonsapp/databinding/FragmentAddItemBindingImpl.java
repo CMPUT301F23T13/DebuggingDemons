@@ -21,10 +21,6 @@ public class FragmentAddItemBindingImpl extends FragmentAddItemBinding  {
         sViewsWithIds.put(R.id.editTextSerialNumber, 5);
         sViewsWithIds.put(R.id.editTextEstimatedValue, 6);
         sViewsWithIds.put(R.id.editTextComment, 7);
-        sViewsWithIds.put(R.id.textView, 8);
-        sViewsWithIds.put(R.id.imageButton, 9);
-        sViewsWithIds.put(R.id.imageButton2, 10);
-        sViewsWithIds.put(R.id.imageButton3, 11);
     }
     // views
     // variables
@@ -33,7 +29,7 @@ public class FragmentAddItemBindingImpl extends FragmentAddItemBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentAddItemBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 12, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 8, sIncludes, sViewsWithIds));
     }
     private FragmentAddItemBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
@@ -45,10 +41,6 @@ public class FragmentAddItemBindingImpl extends FragmentAddItemBinding  {
             , (android.widget.EditText) bindings[4]
             , (android.widget.EditText) bindings[5]
             , (android.widget.LinearLayout) bindings[0]
-            , (android.widget.ImageButton) bindings[9]
-            , (android.widget.ImageButton) bindings[10]
-            , (android.widget.ImageButton) bindings[11]
-            , (android.widget.TextView) bindings[8]
             );
         this.fragmentContainer.setTag(null);
         setRootTag(root);

@@ -1,54 +1,70 @@
 [
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_add_item.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_add_item.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/item_layout.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/item_layout.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_home.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_home.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_add_tag.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_add_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/content_tag.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/content_tag.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/content_tag.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/content_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/activity_main.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/activity_main.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/activity_main.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_notifications.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_notifications.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_tag.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/list_item.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/list_item.xml"
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/tag_equip_content.xml",
+        "source": "com.example.debuggingdemonsapp-main-56:/layout/tag_equip_content.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_camera.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_camera.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_camera.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_camera.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/item_layout.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/item_layout.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_home.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_add_tag.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_add_tag.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/tag_content.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/tag_content.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/inventory_content.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/inventory_content.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_tag_equip.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_tag_equip.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_tag.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_tag.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/list_item.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/list_item.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_inventory.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_inventory.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/inventory_content.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/inventory_content.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_equip_tags.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_equip_tags.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/tag_equip_content.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/tag_equip_content.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_inventory.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_equip_tags.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_equip_tags.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_add_item.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_add_item.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_notifications.xml",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_notifications.xml"
     }
 ]

@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.tag.AddTagFragment">
+    tools:context=".ui.inventory.EquipTagsFragment">
 
-    <EditText
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tag_name_editText"
-        android:ems="10"
-        android:hint="Tag Name"
-        android:inputType="textPersonName">
-    </EditText>
+        android:layout_height="match_parent"
+        android:id="@+id/tag_list" />
 
 </LinearLayout>

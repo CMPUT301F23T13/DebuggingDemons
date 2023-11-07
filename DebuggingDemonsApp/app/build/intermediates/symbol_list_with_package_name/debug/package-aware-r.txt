@@ -3258,7 +3258,6 @@ id center_vertical
 id chain
 id chain2
 id chains
-id checkBox
 id checkbox
 id checked
 id chronometer
@@ -3270,7 +3269,6 @@ id clockwise
 id closest
 id collapseActionView
 id comment
-id comment2
 id compress
 id confirm_button
 id constraint
@@ -3385,9 +3383,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id imageButton
-id imageButton2
-id imageButton3
 id immediateStop
 id included
 id indeterminate
@@ -3395,10 +3390,8 @@ id info
 id invisible
 id inward
 id italic
-id itemImage1
-id itemImage2
-id itemImage3
-id itemImage4
+id item_checkbox
+id item_name
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
@@ -3630,6 +3623,7 @@ id tag_accessibility_clickable_spans
 id tag_accessibility_heading
 id tag_accessibility_pane_title
 id tag_button
+id tag_checkbox
 id tag_list
 id tag_name
 id tag_name_editText
@@ -3649,7 +3643,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id textViewDate
 id textViewDescription
 id textWatcher
@@ -3822,7 +3815,6 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
-layout content_tag
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3842,11 +3834,11 @@ layout design_text_input_start_icon
 layout fragment_add_item
 layout fragment_add_tag
 layout fragment_camera
-layout fragment_equip_tags
 layout fragment_home
 layout fragment_inventory
 layout fragment_notifications
 layout fragment_tag
+layout fragment_tag_equip
 layout inventory_content
 layout item_layout
 layout list_item
@@ -3920,6 +3912,8 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout tag_content
+layout tag_equip_content
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round

@@ -11,11 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/add_tag_button"
-        android:text="Add Tag" />
+        android:text="Add Tag"
+        android:textColor="@color/white" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/tag_list" />
+        android:id="@+id/tag_list"
+        android:scrollbars="vertical" />
 
 </LinearLayout>

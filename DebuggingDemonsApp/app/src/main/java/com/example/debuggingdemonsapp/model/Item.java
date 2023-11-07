@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.model;
 
+import java.util.ArrayList;
+
 public class Item {
     private String description;
     private String dateOfPurchase;
@@ -8,6 +10,7 @@ public class Item {
     private String serialNumber;
     private String estimatedValue;
     private String comment;
+    private ArrayList<Tag> tags;
 
     // Constructors
     public Item() {}
@@ -78,5 +81,15 @@ public class Item {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public ArrayList<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {
+        if (!tags.contains(tag)) {
+            tags.add(tag);
+        }
     }
 }
