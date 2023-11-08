@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                         showMessageDialog("Register Successfully", () ->
                                                 new Handler(Looper.getMainLooper()).postDelayed(
                                                         this::navigateToMainActivity,
-                                                        1000
+                                                        500
                                                 )
                                         );
                                     })
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             showMessageDialog("Logged in successfully", () -> {
-                                new Handler(Looper.getMainLooper()).postDelayed(this::navigateToMainActivity, 1000);
+                                new Handler(Looper.getMainLooper()).postDelayed(this::navigateToMainActivity, 500);
                             });
                         } else {
                             showMessageDialog("Username does not exist", null);
