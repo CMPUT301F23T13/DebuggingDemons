@@ -53,6 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Serial Number: " + item.getSerialNumber() + "\n" +
                 "Estimated Value: " + item.getEstimatedValue() + "\n" +
                 "Comment: " + item.getComment();
+
     }
 
 

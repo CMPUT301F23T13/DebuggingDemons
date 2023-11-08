@@ -3,6 +3,7 @@ package com.example.debuggingdemonsapp.ui.camera;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,16 @@ import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
 import com.example.debuggingdemonsapp.ui.photo.Photograph;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.ByteArrayOutputStream;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -24,6 +33,8 @@ public class PhotoPreview extends Fragment {
 
     private FragmentPictureBinding binding;
     private Photograph newPhoto;
+    private FirebaseStorage storage;
+
     private Bitmap newImage;
 
 
@@ -47,7 +58,13 @@ public class PhotoPreview extends Fragment {
         binding = FragmentPictureBinding.inflate(inflater, container, false);
         newImage = getArguments().getParcelable("Image");
         newPhoto = new Photograph(newImage);
+
         binding.imageView.setImageBitmap(newImage);
+
+        storage = FirebaseStorage.getInstance("gs://debuggingdemons.appspot.com/");
+
+
+//        StorageReference imagesRef = storageRef.child("images");
 
         // Calls 'enable' method from MainActivity with 'false' passed in, which makes it so that you can't press the bottom navigation icons
         ((MainActivity) getActivity()).enable(false);
@@ -66,10 +83,34 @@ public class PhotoPreview extends Fragment {
 
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
+                // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
+
+                StorageReference storageRef = storage.getReference("image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
+                ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+
+                // Needed to rotate image for it to be in the right orientation in the database
+                // Need to figure out how to have image orientation based on camera/phone orientation
+                Matrix matrix = new Matrix();
+                matrix.postRotate(90);
+
+                Bitmap rotatednewPhoto = Bitmap.createBitmap(newPhoto.photoBitmap(),0,0, newPhoto.photoBitmap().getWidth(),newPhoto.photoBitmap().getHeight(),matrix,true);
+
+                rotatednewPhoto.compress(Bitmap.CompressFormat.JPEG, 100, byteOutput);
+                byte[] imageData = byteOutput.toByteArray();
+
+                storageRef.putBytes(imageData).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        System.out.println(e);
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        System.out.println(taskSnapshot);
+                    }
+                });
                 ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
 
-//                photosRef.add(newPhoto); // Adds Photograph object's bitmap to a photos database collection
-//                System.out.println(((MainActivity) getActivity()).appPhotos.getPhotos());
 
                 backToCamera(container);
             }
