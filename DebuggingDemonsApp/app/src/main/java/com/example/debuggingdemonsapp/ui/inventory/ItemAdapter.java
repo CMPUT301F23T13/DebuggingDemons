@@ -40,6 +40,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             builder.setTitle("Item Details")
                     .setMessage(createItemDetailMessage(item))
                     .setPositiveButton("OK", null)
+                    .setNeutralButton("Edit", null)
                     .create()
                     .show();
         });
