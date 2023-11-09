@@ -100,12 +100,20 @@ public class Item {
         return tags;
     }
 
+    public ArrayList<String> getTagNames() {
+        ArrayList<String> tagNames = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagNames.add(tag.getName());
+        }
+        return tagNames;
+    }
+
     public void addTag(Tag tag) {
-        if (!tags.contains(tag)) {
+        if (!getTagNames().contains(tag.getName())) {
             tags.add(tag);
         }
     }
-  
+
     public String getImage1() {return this.image1;}
 
     public void setImage1(String image1) {this.image1 = image1;}

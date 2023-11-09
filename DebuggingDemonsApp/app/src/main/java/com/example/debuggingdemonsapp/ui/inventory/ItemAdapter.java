@@ -108,6 +108,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     private String createItemDetailMessage(Item item) {
+        StringBuilder tagList = new StringBuilder();
+        for (String tagName : item.getTagNames()) {
+            tagList.append("- ").append(tagName).append("\n");
+        }
+
         return "Description: " + item.getDescription() + "\n" +
                 "Date of Purchase: " + item.getDateOfPurchase() + "\n" +
                 "Make: " + item.getMake() + "\n" +
@@ -115,6 +120,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Serial Number: " + item.getSerialNumber() + "\n" +
                 "Estimated Value: " + item.getEstimatedValue() + "\n" +
                 "Comment: " + item.getComment() +  "\n" +
+                "Tags:" + "\n" + tagList +
                 "Images" + " ...";
     }
 
