@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,18 +22,23 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     public SavedPhotoList appPhotos;
+    public String current_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        current_user = getIntent().getStringExtra("current_user");
+
         db = FirebaseFirestore.getInstance();
+
         appPhotos = new SavedPhotoList();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         getSupportActionBar().hide();
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

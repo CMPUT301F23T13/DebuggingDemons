@@ -4,6 +4,7 @@ package com.example.debuggingdemonsapp.ui.camera;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import com.example.debuggingdemonsapp.LoginActivity;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
@@ -61,10 +63,10 @@ public class PhotoPreview extends Fragment {
 
         binding.imageView.setImageBitmap(newImage);
 
-        storage = FirebaseStorage.getInstance("gs://debuggingdemons.appspot.com/");
+        storage = FirebaseStorage.getInstance();
 
 
-//        StorageReference imagesRef = storageRef.child("images");
+
 
         // Calls 'enable' method from MainActivity with 'false' passed in, which makes it so that you can't press the bottom navigation icons
         ((MainActivity) getActivity()).enable(false);
@@ -84,8 +86,8 @@ public class PhotoPreview extends Fragment {
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
                 // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
-
-                StorageReference storageRef = storage.getReference("image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
+                //
+                StorageReference storageRef = storage.getReference(((MainActivity) getActivity()).current_user+"/image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
                 ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 
                 // Needed to rotate image for it to be in the right orientation in the database
@@ -101,14 +103,21 @@ public class PhotoPreview extends Fragment {
                 storageRef.putBytes(imageData).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
-                        System.out.println(e);
+
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        System.out.println(taskSnapshot);
+                        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                newPhoto.setUri(uri.toString());
+                            }
+                        });
+
                     }
                 });
+
                 ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
 
 

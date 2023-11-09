@@ -10,9 +10,9 @@ public class Item {
     private String serialNumber;
     private String estimatedValue;
     private String comment;
-    private byte[] image1;
-    private Drawable image2;
-    private Drawable image3;
+    private String image1;
+    private String image2;
+    private String image3;
 
     private boolean isSelected; // Used to track whether an entry is selected.
     private String id; // Used to uniquely identify an entry in the database.
@@ -21,7 +21,7 @@ public class Item {
     public Item() {}
 
     // Constructor with all fields for convenience
-    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, byte[] image1) {
+    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3) {
         this.description = description;
         this.dateOfPurchase = dateOfPurchase;
         this.make = make;
@@ -30,8 +30,8 @@ public class Item {
         this.estimatedValue = estimatedValue;
         this.comment = comment;
         this.image1 = image1;
-//        this.image2 = image2;
-//        this.image3 = image3;
+        this.image2 = image2;
+        this.image3 = image3;
     }
 
     // Getters and Setters
@@ -91,17 +91,18 @@ public class Item {
         this.comment = comment;
     }
 
-    public byte[] getImage1() {return this.image1;}
+    public String getImage1() {return this.image1;}
 
-    public void setImage1(byte[] image1) {this.image1 = image1;}
+    public void setImage1(String image1) {this.image1 = image1;}
 
-    public Drawable getImage2() {return this.image2;}
+    public String getImage2() {return this.image2;}
 
-    public void setImage2(Drawable image2) {this.image2 = image2;}
+    public void setImage2(String image2) {this.image2 = image2;}
 
-    public Drawable getImage3() {return this.image3;}
+    public String getImage3() {return this.image3;}
 
-    public void setImage3(Drawable image3) {this.image3 = image3;}
+    public void setImage3(String image3) {this.image3 = image3;}
+
 
     // Getters and Setters for the new attributes
 

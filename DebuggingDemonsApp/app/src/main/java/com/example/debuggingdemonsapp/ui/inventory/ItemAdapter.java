@@ -75,8 +75,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Model: " + item.getModel() + "\n" +
                 "Serial Number: " + item.getSerialNumber() + "\n" +
                 "Estimated Value: " + item.getEstimatedValue() + "\n" +
-                "Comment: " + item.getComment();
-
+                "Comment: " + item.getComment() +  "\n" +
+                "Images" + "...";
     }
 
     // Add a method to retrieve all selected items.
@@ -116,6 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             super(itemView);
             itemName = itemView.findViewById(R.id.item_name);
             itemCheckbox = itemView.findViewById(R.id.item_checkbox);
+
         }
     }
 }

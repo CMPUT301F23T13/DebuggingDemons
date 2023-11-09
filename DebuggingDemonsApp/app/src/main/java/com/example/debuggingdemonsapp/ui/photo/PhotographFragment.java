@@ -80,9 +80,10 @@ public class PhotographFragment extends Fragment {
                         key = "image3";
                     }
 
+                    Photograph photoObj = photoList.getPhotos().get(imageButtons.indexOf(imageButton));
                     // Sets the MutableLiveData object corresponding to the key to the bitmap of the selected image
                     // Then returns to the add item details page
-                    findNavController(container).getPreviousBackStackEntry().getSavedStateHandle().set(key,((BitmapDrawable)imageButton.getDrawable()).getBitmap());
+                    findNavController(container).getPreviousBackStackEntry().getSavedStateHandle().set(key,  photoObj);
                     findNavController(container).popBackStack();
                 }
             });
