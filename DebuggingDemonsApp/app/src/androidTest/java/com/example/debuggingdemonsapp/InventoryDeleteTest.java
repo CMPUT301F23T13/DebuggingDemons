@@ -68,7 +68,7 @@ public class InventoryDeleteTest {
     }
 
     @Test
-    public void testCheckbox_Checking() throws InterruptedException {
+    public void testCheckbox_CheckingAndDelete() throws InterruptedException {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
         // Assuming you have a checkbox with the ID checkbox_id in your layout
