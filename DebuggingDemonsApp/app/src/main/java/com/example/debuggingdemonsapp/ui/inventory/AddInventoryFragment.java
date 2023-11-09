@@ -132,9 +132,19 @@ public class AddInventoryFragment extends Fragment {
         String serialNumber = editTextSerialNumber.getText().toString();
         String estimatedValue = editTextEstimatedValue.getText().toString();
         String comment = editTextComment.getText().toString();
-        String image1 = liveData1.getValue().storageURI();
-        String image2 = liveData2.getValue().storageURI();
-        String image3 = liveData3.getValue().storageURI();
+
+        String image1 = "";
+        String image2 = "";
+        String image3 = "";
+        if (liveData1.getValue() != null){
+            image1 = liveData1.getValue().storageURI();
+        }
+        if(liveData2.getValue() != null){
+            image2 = liveData2.getValue().storageURI();
+        }
+        if(liveData3.getValue() != null){
+            image3 = liveData3.getValue().storageURI();
+        }
         // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
 
 

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 
 public class Photograph implements Parcelable {
     private Bitmap photo;
-    private String uri = null;
+    private String uri = "";
 
     public Photograph(Bitmap savedPhoto){
         this.photo = savedPhoto;
