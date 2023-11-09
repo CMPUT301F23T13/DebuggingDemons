@@ -16,15 +16,26 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.debuggingdemonsapp.model.Tag;
 
-
+/**
+ * This is a class that allows the user to define a new Tag
+ */
 public class AddTagFragment extends DialogFragment {
     private EditText editTagName;
     private OnFragmentInteractionListener listener;
 
+    /**
+     * This is an interface that ensures a listener that implements this interface
+     * will execute onOkPressed() when necessary
+     */
     public interface OnFragmentInteractionListener {
         void onOkPressed(Tag tag);
     }
 
+    /**
+     * This attaches the AddTagFragment to a given Context
+     * @param context
+     *     Context to which the AddTagFragment should be attached
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -32,6 +43,15 @@ public class AddTagFragment extends DialogFragment {
         assert listener != null;
     }
 
+    /**
+     * This creates a Dialog that displays an EditText for the user to enter a Tag name
+     * @param savedInstanceState
+     *     The last saved instance state of the Fragment, or null if
+     *     this is a freshly created Fragment
+     *
+     * @return
+     *     Returns Dialog with EditText
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -40,12 +60,14 @@ public class AddTagFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
+        // return a Dialog
         return builder
                 .setView(view)
                 .setTitle("Add Tag")
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
+                    // pass new Tag with given name in EditText to TagFragment when "OK" is clicked
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String tagName = editTagName.getText().toString();
 

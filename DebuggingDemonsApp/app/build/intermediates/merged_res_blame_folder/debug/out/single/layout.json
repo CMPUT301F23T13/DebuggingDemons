@@ -20,10 +20,6 @@
         "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/tag_equip_content.xml",
-        "source": "com.example.debuggingdemonsapp-main-56:/layout/tag_equip_content.xml"
-    },
-    {
         "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_camera.xml",
         "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_camera.xml"
     },
@@ -58,6 +54,10 @@
     {
         "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_equip_tags.xml",
         "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-56:/layout/fragment_equip_tags.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_inventory.xml",
+        "source": "com.example.debuggingdemonsapp-main-56:/layout/fragment_inventory.xml"
     },
     {
         "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-mergeDebugResources-53:/layout/fragment_add_item.xml",

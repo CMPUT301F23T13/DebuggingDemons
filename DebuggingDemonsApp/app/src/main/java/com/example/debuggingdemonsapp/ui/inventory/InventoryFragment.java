@@ -52,6 +52,9 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         newFragment.show(getParentFragmentManager(), "add_item");
     }
 
+    /**
+     * This creates a new EquipTagsFragment and displays it
+     */
     private void openEquipTagsDialog() {
         EquipTagsFragment newFragment = new EquipTagsFragment();
         newFragment.show(getChildFragmentManager(), "equip_tags");
@@ -63,6 +66,11 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         binding = null;
     }
 
+    /**
+     * This equips given Tags (that were selected by user) to currently selected Items in adapter
+     * @param selectedTags
+     *     List of selected Tags from a EquipTagsFragment
+     */
     @Override
     public void onEquipTags(ArrayList<Tag> selectedTags) {
         ArrayList<Item> selectedItems = adapter.getSelectedItems();

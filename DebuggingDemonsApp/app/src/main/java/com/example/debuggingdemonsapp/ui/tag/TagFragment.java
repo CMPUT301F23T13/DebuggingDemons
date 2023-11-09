@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,15 +21,38 @@ import com.example.debuggingdemonsapp.model.Tag;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a class that displays a list of Tags from a TagViewModel
+ */
 public class TagFragment extends Fragment implements AddTagFragment.OnFragmentInteractionListener {
     private FragmentTagBinding binding;
     private TagViewModel tagViewModel;
     private TagAdapter tagAdapter;
 
+    /**
+     *
+     * @return
+     */
     public static TagFragment newInstance() {
         return new TagFragment();
     }
 
+    /**
+     * This creates a new Fragment to display the list of Tags
+     * @param inflater
+     *     The LayoutInflater object that can be used to inflate
+     *     any views in the fragment
+     * @param container
+     *     If non-null, this is the parent view that the fragment's
+     *     UI should be attached to.  The fragment should not add the view itself,
+     *     but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState
+     *     If non-null, this fragment is being re-constructed
+     *     from a previous saved state as given here.
+     *
+     * @return
+     *     View that created this instance of TagFragment
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         tagViewModel = new ViewModelProvider(this).get(TagViewModel.class);
@@ -48,23 +72,37 @@ public class TagFragment extends Fragment implements AddTagFragment.OnFragmentIn
         });
 
         Button addButton = binding.addTagButton;
-
-        addButton.setOnClickListener(v -> {
-            AddTagFragment addTagFragment = new AddTagFragment();
-            addTagFragment.show(getChildFragmentManager(), "add_tag");
-        });
+        addButton.setOnClickListener(v -> openAddTagDialog());
 
         return root;
     }
 
+    /**
+     * This destroys the Fragment
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
+    /**
+     * This creates a new AddTagFragment and displays it
+     */
+    public void openAddTagDialog() {
+        AddTagFragment addTagFragment = new AddTagFragment();
+        addTagFragment.show(getChildFragmentManager(), "add_tag");
+    }
+
+    /**
+     * This attempts to add given Tag to TagViewModel
+     * @param tag
+     *     Tag created in a AddTagFragment
+     */
     @Override
     public void onOkPressed(Tag tag) {
-        tagViewModel.addTag(tag);
+        if (!tagViewModel.addTag(tag)) {
+            Toast.makeText(getActivity(), "tag already defined", Toast.LENGTH_LONG).show();
+        };
     }
 }

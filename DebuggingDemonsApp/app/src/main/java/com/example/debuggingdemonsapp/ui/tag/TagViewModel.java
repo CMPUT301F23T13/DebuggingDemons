@@ -11,35 +11,70 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
+/**
+ * This is a class that retrieves and updates Tag data from a FirebaseFirestore database
+ */
 public class TagViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Tag>> tags;
     private FirebaseFirestore db;
     private CollectionReference tagsRef;
 
+    /**
+     * This creates a new TagViewModel, connects to database, and fetches Tags from database
+     */
     public TagViewModel() {
         db = FirebaseFirestore.getInstance();
         tagsRef = db.collection("tags");
         tags = new MutableLiveData<>(new ArrayList<>());
-        fetchItems();
+        fetchTags();
     }
 
+    /**
+     * This returns the List of Tags
+     * @return
+     *     Returns Tags (LiveData)
+     */
     public LiveData<ArrayList<Tag>> getTags() {
         return tags;
     }
 
+    /**
+     * This sets the List of Tags to newTags
+     * @param newTags
+     *     List of Tags to overwrite current Tags
+     */
     public void setTags(ArrayList<Tag> newTags) {
         tags.setValue(newTags);
     }
 
-    public void addTag(Tag tag) {
-        tagsRef.add(tag);
+    /**
+     * This adds a given Tag to Tags, only if a Tag with same name isn't already present
+     * @param tag
+     *     Tag to be added
+     * @return
+     *     Returns true if Tag is added, false otherwise
+     */
+    public boolean addTag(Tag tag) {
         ArrayList<Tag> currentTags = new ArrayList<>(tags.getValue());
+
+        // return false if tag has duplicate name
+        for (Tag aTag : currentTags) {
+            if (aTag.getName().equals(tag.getName())) {
+                return false;
+            }
+        }
+
         currentTags.add(tag);
         tags.setValue(currentTags);
+        tagsRef.add(tag);
+        return true;
     }
 
-    public void fetchItems() {
+    /**
+     * This retrieves List of Tags from FirebaseFirestore database
+     */
+    public void fetchTags() {
         tagsRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 ArrayList<Tag> newTags = new ArrayList<>();
