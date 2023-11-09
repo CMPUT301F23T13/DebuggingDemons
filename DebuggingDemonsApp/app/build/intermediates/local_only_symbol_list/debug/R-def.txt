@@ -83,6 +83,7 @@ id serialNumber
 id serial_number
 id sortby_button
 id tag_button
+id tag_checkbox
 id tag_list
 id tag_name
 id tag_name_editText
@@ -110,6 +111,7 @@ layout item_edit
 layout item_layout
 layout list_item
 layout tag_content
+layout tag_equip_content
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
