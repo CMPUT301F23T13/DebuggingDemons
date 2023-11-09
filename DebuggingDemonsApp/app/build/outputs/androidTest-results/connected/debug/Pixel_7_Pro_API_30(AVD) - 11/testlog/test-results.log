@@ -1,21 +1,21 @@
-INSTRUMENTATION_STATUS: class=com.example.debuggingdemonsapp.InventoryDeleteTest
+INSTRUMENTATION_STATUS: class=com.example.debuggingdemonsapp.LoginActivityTest
 INSTRUMENTATION_STATUS: current=1
 INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
 INSTRUMENTATION_STATUS: numtests=1
 INSTRUMENTATION_STATUS: stream=
-com.example.debuggingdemonsapp.InventoryDeleteTest:
-INSTRUMENTATION_STATUS: test=testClickDeleteButton_WithoutAnyCheckbox
+com.example.debuggingdemonsapp.LoginActivityTest:
+INSTRUMENTATION_STATUS: test=testLoginButton_withValidUsername
 INSTRUMENTATION_STATUS_CODE: 1
-INSTRUMENTATION_STATUS: class=com.example.debuggingdemonsapp.InventoryDeleteTest
+INSTRUMENTATION_STATUS: class=com.example.debuggingdemonsapp.LoginActivityTest
 INSTRUMENTATION_STATUS: current=1
 INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
 INSTRUMENTATION_STATUS: numtests=1
 INSTRUMENTATION_STATUS: stream=.
-INSTRUMENTATION_STATUS: test=testClickDeleteButton_WithoutAnyCheckbox
+INSTRUMENTATION_STATUS: test=testLoginButton_withValidUsername
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 1.582
+Time: 5.055
 
 OK (1 test)
 
