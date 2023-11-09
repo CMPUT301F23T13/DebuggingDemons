@@ -1,26 +1,24 @@
 package com.example.debuggingdemonsapp;
 
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.matcher.RootMatchers.isDialog;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginActivityTest {
 
     @Rule
@@ -28,7 +26,7 @@ public class LoginActivityTest {
             = new ActivityScenarioRule<>(LoginActivity.class);
 
     @Test
-    public void testComponentsAreDisplayed() {
+    public void test1_ComponentsAreDisplayed() {
         // Check if the username edit text is displayed
         onView(withId(R.id.usernameEditText)).check(ViewAssertions.matches(isDisplayed()));
 
@@ -41,7 +39,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testRegisterButton_withEmptyUsername() {
+    public void test2_RegisterButton_withEmptyUsername() {
         // input the empty username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
         // click register button
@@ -54,7 +52,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testLoginButton_withEmptyUsername() {
+    public void test3_LoginButton_withEmptyUsername() {
         // input the empty username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
         // click login button
@@ -67,7 +65,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testRegisterButton_withValidUsername() throws InterruptedException {
+    public void test4_RegisterButton_withValidUsername() throws InterruptedException {
         // Assume "newuser" is not already in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
@@ -88,7 +86,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testLoginButton_withValidUsername() {
+    public void test5_LoginButton_withValidUsername() {
         // Assume "newuser" is already in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
@@ -110,7 +108,7 @@ public class LoginActivityTest {
 
 
     @Test
-    public void testRegisterButton_withExistUsername() {
+    public void test6_RegisterButton_withExistUsername() {
         // Assume "newuser" is already in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
@@ -121,7 +119,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testLoginButton_withNonExistUsername() {
+    public void test7_LoginButton_withNonExistUsername() {
         // Assume "bonobo" is not in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("nouser"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());

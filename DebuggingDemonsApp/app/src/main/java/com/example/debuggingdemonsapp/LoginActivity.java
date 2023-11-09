@@ -54,9 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             HashMap<String, Object> userMap = new HashMap<>();
                             userMap.put("username", username);
                             db.collection("users").document(username).set(userMap)
-                                    .addOnSuccessListener(aVoid -> {
-                                        showMessageDialog("Register Successfully", this::navigateToMainActivity);
-                                    })
+                                    .addOnSuccessListener(aVoid -> showMessageDialog("Register Successfully", this::navigateToMainActivity))
                                     .addOnFailureListener(e -> showMessageDialog("Error: " + e.getMessage(), null));
                         }
                     } else {
@@ -102,11 +100,11 @@ public class LoginActivity extends AppCompatActivity {
                 .show();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            if (dialog.isShowing()) {
+            if (!isFinishing() && dialog.isShowing()) {
                 dialog.dismiss();
-            }
-            if (onDismiss != null) {
-                onDismiss.run();
+                if (onDismiss != null) {
+                    onDismiss.run();
+                }
             }
         }, 1000); // delay one second to show the message
     }
