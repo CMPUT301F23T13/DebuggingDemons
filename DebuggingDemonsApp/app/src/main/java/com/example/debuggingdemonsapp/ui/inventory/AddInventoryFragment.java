@@ -1,6 +1,5 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +16,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.ui.photo.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,11 +33,11 @@ public class AddInventoryFragment extends Fragment {
     private EditText editTextEstimatedValue;
     private EditText editTextComment;
     private ImageButton addImage1;
-    private MutableLiveData<Bitmap> liveData1;
+    private MutableLiveData<Photograph> liveData1;
     private ImageButton addImage2;
-    private MutableLiveData<Bitmap> liveData2;
+    private MutableLiveData<Photograph> liveData2;
     private ImageButton addImage3;
-    private MutableLiveData<Bitmap> liveData3;
+    private MutableLiveData<Photograph> liveData3;
 
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
@@ -72,10 +68,10 @@ public class AddInventoryFragment extends Fragment {
         // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one boxes' image was changed
         liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image1");
-        liveData1.observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
+        liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
-                addImage1.setImageBitmap(liveData1.getValue());
+            public void onChanged(Photograph photo) {
+                addImage1.setImageBitmap(liveData1.getValue().photoBitmap());
                 addImage1.setRotation(90);
 
             }
@@ -92,10 +88,10 @@ public class AddInventoryFragment extends Fragment {
 
         liveData2 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image2");
-        liveData2.observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
+        liveData2.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
-                addImage2.setImageBitmap(liveData2.getValue());
+            public void onChanged(Photograph photo) {
+                addImage2.setImageBitmap(liveData2.getValue().photoBitmap());
                 addImage2.setRotation(90);
 
             }
@@ -104,10 +100,10 @@ public class AddInventoryFragment extends Fragment {
 
         liveData3 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image3");
-        liveData3.observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
+        liveData3.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
-                addImage3.setImageBitmap(liveData3.getValue());
+            public void onChanged(Photograph photo) {
+                addImage3.setImageBitmap(liveData3.getValue().photoBitmap());
                 addImage3.setRotation(90);
 
             }
@@ -136,15 +132,10 @@ public class AddInventoryFragment extends Fragment {
         String serialNumber = editTextSerialNumber.getText().toString();
         String estimatedValue = editTextEstimatedValue.getText().toString();
         String comment = editTextComment.getText().toString();
-
+        String image1 = liveData1.getValue().storageURI();
+        String image2 = liveData2.getValue().storageURI();
+        String image3 = liveData3.getValue().storageURI();
         // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
-        Bitmap image1 = Bitmap.createBitmap(addImage1.getDrawable().getIntrinsicWidth(), addImage1.getDrawable().getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        ByteArrayOutputStream image1ByteStream = new ByteArrayOutputStream();
-        image1.compress(Bitmap.CompressFormat.JPEG, 100, image1ByteStream);
-        byte[] image1Bytes = image1ByteStream.toByteArray();
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-//        Drawable image2 = addImage2.getDrawable();
-//        Drawable image3 = addImage3.getDrawable();
 
 
         Map<String, Object> newItem = new HashMap<>();
@@ -155,9 +146,9 @@ public class AddInventoryFragment extends Fragment {
         newItem.put("serialNumber", serialNumber);
         newItem.put("estimatedValue", estimatedValue);
         newItem.put("comment", comment);
-        newItem.put("image1", image1Bytes);
-//        newItem.put("image2",image2);
-//        newItem.put("image3",image3);
+        newItem.put("image1", image1);
+        newItem.put("image2",image2);
+        newItem.put("image3",image3);
 
         itemsRef.add(newItem)
                 .addOnSuccessListener(documentReference -> {
