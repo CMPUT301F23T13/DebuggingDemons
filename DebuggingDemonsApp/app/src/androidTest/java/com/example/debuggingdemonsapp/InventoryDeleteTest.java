@@ -72,7 +72,7 @@ public class InventoryDeleteTest {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
         // Assuming you have a checkbox with the ID checkbox_id in your layout
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         // First, click on the checkbox to change its state
         onView(withId(R.id.recycler_view))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
