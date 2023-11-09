@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_inventory"
         android:name="com.example.debuggingdemonsapp.ui.inventory.InventoryFragment"
-        android:label="Inventory"
+        android:label="@string/title_inventory"
         tools:layout="@layout/fragment_inventory">
         <action
             android:id="@+id/action_inventoryFragment_to_addInventoryFragment"
@@ -44,7 +44,6 @@
             app:destination="@id/navigation_photosList" />
     </fragment>
 
-
     <fragment
         android:id="@+id/navigation_camera"
         android:name="com.example.debuggingdemonsapp.ui.camera.CameraFragment"
@@ -65,6 +64,13 @@
         android:name="com.example.debuggingdemonsapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_tag"
+        android:name="com.example.debuggingdemonsapp.ui.tag.TagFragment"
+        android:label="@string/title_tag_tab"
+        tools:layout="@layout/fragment_tag" />
+
     <fragment
         android:id="@+id/navigation_photosList"
         android:name="com.example.debuggingdemonsapp.ui.photo.PhotographFragment"

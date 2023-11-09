@@ -1,11 +1,15 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.util.Log;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -21,9 +25,11 @@ import java.util.List;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private ArrayList<Item> items;
+    private ArrayList<Item> selectedItems;
 
     public ItemAdapter(ArrayList<Item> items) {
         this.items = items;
+        selectedItems = new ArrayList<>();
     }
 
     @NonNull
@@ -37,7 +43,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = items.get(position);
         holder.itemName.setText(item.getDescription());
-        //holder.itemCheckbox.setChecked();
+
+        // keep track of currently selected Items
+        holder.itemCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked && !selectedItems.contains(item)) {
+                    selectedItems.add(item);
+                }
+                if (!isChecked && selectedItems.contains(item)) {
+                    selectedItems.remove(item);
+                }
+            }
+        });
 
         holder.itemView.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
@@ -61,11 +79,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     .create()
                     .show();
         });
-        holder.itemCheckbox.setOnCheckedChangeListener(null); // Prevent callback conflicts.
-        holder.itemCheckbox.setChecked(items.get(position).isSelected()); // Update the checkbox from the item data.
-        holder.itemCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            items.get(position).setSelected(isChecked); // Update the item's selected status.
-        });
     }
 
     private String createItemDetailMessage(Item item) {
@@ -79,25 +92,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Images" + "...";
     }
 
-    // Add a method to retrieve all selected items.
-    public List<Item> getSelectedItems() {
-        List<Item> selectedItems = new ArrayList<>();
-        for (Item item : items) {
-            if (item.isSelected()) { // Make sure the item has been selected
-                selectedItems.add(item);
-            }
-        }
-        return selectedItems;
-    }
-
-    // Add a method to delete all selected items.
-    public void deleteSelectedItems() {
-        List<Item> selectedItems = getSelectedItems();
-        items.removeAll(selectedItems);
-        notifyDataSetChanged(); // Update the adapter
-    }
-
-
     @Override
     public int getItemCount() {
         return items != null ? items.size() : 0;
@@ -108,6 +102,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         notifyDataSetChanged();
     }
 
+    public ArrayList<Item> getSelectedItems() {
+        return selectedItems;
+    }
+
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName;
         public CheckBox itemCheckbox;
@@ -116,7 +114,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             super(itemView);
             itemName = itemView.findViewById(R.id.item_name);
             itemCheckbox = itemView.findViewById(R.id.item_checkbox);
-
         }
     }
 }

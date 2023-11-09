@@ -42,7 +42,6 @@ public class AddInventoryFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -146,7 +145,6 @@ public class AddInventoryFragment extends Fragment {
             image3 = liveData3.getValue().storageURI();
         }
         // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
-
 
         Map<String, Object> newItem = new HashMap<>();
         newItem.put("dateOfPurchase", dateOfPurchase);
