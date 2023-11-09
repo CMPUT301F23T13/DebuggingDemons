@@ -25,7 +25,6 @@ public class InventoryViewModel extends ViewModel {
         fetchItems();
     }
 
-
     public interface DeletionListener {
         void onDeletionSuccessful();
         void onDeletionFailed();

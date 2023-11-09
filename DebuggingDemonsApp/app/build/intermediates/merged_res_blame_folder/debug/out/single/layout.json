@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_saved.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_saved.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_home.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/inventory_content.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/inventory_content.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/tag_equip_content.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/tag_equip_content.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/activity_login.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/tag_content.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/tag_content.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/list_item.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/list_item.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/item_edit.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/item_edit.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/item_layout.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/item_layout.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_add_item.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_add_item.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_picture.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_picture.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_inventory.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_camera.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_camera.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_notifications.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/activity_main.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_tag_equip.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_tag_equip.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_tag.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_tag.xml"
+    },
+    {
+        "merged": "com.example.debuggingdemonsapp-mergeDebugResources-58:/layout/fragment_add_tag.xml",
+        "source": "com.example.debuggingdemonsapp-main-61:/layout/fragment_add_tag.xml"
+    }
+]
