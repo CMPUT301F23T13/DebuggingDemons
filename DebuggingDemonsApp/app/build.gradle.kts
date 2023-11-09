@@ -45,6 +45,7 @@ dependencies {
     implementation("androidx.camera:camera-extensions:1.3.0")
     implementation("com.google.firebase:firebase-firestore")
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -57,7 +58,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0"){
+        exclude(module="protobuf-lite")
+    }
     implementation("com.google.firebase:firebase-database")
 
 }

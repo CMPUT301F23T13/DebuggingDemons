@@ -54,7 +54,6 @@ public class CameraFragment extends Fragment {
 
     private FragmentCameraBinding binding;
     private ProcessCameraProvider cameraProvider;
-    private FragmentPictureBinding binding2;
 
     private ImageCapture takePhoto;
     private ListenableFuture<ProcessCameraProvider> cameraProviderLF; //LF = Listenable Future
@@ -77,7 +76,7 @@ public class CameraFragment extends Fragment {
                 new ViewModelProvider(this).get(CameraViewModel.class);
 
         binding = FragmentCameraBinding.inflate(inflater, container, false);
-        binding2 = FragmentPictureBinding.inflate(inflater,container,false);
+//        binding2 = FragmentPictureBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
 
 

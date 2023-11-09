@@ -16,6 +16,7 @@ import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -60,6 +61,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     .create()
                     .show();
         });
+        holder.itemCheckbox.setOnCheckedChangeListener(null); // Prevent callback conflicts.
+        holder.itemCheckbox.setChecked(items.get(position).isSelected()); // Update the checkbox from the item data.
+        holder.itemCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            items.get(position).setSelected(isChecked); // Update the item's selected status.
+        });
     }
 
     private String createItemDetailMessage(Item item) {
@@ -69,7 +75,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Model: " + item.getModel() + "\n" +
                 "Serial Number: " + item.getSerialNumber() + "\n" +
                 "Estimated Value: " + item.getEstimatedValue() + "\n" +
-                "Comment: " + item.getComment();
+                "Comment: " + item.getComment() +  "\n" +
+                "Images" + "...";
+    }
+
+    // Add a method to retrieve all selected items.
+    public List<Item> getSelectedItems() {
+        List<Item> selectedItems = new ArrayList<>();
+        for (Item item : items) {
+            if (item.isSelected()) { // Make sure the item has been selected
+                selectedItems.add(item);
+            }
+        }
+        return selectedItems;
+    }
+
+    // Add a method to delete all selected items.
+    public void deleteSelectedItems() {
+        List<Item> selectedItems = getSelectedItems();
+        items.removeAll(selectedItems);
+        notifyDataSetChanged(); // Update the adapter
     }
 
 
@@ -91,6 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             super(itemView);
             itemName = itemView.findViewById(R.id.item_name);
             itemCheckbox = itemView.findViewById(R.id.item_checkbox);
+
         }
     }
 }

@@ -108,6 +108,35 @@ public class PhotographTest {
 
     @Test
     public void DeletePhotoTest(){
-        
+        // Method to test photo deletion
+    }
+
+    @Test
+    public void AddPhoto(){
+        // Method to add photo to an item
+
+        onView(withId(R.id.navigation_inventory)).perform(click());
+
+        onView(withId(R.id.add_button)).perform(click());
+
+        onView(withId(R.id.addImage1)).perform(click());
+
+        onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.photoList_back)).perform(click());
+
+        onView(withId(R.id.addImage2)).perform(click());
+
+        onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.photoList_back)).perform(click());
+
+        onView(withId(R.id.addImage3)).perform(click());
+
+        onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
+
+
+
     }
 }

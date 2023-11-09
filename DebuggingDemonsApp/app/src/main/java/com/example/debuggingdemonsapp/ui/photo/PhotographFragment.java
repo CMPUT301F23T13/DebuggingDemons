@@ -2,6 +2,7 @@ package com.example.debuggingdemonsapp.ui.photo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class PhotographFragment extends Fragment {
     ArrayList<ImageButton> imageButtons;
 
     /**
-     *
+     * Used to create the PhotographFragment which displays the list of saved photos
      * @param savedInstanceState The last saved instance state of the Fragment,
      * or null if this is a freshly created Fragment.
      *
@@ -68,9 +69,22 @@ public class PhotographFragment extends Fragment {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String key = null;
+                    int button_id = (int) getArguments().get("button");
+                    // Sets key based on value of the button id that was passed through in the bundle
+                    if (button_id == R.id.addImage1){
+                        key = "image1";
+                    } else if (button_id == R.id.addImage2) {
+                        key = "image2";
+                    } else if (button_id == R.id.addImage3) {
+                        key = "image3";
+                    }
 
-                    Toast.makeText(getContext(),"Photo selected", Toast.LENGTH_LONG).show();
-//                  findNavController(container).navigate(R.id.navigation_photosList);
+                    Photograph photoObj = photoList.getPhotos().get(imageButtons.indexOf(imageButton));
+                    // Sets the MutableLiveData object corresponding to the key to the bitmap of the selected image
+                    // Then returns to the add item details page
+                    findNavController(container).getPreviousBackStackEntry().getSavedStateHandle().set(key,  photoObj);
+                    findNavController(container).popBackStack();
                 }
             });
         }
@@ -91,26 +105,21 @@ public class PhotographFragment extends Fragment {
 
 
     /**
-     * Used to add ImageViews to the 'Photos' page when photos are taken with the app's camera
+     * Used to add ImageViews to the 'Saved Photos' page when photos are taken with the app's camera
      * @param binding
      * @param photo
      */
     public void addPhotoView(FragmentSavedBinding binding, Photograph photo){
-        ImageButton template = binding.image1;
 
         ImageButton imageButton = new ImageButton(getContext());
+
         // For some reason the view needs to be rotated for the emulator to display photos in the right orientation.
-        //  This needs to be changed for real devices
+        // Need to figure out how to set this rotation based on the phone's orientation rather than hardcoding a value
         imageButton.setRotation(90);
-
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) template.getLayoutParams();
-        params.setMargins(0,100,0,0);
-
-        imageButton.setLayoutParams(params);
-        imageButton.setOutlineProvider(template.getOutlineProvider());
 
         imageButton.setImageBitmap(photo.photoBitmap());
         imageButton.setId(View.generateViewId());
+
 
         imageButtons.add(imageButton);
         binding.photoContainer.addView(imageButton);

@@ -113,7 +113,7 @@ public class LoginActivityTest {
     @Test
     public void testLoginButton_withNonExistUsername() {
         // Assume "bonobo" is not in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("bonobo"), closeSoftKeyboard());
+        onView(withId(R.id.usernameEditText)).perform(typeText("nouser"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
         // We expect to see a username does not exist message
         onView(withText("Username does not exist"))

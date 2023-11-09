@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryViewModel extends ViewModel {
 
@@ -22,6 +23,32 @@ public class InventoryViewModel extends ViewModel {
     public InventoryViewModel() {
         items.setValue(new ArrayList<>());
         fetchItems();
+    }
+
+
+    public interface DeletionListener {
+        void onDeletionSuccessful();
+        void onDeletionFailed();
+    }
+
+    public void deleteItem(Item item, DeletionListener listener) {
+        // Deleting the item in Firebase
+        itemsRef.document(item.getId()).delete()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // if successful delete the item from the LiveData
+                        List<Item> currentItems = items.getValue();
+                        if (currentItems != null) {
+                            currentItems.remove(item);
+                            items.setValue((ArrayList<Item>) currentItems);
+                            listener.onDeletionSuccessful();
+                        }
+                    } else {
+                        // Deletion failed, show error message and provide a retry option
+                        // Notify listener of failure
+                        listener.onDeletionFailed();
+                    }
+                });
     }
 
     public LiveData<ArrayList<Item>> getItems() {
@@ -43,7 +70,9 @@ public class InventoryViewModel extends ViewModel {
             if (task.isSuccessful()) {
                 ArrayList<Item> newItems = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    newItems.add(document.toObject(Item.class));
+                    Item item = document.toObject(Item.class);
+                    item.setId(document.getId()); // Set the ID from the document
+                    newItems.add(item);
                 }
                 items.postValue(newItems);
             }
