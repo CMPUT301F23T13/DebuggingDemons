@@ -14,6 +14,9 @@ public class Item {
     private String image2;
     private String image3;
 
+    private boolean isSelected; // Used to track whether an entry is selected.
+    private String id; // Used to uniquely identify an entry in the database.
+
     // Constructors
     public Item() {}
 
@@ -99,4 +102,23 @@ public class Item {
     public String getImage3() {return this.image3;}
 
     public void setImage3(String image3) {this.image3 = image3;}
+
+
+    // Getters and Setters for the new attributes
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

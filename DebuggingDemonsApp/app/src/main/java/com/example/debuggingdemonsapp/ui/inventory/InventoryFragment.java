@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
+import com.example.debuggingdemonsapp.model.Item;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryFragment extends Fragment {
 
@@ -40,12 +43,44 @@ public class InventoryFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 
+        binding.deleteButton.setOnClickListener(v -> deleteSelectedItems());
+
+//
         binding.addButton.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
         });
 
         return root;
     }
+
+
+    private void deleteSelectedItems() {
+        List<Item> selectedItems = adapter.getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            // Display the message when user didn't select any items and click the delete button
+            Snackbar.make(getView(), "No items selected to be deleted.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        // Deleting the item from the database and the RecycleView
+        for (Item item : selectedItems) {
+            inventoryViewModel.deleteItem(item, new InventoryViewModel.DeletionListener() {
+                @Override
+                public void onDeletionSuccessful() {
+                    // Snackbar to confirm deletion
+                    Snackbar.make(getView(), "Item deleted successfully", Snackbar.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onDeletionFailed() {
+                    // Snackbar to inform about the failure and retry
+                    Snackbar.make(getView(), "Failed to delete item", Snackbar.LENGTH_LONG)
+                            .setAction("Retry", v -> deleteSelectedItems()) // Provide a retry button
+                            .show();
+                }
+            });
+        }
+    }
+
 
     @Override
     public void onDestroyView() {
