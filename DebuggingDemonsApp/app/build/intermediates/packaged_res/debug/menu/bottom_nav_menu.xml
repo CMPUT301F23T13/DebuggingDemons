@@ -8,6 +8,7 @@
 
     <item
         android:id="@+id/navigation_inventory"
+        android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_inventory" />
 
     <item
@@ -23,6 +24,6 @@
     <item
         android:id="@+id/navigation_tag"
         android:icon="@android:drawable/ic_input_get"
-        android:title="@string/title_tag" />
+        android:title="@string/title_tag_tab" />
 
 </menu>

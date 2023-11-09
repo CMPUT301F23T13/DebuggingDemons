@@ -6,8 +6,6 @@ import android.view.View;
 import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
-import com.example.debuggingdemonsapp.databinding.FragmentAddItemBindingImpl;
-import java.lang.IllegalArgumentException;
 import java.lang.Integer;
 import java.lang.Object;
 import java.lang.Override;
@@ -18,13 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataBinderMapperImpl extends DataBinderMapper {
-  private static final int LAYOUT_FRAGMENTADDITEM = 1;
-
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(1);
-
-  static {
-    INTERNAL_LAYOUT_ID_LOOKUP.put(com.example.debuggingdemonsapp.R.layout.fragment_add_item, LAYOUT_FRAGMENTADDITEM);
-  }
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(0);
 
   @Override
   public ViewDataBinding getDataBinder(DataBindingComponent component, View view, int layoutId) {
@@ -33,14 +25,6 @@ public class DataBinderMapperImpl extends DataBinderMapper {
       final Object tag = view.getTag();
       if(tag == null) {
         throw new RuntimeException("view must have a tag");
-      }
-      switch(localizedLayoutId) {
-        case  LAYOUT_FRAGMENTADDITEM: {
-          if ("layout/fragment_add_item_0".equals(tag)) {
-            return new FragmentAddItemBindingImpl(component, view);
-          }
-          throw new IllegalArgumentException("The tag for fragment_add_item is invalid. Received: " + tag);
-        }
       }
     }
     return null;
@@ -94,10 +78,6 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(1);
-
-    static {
-      sKeys.put("layout/fragment_add_item_0", com.example.debuggingdemonsapp.R.layout.fragment_add_item);
-    }
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(0);
   }
 }

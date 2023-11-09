@@ -4,9 +4,10 @@ package com.example.debuggingdemonsapp.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.view.PreviewView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -20,11 +21,24 @@ public final class FragmentCameraBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final TextView textCamera;
+  public final Button buttonBorder;
 
-  private FragmentCameraBinding(@NonNull ConstraintLayout rootView, @NonNull TextView textCamera) {
+  @NonNull
+  public final Button cameraButton;
+
+  @NonNull
+  public final PreviewView cameraView;
+
+  @NonNull
+  public final Button photosButton;
+
+  private FragmentCameraBinding(@NonNull ConstraintLayout rootView, @NonNull Button buttonBorder,
+      @NonNull Button cameraButton, @NonNull PreviewView cameraView, @NonNull Button photosButton) {
     this.rootView = rootView;
-    this.textCamera = textCamera;
+    this.buttonBorder = buttonBorder;
+    this.cameraButton = cameraButton;
+    this.cameraView = cameraView;
+    this.photosButton = photosButton;
   }
 
   @Override
@@ -54,13 +68,32 @@ public final class FragmentCameraBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.text_camera;
-      TextView textCamera = ViewBindings.findChildViewById(rootView, id);
-      if (textCamera == null) {
+      id = R.id.button_border;
+      Button buttonBorder = ViewBindings.findChildViewById(rootView, id);
+      if (buttonBorder == null) {
         break missingId;
       }
 
-      return new FragmentCameraBinding((ConstraintLayout) rootView, textCamera);
+      id = R.id.camera_button;
+      Button cameraButton = ViewBindings.findChildViewById(rootView, id);
+      if (cameraButton == null) {
+        break missingId;
+      }
+
+      id = R.id.cameraView;
+      PreviewView cameraView = ViewBindings.findChildViewById(rootView, id);
+      if (cameraView == null) {
+        break missingId;
+      }
+
+      id = R.id.photos_button;
+      Button photosButton = ViewBindings.findChildViewById(rootView, id);
+      if (photosButton == null) {
+        break missingId;
+      }
+
+      return new FragmentCameraBinding((ConstraintLayout) rootView, buttonBorder, cameraButton,
+          cameraView, photosButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

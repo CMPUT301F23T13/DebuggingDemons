@@ -669,6 +669,7 @@ attr imagePanX
 attr imagePanY
 attr imageRotate
 attr imageZoom
+attr implementationMode
 attr indeterminateAnimationType
 attr indeterminateProgressStyle
 attr indicatorColor
@@ -1048,6 +1049,7 @@ attr roundPercent
 attr route
 attr saturation
 attr scaleFromTextSize
+attr scaleType
 attr scopeUris
 attr scrimAnimationDuration
 attr scrimBackground
@@ -3192,6 +3194,7 @@ id action0
 id actionDown
 id actionDownUp
 id actionUp
+id action_addItemFragment_to_inventoryFragment
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -3203,15 +3206,23 @@ id action_container
 id action_context_bar
 id action_divider
 id action_image
+id action_inventoryFragment_to_addInventoryFragment
 id action_menu_divider
 id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
+id action_navigation_addItem_to_navigation_photosList
+id action_navigation_photo_to_navigation_camera2
+id action_navigation_photosList_to_navigation_addItem
 id action_text
 id actions
 id activity_chooser_view_content
 id add
+id addImage1
+id addImage2
+id addImage3
+id addInventoryFragment
 id add_button
 id add_tag_button
 id adjust_height
@@ -3233,6 +3244,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id back_button
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3245,8 +3257,13 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id buttonPanel
+id button_border
+id button_cancel
+id button_ok
 id cache_measures
 id callMeasure
+id cameraView
+id camera_button
 id cancel_action
 id cancel_button
 id carryVelocity
@@ -3269,6 +3286,8 @@ id clockwise
 id closest
 id collapseActionView
 id comment
+id comment2
+id compatible
 id compress
 id confirm_button
 id constraint
@@ -3340,11 +3359,15 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id estimatedValue
+id estimated_value
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
 id fill
+id fillCenter
+id fillEnd
+id fillStart
 id fill_horizontal
 id fill_vertical
 id filled
@@ -3383,6 +3406,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageView
 id immediateStop
 id included
 id indeterminate
@@ -3390,6 +3414,10 @@ id info
 id invisible
 id inward
 id italic
+id itemImage1
+id itemImage2
+id itemImage3
+id itemImage4
 id item_checkbox
 id item_name
 id item_touch_helper_previous_elevation
@@ -3407,6 +3435,7 @@ id linear
 id listMode
 id list_item
 id locale
+id loginButton
 id ltr
 id m3_side_sheet
 id make
@@ -3476,6 +3505,7 @@ id nav_controller_view_tag
 id nav_host_fragment_activity_main
 id nav_host_fragment_container
 id nav_view
+id navigation_addItem
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3483,10 +3513,13 @@ id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
 id navigation_camera
+id navigation_editItem
 id navigation_header_container
 id navigation_home
 id navigation_inventory
 id navigation_notifications
+id navigation_photoPreview
+id navigation_photosList
 id navigation_tag
 id never
 id neverCompleteToEnd
@@ -3532,6 +3565,11 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id performance
+id photoContainer
+id photoList_add
+id photoList_back
+id photos_button
 id pin
 id position
 id postLayout
@@ -3542,7 +3580,9 @@ id radio
 id ratio
 id rectangles
 id recycler_view
+id registerButton
 id report_drawn
+id retake_button
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3551,6 +3591,7 @@ id right_side
 id rounded
 id row_index_key
 id rtl
+id save_button
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3575,6 +3616,7 @@ id select_dialog_listview
 id selected
 id selection_type
 id serialNumber
+id serial_number
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3623,7 +3665,6 @@ id tag_accessibility_clickable_spans
 id tag_accessibility_heading
 id tag_accessibility_pane_title
 id tag_button
-id tag_checkbox
 id tag_list
 id tag_name
 id tag_name_editText
@@ -3643,10 +3684,11 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
+id textView2
 id textViewDate
 id textViewDescription
 id textWatcher
-id text_camera
 id text_home
 id text_input_end_icon
 id text_input_error_icon
@@ -3679,6 +3721,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id usernameEditText
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3814,6 +3857,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_login
 layout activity_main
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3837,9 +3881,12 @@ layout fragment_camera
 layout fragment_home
 layout fragment_inventory
 layout fragment_notifications
+layout fragment_picture
+layout fragment_saved
 layout fragment_tag
 layout fragment_tag_equip
 layout inventory_content
+layout item_edit
 layout item_layout
 layout list_item
 layout m3_alert_dialog
@@ -3913,7 +3960,6 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout tag_content
-layout tag_equip_content
 menu bottom_nav_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -3951,6 +3997,7 @@ string add_item
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string back
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
 string bottomsheet_action_expand
@@ -3961,6 +4008,7 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
+string comment
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title
@@ -3979,9 +4027,14 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string confirm
+string dateofpurchase
+string description
 string dest_title
+string edit_view
 string error_a11y_label
 string error_icon_content_description
+string estimated_value
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
@@ -3993,6 +4046,7 @@ string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string login
 string m3_exceed_max_badge_text_suffix
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
@@ -4009,6 +4063,7 @@ string m3_sys_motion_easing_linear
 string m3_sys_motion_easing_standard
 string m3_sys_motion_easing_standard_accelerate
 string m3_sys_motion_easing_standard_decelerate
+string make
 string material_clock_display_divider
 string material_clock_toggle_content_description
 string material_hour_24h_suffix
@@ -4031,6 +4086,7 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string model
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name
@@ -4101,10 +4157,14 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string project_id
+string register
+string retake_button
+string save_button
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
+string serial_number
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
@@ -4118,6 +4178,7 @@ string title_notifications
 string title_sort
 string title_tag
 string title_tag_tab
+string username
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -5366,6 +5427,7 @@ styleable OnClick clickAction targetId
 styleable OnSwipe autoCompleteMode dragDirection dragScale dragThreshold limitBoundsTo maxAcceleration maxVelocity moveWhenScrollAtTop nestedScrollFlags onTouchUp rotationCenterId springBoundary springDamping springMass springStiffness springStopThreshold touchAnchorId touchAnchorSide touchRegionId
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
+styleable PreviewView implementationMode scaleType
 styleable PropertySet android_visibility android_alpha layout_constraintTag motionProgress visibilityMode
 styleable RadialViewGroup materialCircleRadius
 styleable RangeSlider minSeparation values

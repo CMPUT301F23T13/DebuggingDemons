@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.debuggingdemonsapp-mergeDebugResources-52:/values-hdpi-v4/values-hdpi-v4.xml",
+            "outputFile": "com.example.debuggingdemonsapp-mergeDebugResources-58:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/elialex15/.gradle/caches/transforms-3/87d19731aaca1c252b65617fcdbfbff8/transformed/appcompat-1.6.1/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "C:\\Users\\AlexYuan\\.gradle\\caches\\transforms-3\\87d19731aaca1c252b65617fcdbfbff8\\transformed\\appcompat-1.6.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
