@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.debuggingdemonsapp.R;
@@ -82,12 +84,16 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveData();
+                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                viewModel.fetchItems();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).popBackStack();
+                NavController navController = Navigation.findNavController(getView());
+                navController.navigate(R.id.navigation_inventory);
+//                Navigation.findNavController(v).popBackStack();
             }
         });
         return view;
