@@ -86,7 +86,6 @@ public class PhotoPreview extends Fragment {
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
                 // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
-                //
                 StorageReference storageRef = storage.getReference(((MainActivity) getActivity()).current_user+"/image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
                 ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 

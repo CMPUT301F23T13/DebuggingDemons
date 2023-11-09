@@ -61,6 +61,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0"){
         exclude(module="protobuf-lite")
     }
+
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.google.firebase:firebase-database")
 
 }

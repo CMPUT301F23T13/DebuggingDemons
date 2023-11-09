@@ -1,11 +1,13 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.debuggingdemonsapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +35,13 @@ public class EditItemFragment extends Fragment {
     private EditText SerialNumber;
     private EditText EstimatedValue;
     private EditText Comment;
+    private ImageButton imageButton1;
+    private String image1;
+    private ImageButton imageButton2;
+    private String image2;
+    private ImageButton imageButton3;
+    private String image3;
+
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
@@ -54,9 +64,34 @@ public class EditItemFragment extends Fragment {
         EstimatedValue = view.findViewById(R.id.estimated_value);
         Comment = view.findViewById(R.id.comment);
 
+        imageButton1 = view.findViewById(R.id.editImage1);
+        imageButton2 = view.findViewById(R.id.editImage2);
+        imageButton3 = view.findViewById(R.id.editImage3);
+
         Button confirmButton = view.findViewById(R.id.confirm_button);
         Button cancelButton = view.findViewById(R.id.back_button);
 
+        // When any of the three image buttons are pressed in the edit page the image is removed from the item
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton1.setImageDrawable(null);
+            }
+        });
+
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton2.setImageDrawable(null);
+            }
+        });
+
+        imageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton3.setImageDrawable(null);
+            }
+        });
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -69,6 +104,16 @@ public class EditItemFragment extends Fragment {
             String estimatedValue = bundle.getString("estimatedValue");
             String comment = bundle.getString("comment");
 
+            // Gets image Uri's from the bundle for images that exist
+            // If an image wasn't selected in the add menu then the string is empty (i.e. the object would be null)
+            image1 = bundle.getString("image1");
+            image2 = bundle.getString("image2");
+            image3 = bundle.getString("image3");
+
+            setImage(image1, imageButton1);
+            setImage(image2, imageButton2);
+            setImage(image3, imageButton3);
+
             // 初始化界面
             DoP.setText(doP);
             Description.setText(description);
@@ -77,6 +122,10 @@ public class EditItemFragment extends Fragment {
             SerialNumber.setText(serialNumber);
             EstimatedValue.setText(estimatedValue);
             Comment.setText(comment);
+
+
+
+
         }
 
 
@@ -99,6 +148,49 @@ public class EditItemFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Used to set the image of a certain ImageButton to the Uri that corresponds to the image chosen in 'Add item' page
+     * @param imageUri The Uri of the image as a string
+     * @param imageButton Corresponds to a ImageButton object that is passed in
+     */
+    public void setImage(String imageUri, ImageButton imageButton){
+        if (imageUri != null){
+            // Glide found in https://stackoverflow.com/questions/52651815/how-to-place-a-firebase-generated-url-into-an-imageview-with-glide/52652077#52652077 and https://www.geeksforgeeks.org/image-loading-caching-library-android-set-2/
+            // Glide is a library (https://github.com/bumptech/glide) used to load an image from a Uri
+            Glide.with(getContext())
+                    .load(imageUri)
+                    .into(imageButton);
+
+        }
+    }
+
+
+    /**
+     * This method is used to get the updated image
+     * @param imageButton  Corresponds to a ImageButton object that is passed in
+     * @param imageNumber Corresponds to the number (1-3) of the image
+     * @return updatedImage A string which holds either null or the Uri of an image as a string
+     */
+    public String updateImage(ImageButton imageButton,int imageNumber){
+        Drawable updatedDrawable = imageButton.getDrawable();
+        String updatedImage = null;
+        if(updatedDrawable == null){
+            updatedImage = "";
+        }else{
+            switch (imageNumber){
+                case 1:
+                    updatedImage = image1;
+                    break;
+                case 2:
+                    updatedImage = image2;
+                    break;
+                case 3:
+                    updatedImage = image3;
+                    break;
+            }
+        }
+        return updatedImage;
+    }
     private void saveData(){
         String updatedDoP = DoP.getText().toString();
         String updatedDescription = Description.getText().toString();
@@ -107,6 +199,13 @@ public class EditItemFragment extends Fragment {
         String updatedSerialNumber = SerialNumber.getText().toString();
         String updatedEstimatedValue = EstimatedValue.getText().toString();
         String updatedComment = Comment.getText().toString();
+
+        // Get the updated images for all three images
+        // As of right now this just focuses on deleting images; Future -> add choosing new image functionality
+        String updatedImage1 = updateImage(imageButton1, 1);
+        String updatedImage2 = updateImage(imageButton2,2);
+        String updatedImage3 = updateImage(imageButton3,3);
+
         Query query = itemsRef.whereEqualTo("description", updatedDescription);
 
         query.get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -119,7 +218,11 @@ public class EditItemFragment extends Fragment {
                                         "model", updatedModel,
                                         "serialNumber", updatedSerialNumber,
                                         "estimatedValue", updatedEstimatedValue,
-                                        "comment", updatedComment)
+                                        "comment", updatedComment,
+                                        "image1",updatedImage1,
+                                        "image2", updatedImage2,
+                                        "image3", updatedImage3
+                                       )
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -135,4 +238,5 @@ public class EditItemFragment extends Fragment {
             }
         });
     }
+
 }

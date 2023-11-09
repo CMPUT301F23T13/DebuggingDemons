@@ -1,12 +1,15 @@
 package com.example.debuggingdemonsapp.ui.photo;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
-
+/**
+ * Photograph object which is has a bitmap and the uri of the image corresponding to
+ *      its database uri
+ */
 public class Photograph implements Parcelable {
     private Bitmap photo;
     private String uri = "";
@@ -19,18 +22,6 @@ public class Photograph implements Parcelable {
         photo = in.readParcelable(Bitmap.class.getClassLoader());
         uri = in.readString();
     }
-
-    public static final Creator<Photograph> CREATOR = new Creator<Photograph>() {
-        @Override
-        public Photograph createFromParcel(Parcel in) {
-            return new Photograph(in);
-        }
-
-        @Override
-        public Photograph[] newArray(int size) {
-            return new Photograph[size];
-        }
-    };
 
     public Bitmap photoBitmap(){
         return this.photo;
@@ -57,4 +48,15 @@ public class Photograph implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeArray(new Object[] {this.uri, this.photo});
     }
+    public static final Creator<Photograph> CREATOR = new Creator<Photograph>() {
+        @Override
+        public Photograph createFromParcel(Parcel in) {
+            return new Photograph(in);
+        }
+
+        @Override
+        public Photograph[] newArray(int size) {
+            return new Photograph[size];
+        }
+    };
 }
