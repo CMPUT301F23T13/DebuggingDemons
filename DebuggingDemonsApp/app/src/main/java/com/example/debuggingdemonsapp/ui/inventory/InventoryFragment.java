@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
+import com.example.debuggingdemonsapp.model.Tag;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
