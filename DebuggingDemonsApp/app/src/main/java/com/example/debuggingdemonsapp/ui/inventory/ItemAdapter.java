@@ -1,6 +1,8 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.util.Log;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +10,17 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -49,6 +56,40 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 }
             }
         });
+
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+            builder.setTitle("Item Details")
+                    .setMessage(createItemDetailMessage(item))
+                    .setPositiveButton("OK", null)
+                    .setNeutralButton("Edit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("doP",item.getDateOfPurchase());
+                            bundle.putString("description", item.getDescription());
+                            bundle.putString("make", item.getMake());
+                            bundle.putString("model", item.getModel());
+                            bundle.putString("serialNumber", item.getSerialNumber());
+                            bundle.putString("estimatedValue", item.getEstimatedValue());
+                            bundle.putString("comment", item.getComment());
+                            Navigation.findNavController(v).navigate(R.id.navigation_editItem, bundle);
+                        }
+                    })
+                    .create()
+                    .show();
+        });
+    }
+
+    private String createItemDetailMessage(Item item) {
+        return "Description: " + item.getDescription() + "\n" +
+                "Date of Purchase: " + item.getDateOfPurchase() + "\n" +
+                "Make: " + item.getMake() + "\n" +
+                "Model: " + item.getModel() + "\n" +
+                "Serial Number: " + item.getSerialNumber() + "\n" +
+                "Estimated Value: " + item.getEstimatedValue() + "\n" +
+                "Comment: " + item.getComment() +  "\n" +
+                "Images" + "...";
     }
 
     @Override

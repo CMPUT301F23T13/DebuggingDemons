@@ -15,7 +15,34 @@
         android:id="@+id/navigation_inventory"
         android:name="com.example.debuggingdemonsapp.ui.inventory.InventoryFragment"
         android:label="@string/title_inventory"
-        tools:layout="@layout/fragment_inventory" />
+        tools:layout="@layout/fragment_inventory">
+        <action
+            android:id="@+id/action_inventoryFragment_to_addInventoryFragment"
+            app:destination="@id/addInventoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addInventoryFragment"
+        android:name="com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment"
+        android:label="Add Inventory Item"
+        tools:layout="@layout/fragment_add_item" />
+
+    <!-- Remove the fragment and action definitions related to AddInventoryFragment -->
+
+    <fragment
+        android:id="@+id/navigation_addItem"
+        android:name="com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment"
+        android:label="Add Item"
+        tools:layout="@layout/fragment_add_item">
+
+        <!-- The action to navigate from AddItemFragment back to InventoryFragment -->
+        <action
+            android:id="@+id/action_addItemFragment_to_inventoryFragment"
+            app:destination="@id/navigation_inventory" />
+        <action
+            android:id="@+id/action_navigation_addItem_to_navigation_photosList"
+            app:destination="@id/navigation_photosList" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_camera"
@@ -23,6 +50,15 @@
         android:label="@string/title_camera"
         tools:layout="@layout/fragment_camera" />
 
+    <fragment
+        android:id="@+id/navigation_photoPreview"
+        android:name="com.example.debuggingdemonsapp.ui.camera.PhotoPreview"
+        android:label="Photo"
+        tools:layout="@layout/fragment_picture">
+        <action
+            android:id="@+id/action_navigation_photo_to_navigation_camera2"
+            app:destination="@id/navigation_camera" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.debuggingdemonsapp.ui.notifications.NotificationsFragment"
@@ -34,5 +70,18 @@
         android:name="com.example.debuggingdemonsapp.ui.tag.TagFragment"
         android:label="@string/title_tag_tab"
         tools:layout="@layout/fragment_tag" />
+
+    <fragment
+        android:id="@+id/navigation_photosList"
+        android:name="com.example.debuggingdemonsapp.ui.photo.PhotographFragment"
+        android:label="PhotographFragment" >
+        <action
+            android:id="@+id/action_navigation_photosList_to_navigation_addItem"
+            app:destination="@id/navigation_addItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_editItem"
+        android:name="com.example.debuggingdemonsapp.ui.inventory.EditItemFragment"
+        tools:layout="@layout/item_edit"/>
 
 </navigation>

@@ -11,4 +11,19 @@
     <string name="title_tag">TAGS</string>
     <string name="title_delete">DELETE</string>
     <string name="title_add">ADD</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="retake_button">Retake Photo</string>
+    <string name="save_button">Save Photo</string>
+    <string name="edit_view">EDIT</string>
+    <string name="description">Description</string>
+    <string name="dateofpurchase">Date of Purchase</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="estimated_value">Estimated Value</string>
+    <string name="comment">Comment</string>
+    <string name="back">BACK</string>
+    <string name="confirm">CONFIRM</string>
 </resources>
