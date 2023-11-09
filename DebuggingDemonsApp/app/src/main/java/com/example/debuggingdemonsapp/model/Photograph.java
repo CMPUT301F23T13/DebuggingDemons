@@ -1,4 +1,4 @@
-package com.example.debuggingdemonsapp.ui.photo;
+package com.example.debuggingdemonsapp.model;
 
 import android.graphics.Bitmap;
 
