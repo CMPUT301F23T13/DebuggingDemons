@@ -37,7 +37,7 @@ public class InventoryDeleteTest {
     public void testIsInventoryFragmentDisplayed() {
 
         // Navigate to inventory
-        onView(withId(R.id.navigation_home)).perform(click());
+        onView(withId(R.id.navigation_inventory)).perform(click());
 
 //        // Check if inventory fragment is displayed
 //        onView(withId(R.id.fragment_inventory)).check(ViewAssertions.matches(isDisplayed()));
