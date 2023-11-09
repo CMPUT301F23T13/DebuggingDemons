@@ -2199,9 +2199,11 @@
     <string name="title_delete">DELETE</string>
     <string name="title_filter">FILTER</string>
     <string name="title_home">Home</string>
+    <string name="title_inventory">Inventory</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_sort">SORT BY</string>
     <string name="title_tag">TAGS</string>
+    <string name="title_tag_tab">Tag</string>
     <string name="username">Username</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
