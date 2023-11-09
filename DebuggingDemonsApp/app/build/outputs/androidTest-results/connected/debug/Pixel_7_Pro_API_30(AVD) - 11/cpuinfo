@@ -5,7 +5,7 @@ model		: 183
 model name	: 13th Gen Intel(R) Core(TM) i9-13980HX
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 5171.216
+cpu MHz		: 5152.291
 cache size	: 36864 KB
 physical id	: 0
 siblings	: 1
@@ -32,7 +32,7 @@ model		: 183
 model name	: 13th Gen Intel(R) Core(TM) i9-13980HX
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 5076.315
+cpu MHz		: 5170.861
 cache size	: 36864 KB
 physical id	: 1
 siblings	: 1
@@ -59,7 +59,7 @@ model		: 183
 model name	: 13th Gen Intel(R) Core(TM) i9-13980HX
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 5099.710
+cpu MHz		: 5106.734
 cache size	: 36864 KB
 physical id	: 2
 siblings	: 1
@@ -86,7 +86,7 @@ model		: 183
 model name	: 13th Gen Intel(R) Core(TM) i9-13980HX
 stepping	: 1
 microcode	: 0xffffffff
-cpu MHz		: 5145.480
+cpu MHz		: 5054.019
 cache size	: 36864 KB
 physical id	: 3
 siblings	: 1

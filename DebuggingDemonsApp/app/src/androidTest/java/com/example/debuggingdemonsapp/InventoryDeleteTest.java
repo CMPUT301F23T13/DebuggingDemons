@@ -72,13 +72,26 @@ public class InventoryDeleteTest {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
         // Assuming you have a checkbox with the ID checkbox_id in your layout
-        Thread.sleep(3000);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         // First, click on the checkbox to change its state
         onView(withId(R.id.recycler_view))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
 
-//        // Now, check if the checkbox is checked
-//        onView(withId(R.id.item_checkbox)).check(ViewAssertions.matches(isChecked()));
+        onView(withId(R.id.delete_button)).perform(click());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        onView(withText("Item deleted successfully"))
+                .check(ViewAssertions.matches(isDisplayed()));
+
     }
 
     // Helper method to perform click on a child view with specified id within the RecyclerView item
