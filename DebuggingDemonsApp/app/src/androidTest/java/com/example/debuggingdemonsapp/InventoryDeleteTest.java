@@ -3,9 +3,13 @@ package com.example.debuggingdemonsapp;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.Matchers.not;
+
 
 import android.view.View;
 
@@ -91,6 +95,17 @@ public class InventoryDeleteTest {
 
         onView(withText("Item deleted successfully"))
                 .check(ViewAssertions.matches(isDisplayed()));
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Assuming the text "item" is the first one on the Recycle view as input in the item description
+
+        onView(withId(R.id.recycler_view))
+                .check(ViewAssertions.matches(not(hasDescendant(withText("item")))));
 
     }
 

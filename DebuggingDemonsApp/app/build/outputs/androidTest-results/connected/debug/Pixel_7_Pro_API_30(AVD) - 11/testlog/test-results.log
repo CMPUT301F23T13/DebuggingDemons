@@ -4,18 +4,18 @@ INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
 INSTRUMENTATION_STATUS: numtests=1
 INSTRUMENTATION_STATUS: stream=
 com.example.debuggingdemonsapp.InventoryDeleteTest:
-INSTRUMENTATION_STATUS: test=testCheckbox_Checking
+INSTRUMENTATION_STATUS: test=testCheckbox_CheckingAndDelete
 INSTRUMENTATION_STATUS_CODE: 1
 INSTRUMENTATION_STATUS: class=com.example.debuggingdemonsapp.InventoryDeleteTest
 INSTRUMENTATION_STATUS: current=1
 INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
 INSTRUMENTATION_STATUS: numtests=1
 INSTRUMENTATION_STATUS: stream=.
-INSTRUMENTATION_STATUS: test=testCheckbox_Checking
+INSTRUMENTATION_STATUS: test=testCheckbox_CheckingAndDelete
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 5.595
+Time: 6.56
 
 OK (1 test)
 

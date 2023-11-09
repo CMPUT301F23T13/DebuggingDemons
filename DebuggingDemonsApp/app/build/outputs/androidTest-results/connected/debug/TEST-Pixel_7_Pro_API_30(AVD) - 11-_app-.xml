@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<testsuite name="com.example.debuggingdemonsapp.InventoryDeleteTest" tests="1" failures="0" errors="0" skipped="0" time="6.519" timestamp="2023-11-09T08:39:22" hostname="localhost">
+<testsuite name="com.example.debuggingdemonsapp.InventoryDeleteTest" tests="1" failures="0" errors="0" skipped="0" time="7.451" timestamp="2023-11-09T08:51:58" hostname="localhost">
   <properties>
     <property name="device" value="Pixel_7_Pro_API_30(AVD) - 11" />
     <property name="flavor" value="" />
     <property name="project" value=":app" />
   </properties>
-  <testcase name="testCheckbox_Checking" classname="com.example.debuggingdemonsapp.InventoryDeleteTest" time="5.587" />
+  <testcase name="testCheckbox_CheckingAndDelete" classname="com.example.debuggingdemonsapp.InventoryDeleteTest" time="6.542" />
 </testsuite>
