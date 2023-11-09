@@ -5,6 +5,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.content.DialogInterface;
+import android.net.Uri;
+import android.net.http.UrlRequest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +96,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             bundle.putString("serialNumber", item.getSerialNumber());
                             bundle.putString("estimatedValue", item.getEstimatedValue());
                             bundle.putString("comment", item.getComment());
+                            bundle.putString("image1", item.getImage1());
+                            bundle.putString("image2", item.getImage2());
+                            bundle.putString("image3", item.getImage3());
                             Navigation.findNavController(v).navigate(R.id.navigation_editItem, bundle);
                         }
                     })
@@ -110,7 +115,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 "Serial Number: " + item.getSerialNumber() + "\n" +
                 "Estimated Value: " + item.getEstimatedValue() + "\n" +
                 "Comment: " + item.getComment() +  "\n" +
-                "Images" + "...";
+                "Images" + " ...";
     }
 
     @Override

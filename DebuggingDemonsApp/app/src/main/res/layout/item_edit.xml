@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -15,57 +16,111 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/description"
-        android:inputType="textMultiLine" />
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/dateOfPurchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/dateofpurchase"
-        android:inputType="date" />
+        android:hint="@string/dateofpurchase"
+        android:inputType="date"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/make"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/make"
-        android:inputType="text" />
+        android:hint="@string/make"
+        android:inputType="text"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/model"
-        android:inputType="text" />
+        android:hint="@string/model"
+        android:inputType="text"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/serial_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/serial_number"
-        android:inputType="text" />
+        android:hint="@string/serial_number"
+        android:inputType="text"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/estimated_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/estimated_value"
-        android:inputType="numberDecimal" />
+        android:hint="@string/estimated_value"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/comment"
-        android:inputType="textMultiLine" />
+        android:hint="@string/comment"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/photos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/photos"
+        android:textSize="18sp"
+        android:textStyle="normal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="207dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/editImage1"
+                android:layout_width="100dp"
+                android:layout_height="207dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <ImageButton
+                android:id="@+id/editImage2"
+                android:layout_width="100dp"
+                android:layout_height="207dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <ImageButton
+                android:id="@+id/editImage3"
+                android:layout_width="100dp"
+                android:layout_height="207dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -75,9 +130,9 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/back"
-            android:textSize="18sp"
-            android:layout_weight="1">
+            android:textSize="18sp">
 
         </Button>
 
@@ -85,9 +140,9 @@
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/confirm"
-            android:textSize="18sp"
-            android:layout_weight="1">
+            android:textSize="18sp">
 
         </Button>
 

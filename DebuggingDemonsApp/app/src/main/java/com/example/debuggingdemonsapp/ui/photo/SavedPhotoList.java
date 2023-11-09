@@ -1,6 +1,6 @@
 package com.example.debuggingdemonsapp.ui.photo;
 
-import android.graphics.Bitmap;
+import com.example.debuggingdemonsapp.model.Photograph;
 
 
 import java.util.ArrayList;

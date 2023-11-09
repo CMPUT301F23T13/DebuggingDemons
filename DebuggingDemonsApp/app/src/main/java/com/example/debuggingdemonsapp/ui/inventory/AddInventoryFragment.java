@@ -16,7 +16,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.debuggingdemonsapp.R;
-import com.example.debuggingdemonsapp.ui.photo.Photograph;
+import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;

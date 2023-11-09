@@ -1,30 +1,23 @@
 package com.example.debuggingdemonsapp;
 
 
-import androidx.test.espresso.IdlingRegistry;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.espresso.assertion.ViewAssertions;
-import androidx.test.filters.LargeTest;
-
-import org.hamcrest.Matcher;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -74,7 +67,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void testRegisterButton_withValidUsername() {
+    public void testRegisterButton_withValidUsername() throws InterruptedException {
         // Assume "newuser" is not already in the database for this test
         onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
@@ -83,7 +76,15 @@ public class LoginActivityTest {
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
         // After the message is shown, we expect to navigate to the MainActivity
-        // This may need to wait for the navigation to happen, potentially with an IdlingResource
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Check that the MainActivity is displayed
+        onView(withId(R.id.container)) // Use an actual ID from MainActivity
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
     @Test
@@ -96,6 +97,15 @@ public class LoginActivityTest {
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
         // Also, expect navigation to MainActivity after successful login
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Check that the MainActivity is displayed
+        onView(withId(R.id.container)) // Use an actual ID from MainActivity
+                .check(ViewAssertions.matches(isDisplayed()));
     }
 
 
@@ -120,32 +130,6 @@ public class LoginActivityTest {
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
     }
-
-    @Test
-    public void testRegisterButton_withValidUsername_navigatesToMainActivity() {
-
-        // Haven't figure out why this test failed
-
-        // Type the new username
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
-
-        // Click the register button
-        onView(withId(R.id.registerButton)).perform(click());
-
-        // Assuming the AlertDialog shows up and you need to click "OK"
-        onView(withText(android.R.string.ok))
-                .inRoot(isDialog()) // Only if you are expecting a dialog to show up
-                .perform(click());
-
-        // Add a delay or IdlingResource here if there is an asynchronous operation
-
-        // Check that the MainActivity is displayed
-        onView(withId(R.id.container)) // Use an actual ID from MainActivity
-                .check(ViewAssertions.matches(isDisplayed()));
-    }
-
-
-
 
 }
 
