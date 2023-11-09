@@ -1,10 +1,10 @@
 
-ø
-s
-InventoryDeleteTestcom.example.debuggingdemonsapp testIsInventoryFragmentDisplayed2§†²ª€êî’:¨†²ª€šÛº"•
+‡
+z
+InventoryDeleteTestcom.example.debuggingdemonsapp(testClickDeleteButton_WithoutAnyCheckbox2£˜²ªÀøÜÄ:¥˜²ªÀ¨®~"
 
-logcatandroidÿ
-üC:\Users\AlexYuan\AndroidStudioProjects\DebuggingDemons\DebuggingDemonsApp\app\build\outputs\androidTest-results\connected\debug\Pixel_7_Pro_API_30(AVD) - 11\logcat-com.example.debuggingdemonsapp.InventoryDeleteTest-testIsInventoryFragmentDisplayed.txt"Ê
+logcatandroid‡
+„C:\Users\AlexYuan\AndroidStudioProjects\DebuggingDemons\DebuggingDemonsApp\app\build\outputs\androidTest-results\connected\debug\Pixel_7_Pro_API_30(AVD) - 11\logcat-com.example.debuggingdemonsapp.InventoryDeleteTest-testClickDeleteButton_WithoutAnyCheckbox.txt"Ê
 
 device-infoandroid¯
 ¬C:\Users\AlexYuan\AndroidStudioProjects\DebuggingDemons\DebuggingDemonsApp\app\build\outputs\androidTest-results\connected\debug\Pixel_7_Pro_API_30(AVD) - 11\device-info.pb"Ë
