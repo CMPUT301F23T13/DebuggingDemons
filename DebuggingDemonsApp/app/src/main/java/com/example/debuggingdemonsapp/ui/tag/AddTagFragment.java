@@ -71,7 +71,9 @@ public class AddTagFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String tagName = editTagName.getText().toString();
 
-                        listener.onOkPressed(new Tag(tagName));
+                        if (tagName.length() > 0) {
+                            listener.onOkPressed(new Tag(tagName));
+                        }
                     }
                 }).create();
     }

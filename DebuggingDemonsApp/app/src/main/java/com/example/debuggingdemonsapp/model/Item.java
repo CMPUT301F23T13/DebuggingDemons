@@ -20,7 +20,9 @@ public class Item {
     private String id; // Used to uniquely identify an entry in the database.
 
     // Constructors
-    public Item() {}
+    public Item() {
+        tags = new ArrayList<>();
+    }
 
     // Constructor with all fields for convenience
     public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3) {
@@ -34,6 +36,7 @@ public class Item {
         this.image1 = image1;
         this.image2 = image2;
         this.image3 = image3;
+        tags = new ArrayList<>();
     }
 
     // Getters and Setters
