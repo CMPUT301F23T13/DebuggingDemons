@@ -65,12 +65,14 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
     }
 
     private void deleteSelectedItems() {
-        List<Item> selectedItems = adapter.getSelectedItems();
+        ArrayList<Item> selectedItems = adapter.getSelectedItems();
+
         if (selectedItems.isEmpty()) {
             // Display the message when user didn't select any items and click the delete button
             Snackbar.make(getView(), "No items selected to be deleted.", Snackbar.LENGTH_SHORT).show();
             return;
         }
+
         // Deleting the item from the database and the RecycleView
         for (Item item : selectedItems) {
             inventoryViewModel.deleteItem(item, new InventoryViewModel.DeletionListener() {

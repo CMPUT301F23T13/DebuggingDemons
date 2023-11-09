@@ -1,5 +1,8 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -54,6 +57,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 if (!isChecked && selectedItems.contains(item)) {
                     selectedItems.remove(item);
                 }
+            }
+        });
+
+        // uncheck on item deletion
+        holder.itemName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // nothing to do
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                holder.itemCheckbox.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // nothing to do
             }
         });
 
