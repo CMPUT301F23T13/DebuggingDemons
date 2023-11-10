@@ -42,6 +42,7 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         inventoryViewModel.getItems().observe(getViewLifecycleOwner(), newItems -> {
             adapter.setItems(newItems);
             adapter.notifyDataSetChanged();
+            updateTotalEstimatedValue();
         });
 
         binding.tagButton.setOnClickListener(v -> openEquipTagsDialog());
@@ -129,5 +130,10 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
                 }
             });
         }
+    }
+
+    private void updateTotalEstimatedValue() {
+        double totalValue = adapter.getTotalEstimatedValue();
+        binding.totalEstimatedValue.setText("Total Estimated Value: " + totalValue);
     }
 }
