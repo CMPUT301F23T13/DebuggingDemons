@@ -14,6 +14,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * This class is used to display the app bar, the navigation windows, and initialize the appPhotos and get the current user from the LoginActivity
+ */
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     public SavedPhotoList appPhotos;
     public String current_user;
 
+    /**
+     * This class is used to create the navigation between fragments and objects needed during the app's lifetime
+     * @param savedInstanceState Bundle with the savedInstanceState in it
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method used to enable and disable the bottom navigation bar's items
-     * @param setActive
+     * @param setActive Boolean that corresponds to whether the item bar should be clickable or not
      */
     public void enable(boolean setActive){
         for(int i = 0; i < binding.navView.getMenu().size(); i++){
