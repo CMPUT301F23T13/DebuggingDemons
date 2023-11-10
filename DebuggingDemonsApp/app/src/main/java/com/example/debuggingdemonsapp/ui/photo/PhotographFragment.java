@@ -1,27 +1,17 @@
 package com.example.debuggingdemonsapp.ui.photo;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
-import com.example.debuggingdemonsapp.databinding.FragmentSavedBinding;
-import com.example.debuggingdemonsapp.ui.inventory.AddInventoryFragment;
-import com.example.debuggingdemonsapp.ui.inventory.InventoryFragment;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import org.jetbrains.annotations.NotNull;
+import com.example.debuggingdemonsapp.databinding.FragmentPhotolistBinding;
+import com.example.debuggingdemonsapp.model.Photograph;
+import com.example.debuggingdemonsapp.model.SavedPhotoList;
 
 import java.util.ArrayList;
 
@@ -33,7 +23,7 @@ import static androidx.navigation.Navigation.findNavController;
 public class PhotographFragment extends Fragment {
 
 
-    private FragmentSavedBinding binding;
+    private FragmentPhotolistBinding binding;
     private FragmentInventoryBinding inventoryBinding;
     private SavedPhotoList photoList;
     ArrayList<ImageButton> imageButtons;
@@ -49,7 +39,7 @@ public class PhotographFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentSavedBinding.inflate(inflater,container,false);
+        binding = FragmentPhotolistBinding.inflate(inflater,container,false);
 
         imageButtons = new ArrayList<>();
 
@@ -109,7 +99,7 @@ public class PhotographFragment extends Fragment {
      * @param binding
      * @param photo
      */
-    public void addPhotoView(FragmentSavedBinding binding, Photograph photo){
+    public void addPhotoView(FragmentPhotolistBinding binding, Photograph photo){
 
         ImageButton imageButton = new ImageButton(getContext());
 

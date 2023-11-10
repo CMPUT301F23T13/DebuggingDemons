@@ -1,7 +1,6 @@
 package com.example.debuggingdemonsapp.ui.camera;
 
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -12,15 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.example.debuggingdemonsapp.LoginActivity;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
-import com.example.debuggingdemonsapp.ui.photo.Photograph;
+import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -86,7 +82,6 @@ public class PhotoPreview extends Fragment {
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
                 // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
-                //
                 StorageReference storageRef = storage.getReference(((MainActivity) getActivity()).current_user+"/image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
                 ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 

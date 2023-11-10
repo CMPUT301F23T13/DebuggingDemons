@@ -25,7 +25,6 @@ public class InventoryViewModel extends ViewModel {
         fetchItems();
     }
 
-
     public interface DeletionListener {
         void onDeletionSuccessful();
         void onDeletionFailed();
@@ -77,5 +76,14 @@ public class InventoryViewModel extends ViewModel {
                 items.postValue(newItems);
             }
         });
+    }
+
+    /**
+     * This gets the collection reference to the items in the database
+     * @return
+     *     Reference to item collection in database
+     */
+    public CollectionReference getItemsRef() {
+        return itemsRef;
     }
 }

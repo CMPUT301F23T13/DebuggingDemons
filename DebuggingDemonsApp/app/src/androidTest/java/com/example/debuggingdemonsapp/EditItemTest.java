@@ -33,7 +33,7 @@ public class EditItemTest {
         onView(withId(R.id.navigation_inventory)).perform(click());
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class EditItemTest {
         onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class EditItemTest {
         onView(withId(android.R.id.button3)).perform((click()));
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class EditItemTest {
 
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class EditItemTest {
 
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -105,7 +105,7 @@ public class EditItemTest {
         onView(withId(android.R.id.button3)).perform((click()));
         // Wait for 1 second
         try {
-            Thread.sleep(1000); // 等待1秒钟
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

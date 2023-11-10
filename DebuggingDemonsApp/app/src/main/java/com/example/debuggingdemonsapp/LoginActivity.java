@@ -54,14 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             HashMap<String, Object> userMap = new HashMap<>();
                             userMap.put("username", username);
                             db.collection("users").document(username).set(userMap)
-                                    .addOnSuccessListener(aVoid -> {
-                                        showMessageDialog("Register Successfully", () ->
-                                                new Handler(Looper.getMainLooper()).postDelayed(
-                                                        this::navigateToMainActivity,
-                                                        500
-                                                )
-                                        );
-                                    })
+                                    .addOnSuccessListener(aVoid -> showMessageDialog("Register Successfully", this::navigateToMainActivity))
                                     .addOnFailureListener(e -> showMessageDialog("Error: " + e.getMessage(), null));
                         }
                     } else {
@@ -83,9 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            showMessageDialog("Logged in successfully", () -> {
-                                new Handler(Looper.getMainLooper()).postDelayed(this::navigateToMainActivity, 500);
-                            });
+                            showMessageDialog("Logged in successfully", this::navigateToMainActivity);
                         } else {
                             showMessageDialog("Username does not exist", null);
                         }
@@ -103,15 +94,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showMessageDialog(String message, Runnable onDismiss) {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(message)
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    if (onDismiss != null) {
-                        onDismiss.run();
-                    }
-                })
                 .setCancelable(false)
                 .show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            if (!isFinishing() && dialog.isShowing()) {
+                dialog.dismiss();
+                if (onDismiss != null) {
+                    onDismiss.run();
+                }
+            }
+        }, 1000); // delay one second to show the message
     }
 
 }

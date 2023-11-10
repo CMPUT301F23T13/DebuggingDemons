@@ -1,5 +1,6 @@
 package com.example.debuggingdemonsapp.model;
 
+import java.util.ArrayList;
 import android.graphics.drawable.Drawable;
 
 public class Item {
@@ -10,18 +11,21 @@ public class Item {
     private String serialNumber;
     private String estimatedValue;
     private String comment;
+    private ArrayList<String> tagNames;
+
     private String image1;
     private String image2;
     private String image3;
 
-    private boolean isSelected; // Used to track whether an entry is selected.
     private String id; // Used to uniquely identify an entry in the database.
 
     // Constructors
-    public Item() {}
+    public Item() {
+        tagNames = new ArrayList<>();
+    }
 
     // Constructor with all fields for convenience
-    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3) {
+    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3, ArrayList<String> tagNames) {
         this.description = description;
         this.dateOfPurchase = dateOfPurchase;
         this.make = make;
@@ -32,6 +36,7 @@ public class Item {
         this.image1 = image1;
         this.image2 = image2;
         this.image3 = image3;
+        this.tagNames = tagNames;
     }
 
     // Getters and Setters
@@ -91,6 +96,17 @@ public class Item {
         this.comment = comment;
     }
 
+    public ArrayList<String> getTagNames() {
+        return tagNames;
+    }
+
+    public void addTag(Tag tag) {
+        String name = tag.getName();
+        if (!tagNames.contains(name)) {
+            tagNames.add(name);
+        }
+    }
+
     public String getImage1() {return this.image1;}
 
     public void setImage1(String image1) {this.image1 = image1;}
@@ -102,17 +118,6 @@ public class Item {
     public String getImage3() {return this.image3;}
 
     public void setImage3(String image3) {this.image3 = image3;}
-
-
-    // Getters and Setters for the new attributes
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
 
     public String getId() {
         return id;

@@ -16,7 +16,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.debuggingdemonsapp.R;
-import com.example.debuggingdemonsapp.ui.photo.Photograph;
+import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
@@ -42,7 +42,6 @@ public class AddInventoryFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +64,7 @@ public class AddInventoryFragment extends Fragment {
 
 
         // Need to figure out how to make this process more efficient
-        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one boxes' image was changed
+        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one box's image was changed
         liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image1");
         liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
@@ -76,14 +75,7 @@ public class AddInventoryFragment extends Fragment {
 
             }
         });
-        addImage1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                chooseImage(addImage1,container);
-
-            }
-        });
+        chooseImage(addImage1,container);
 
 
         liveData2 = Navigation.findNavController(container).getCurrentBackStackEntry()
@@ -110,6 +102,7 @@ public class AddInventoryFragment extends Fragment {
         });
         chooseImage(addImage3,container);
 
+
         view.findViewById(R.id.button_cancel).setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_inventory);
@@ -132,11 +125,20 @@ public class AddInventoryFragment extends Fragment {
         String serialNumber = editTextSerialNumber.getText().toString();
         String estimatedValue = editTextEstimatedValue.getText().toString();
         String comment = editTextComment.getText().toString();
-        String image1 = liveData1.getValue().storageURI();
-        String image2 = liveData2.getValue().storageURI();
-        String image3 = liveData3.getValue().storageURI();
-        // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
 
+        String image1 = "";
+        String image2 = "";
+        String image3 = "";
+        if (liveData1.getValue() != null){
+            image1 = liveData1.getValue().storageURI();
+        }
+        if(liveData2.getValue() != null){
+            image2 = liveData2.getValue().storageURI();
+        }
+        if(liveData3.getValue() != null){
+            image3 = liveData3.getValue().storageURI();
+        }
+        // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
 
         Map<String, Object> newItem = new HashMap<>();
         newItem.put("dateOfPurchase", dateOfPurchase);
