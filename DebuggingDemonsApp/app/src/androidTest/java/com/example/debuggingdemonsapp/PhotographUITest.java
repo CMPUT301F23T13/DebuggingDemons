@@ -117,6 +117,8 @@ public class PhotographUITest {
 
         onView(withId(R.id.add_button)).perform(click());
 
+        // Checks that each of the image buttons go to the correct page
+
         onView(withId(R.id.addImage1)).perform(click());
 
         onView(withText("Saved Photos")).check(matches(isDisplayed()));
@@ -129,10 +131,14 @@ public class PhotographUITest {
 
         onView(withId(R.id.photoList_back)).perform(click());
 
-        onView(withId(R.id.addImage3)).perform(click());
+        onView(withId(R.id.addImage2)).perform(click());
 
         onView(withText("Saved Photos")).check(matches(isDisplayed()));
 
+        onView(withId(R.id.photoList_back)).perform(click());
+
+
+        // Check
 
 
 
