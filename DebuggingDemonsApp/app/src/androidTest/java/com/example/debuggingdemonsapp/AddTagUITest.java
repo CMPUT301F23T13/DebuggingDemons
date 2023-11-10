@@ -75,9 +75,4 @@ public class AddTagUITest {
             }
         });
     }
-
-    @Test
-    public void FailedAddTest() {
-        // TODO
-    }
 }
