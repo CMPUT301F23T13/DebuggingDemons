@@ -36,7 +36,6 @@ public class PhotographFragment extends Fragment {
      * @return
      */
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPhotolistBinding.inflate(inflater,container,false);
