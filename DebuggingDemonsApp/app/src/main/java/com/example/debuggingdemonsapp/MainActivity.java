@@ -2,7 +2,7 @@ package com.example.debuggingdemonsapp;
 
 import android.os.Bundle;
 
-import com.example.debuggingdemonsapp.ui.photo.SavedPhotoList;
+import com.example.debuggingdemonsapp.model.SavedPhotoList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class MainActivity extends AppCompatActivity {
 

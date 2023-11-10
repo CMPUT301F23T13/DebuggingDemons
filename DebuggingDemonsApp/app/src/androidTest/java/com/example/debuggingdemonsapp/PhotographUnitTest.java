@@ -8,8 +8,6 @@ import org.junit.Test;
 
 // As this unit test involves creating a Bitmap object it had to be placed inside the AndroidTest folder
 public class PhotographUnitTest {
-
-
     Bitmap mockBitmap = Bitmap.createBitmap(100,100, Bitmap.Config.ARGB_8888);
     private Photograph mockPhoto(){
         return new Photograph(mockBitmap);
