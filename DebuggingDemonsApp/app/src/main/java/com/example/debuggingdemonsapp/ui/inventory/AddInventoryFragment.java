@@ -42,6 +42,18 @@ public class AddInventoryFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
+    /**
+     * This method creates the view for adding details to an item
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -117,6 +129,9 @@ public class AddInventoryFragment extends Fragment {
         return view;
     }
 
+    /**
+     * This method deals with adding an item to the database
+     */
     private void addItemToDatabase() {
         String dateOfPurchase = editTextDateOfPurchase.getText().toString();
         String description = editTextDescription.getText().toString();
@@ -126,9 +141,13 @@ public class AddInventoryFragment extends Fragment {
         String estimatedValue = editTextEstimatedValue.getText().toString();
         String comment = editTextComment.getText().toString();
 
+        // Strings which will correspond to the images' URI set as "" initially to ensure that if no image is chosen
+        //   for a specific imagebutton, it will just have an empty string when added to database
         String image1 = "";
         String image2 = "";
         String image3 = "";
+
+        // Gets the storageURI of an image when an image has been added to the ImageButton
         if (liveData1.getValue() != null){
             image1 = liveData1.getValue().storageURI();
         }
@@ -138,7 +157,7 @@ public class AddInventoryFragment extends Fragment {
         if(liveData3.getValue() != null){
             image3 = liveData3.getValue().storageURI();
         }
-        // Converting drawable to bitmap from https://stackoverflow.com/questions/10174399/how-can-i-write-a-drawable-resource-to-a-file
+
 
         Map<String, Object> newItem = new HashMap<>();
         newItem.put("dateOfPurchase", dateOfPurchase);
@@ -171,6 +190,12 @@ public class AddInventoryFragment extends Fragment {
                 });
 
     }
+
+    /**
+     * This method is used to navigate to the saved images list when an ImageButton is pressed. Allows user to choose an image
+     * @param imageButton This corresponds to an ImageButton object
+     * @param container  The container that is created in the onCreateView method
+     */
 
     public void chooseImage(ImageButton imageButton, ViewGroup container){
         // Called to listen for a click on the imageButton that is passed as an argument

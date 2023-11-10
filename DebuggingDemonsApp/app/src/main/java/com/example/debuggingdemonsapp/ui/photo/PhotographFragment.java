@@ -108,7 +108,6 @@ public class PhotographFragment extends Fragment {
 
         imageButton.setImageBitmap(photo.photoBitmap());
         imageButton.setId(View.generateViewId());
-        photoList.addID(imageButton.getId());
 
 
         imageButtons.add(imageButton);

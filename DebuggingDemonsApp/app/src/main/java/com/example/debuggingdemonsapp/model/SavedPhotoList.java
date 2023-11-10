@@ -5,28 +5,49 @@ import com.example.debuggingdemonsapp.model.Photograph;
 
 import java.util.ArrayList;
 
+/**
+ * This class is for creating a SavedPhotoList object which is holds a list of saved photos
+ */
 public class SavedPhotoList {
-   ArrayList<Integer> imageViewIDs;
+
    ArrayList<Photograph> photos;
+
+   /**
+    * Constructor object for the class
+    */
    public SavedPhotoList(){
       this.photos = new ArrayList<Photograph>();
-      this.imageViewIDs = new ArrayList<Integer>();
+
    }
 
+   /**
+    * Method which returns the saved photos list
+    * @return ArrayList<Photograph> Returns an array list of saved photos
+    */
    public ArrayList<Photograph> getPhotos(){
       return this.photos;
    }
 
+   /**
+    * Method is used to add a new Photograph object to the list of photos
+    * @param newPhoto Photograph object which should be added to list
+    */
    public void addPhoto(Photograph newPhoto){
       this.photos.add(0,newPhoto);
    }
-   public void addID(Integer imageViewID){
-      this.imageViewIDs.add(0,imageViewID);
-   }
+
+   /**
+    * Method is used to delete a specific Photograph object from the list of photos
+    * @param photo Photograph object to delete from the list
+    */
    public void deletePhoto(Photograph photo){
       this.photos.remove(photo);
    }
 
+   /**
+    * Method is used to check whether the saved photos list is empty or not
+    * @return boolean corresponding to whether the list is empty or not
+    */
    public boolean isEmpty(){
       return photos.isEmpty();
    }
