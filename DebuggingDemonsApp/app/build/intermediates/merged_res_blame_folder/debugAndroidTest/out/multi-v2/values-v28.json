@@ -1,29 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.debuggingdemonsapp.test.app-mergeDebugAndroidTestResources-30:/values-v28/values-v28.xml",
+            "outputFile": "com.example.debuggingdemonsapp.test.app-mergeDebugAndroidTestResources-38:/values-v28/values-v28.xml",
             "map": [
                 {
-                    "source": "/Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/res/values-v28/values.xml",
-                    "from": {
-                        "startLines": "4,13",
-                        "startColumns": "0,0",
-                        "startOffsets": "180,659",
-                        "endLines": "12,21",
-                        "endColumns": "8,8",
-                        "endOffsets": "658,1135"
-                    },
-                    "to": {
-                        "startLines": "24,33",
-                        "startColumns": "4,4",
-                        "startOffsets": "1675,2158",
-                        "endLines": "32,41",
-                        "endColumns": "8,8",
-                        "endOffsets": "2153,2634"
-                    }
-                },
-                {
-                    "source": "/Users/elialex15/.gradle/caches/transforms-3/87d19731aaca1c252b65617fcdbfbff8/transformed/appcompat-1.6.1/res/values-v28/values-v28.xml",
+                    "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-3\\87d19731aaca1c252b65617fcdbfbff8\\transformed\\appcompat-1.6.1\\res\\values-v28\\values-v28.xml",
                     "from": {
                         "startLines": "2,3,4,8",
                         "startColumns": "4,4,4,4",
@@ -42,7 +23,26 @@
                     }
                 },
                 {
-                    "source": "/Users/elialex15/.gradle/caches/transforms-3/808cb9e1b941e967601b14bc15779dff/transformed/material-1.10.0/res/values-v28/values-v28.xml",
+                    "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-3\\a4e54351e69c6b3b282cfb529d121169\\transformed\\core-1.5.0\\res\\values-v28\\values.xml",
+                    "from": {
+                        "startLines": "4,13",
+                        "startColumns": "0,0",
+                        "startOffsets": "180,659",
+                        "endLines": "12,21",
+                        "endColumns": "8,8",
+                        "endOffsets": "658,1135"
+                    },
+                    "to": {
+                        "startLines": "24,33",
+                        "startColumns": "4,4",
+                        "startOffsets": "1675,2158",
+                        "endLines": "32,41",
+                        "endColumns": "8,8",
+                        "endOffsets": "2153,2634"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-3\\808cb9e1b941e967601b14bc15779dff\\transformed\\material-1.10.0\\res\\values-v28\\values-v28.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",

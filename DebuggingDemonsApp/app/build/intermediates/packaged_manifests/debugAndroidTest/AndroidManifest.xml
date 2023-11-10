@@ -27,6 +27,16 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
+            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+            android:exported="true"
+            android:multiprocess="true"
+            android:taskAffinity=""
+            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
             android:exported="true"
             android:theme="@style/WhiteBackgroundTheme" >

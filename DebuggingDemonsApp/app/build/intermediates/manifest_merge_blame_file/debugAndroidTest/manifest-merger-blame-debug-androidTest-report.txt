@@ -3,98 +3,117 @@
 3    package="com.example.debuggingdemonsapp.test" >
 4
 5    <uses-sdk
-5-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:5:5-74
+5-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:5:15-41
+6-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:5:15-41
 7        android:targetSdkVersion="34" />
-7-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:5:42-71
+7-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:11:5-15:80
+9-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:11:5-15:80
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:11:22-76
+10-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:11:22-76
 11        android:functionalTest="false"
-11-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:14:22-52
+11-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:13:22-53
+12-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:13:22-53
 13        android:label="Tests for com.example.debuggingdemonsapp"
-13-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:15:22-78
+13-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:15:22-78
 14        android:targetPackage="com.example.debuggingdemonsapp" />
-14-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:12:22-76
+14-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:12:22-76
 15
 16    <uses-permission android:name="android.permission.REORDER_TASKS" />
-16-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:24:5-72
-16-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:24:22-69
+16-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:23:5-72
+16-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:23:22-69
 17
 18    <queries>
-18-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:24:5-28:15
+18-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:24:5-28:15
 19        <package android:name="androidx.test.orchestrator" />
-19-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:25:9-62
-19-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:25:18-59
+19-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:25:9-62
+19-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:25:18-59
 20        <package android:name="androidx.test.services" />
-20-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:26:9-58
-20-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:26:18-55
+20-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:26:9-58
+20-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:26:18-55
 21        <package android:name="com.google.android.apps.common.testing.services" />
-21-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:27:9-83
-21-->[androidx.test:runner:1.5.2] /Users/elialex15/.gradle/caches/transforms-3/f2f8bf96676780407c8d929feea456f8/transformed/runner-1.5.2/AndroidManifest.xml:27:18-80
+21-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:27:9-83
+21-->[androidx.test:runner:1.5.2] C:\Users\Lenovo\.gradle\caches\transforms-3\f2f8bf96676780407c8d929feea456f8\transformed\runner-1.5.2\AndroidManifest.xml:27:18-80
 22    </queries>
 23
 24    <application
-24-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:7:5-9:19
+24-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:8:9-60
-27-->/Users/elialex15/Desktop/DebuggingDemons/DebuggingDemonsApp/app/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest2790775218030434551.xml:8:23-57
+27-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:8:9-60
+27-->D:\GitHub\project\DebuggingDemonsApp\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest11014081613726484234.xml:8:23-57
 28
 29        <activity
-29-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:27:9-34:20
-30            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
-30-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:28:13-99
+29-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:26:9-35:20
+30            android:name="androidx.fragment.app.testing.EmptyFragmentActivity"
+30-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:27:13-79
 31            android:exported="true"
-31-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:29:13-36
-32            android:theme="@style/WhiteBackgroundTheme" >
-32-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:30:13-56
-33            <intent-filter android:priority="-100" >
-33-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
-33-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
-34                <category android:name="android.intent.category.LAUNCHER" />
-34-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
-34-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
-35            </intent-filter>
-36        </activity>
-37        <activity
-37-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:35:9-42:20
-38            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
-38-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:36:13-95
-39            android:exported="true"
-39-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:37:13-36
-40            android:theme="@style/WhiteBackgroundTheme" >
-40-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:38:13-56
-41            <intent-filter android:priority="-100" >
-41-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
-41-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
-42                <category android:name="android.intent.category.LAUNCHER" />
-42-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
-42-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
-43            </intent-filter>
-44        </activity>
-45        <activity
-45-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:43:9-50:20
-46            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
-46-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:44:13-103
-47            android:exported="true"
-47-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:45:13-36
-48            android:theme="@style/WhiteBackgroundDialogTheme" >
-48-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:46:13-62
-49            <intent-filter android:priority="-100" >
-49-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
-49-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
-50                <category android:name="android.intent.category.LAUNCHER" />
-50-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
-50-->[androidx.test:core:1.5.0] /Users/elialex15/.gradle/caches/transforms-3/a4e54351e69c6b3b282cfb529d121169/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
-51            </intent-filter>
-52        </activity>
-53    </application>
-54
-55</manifest>
+31-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:28:13-36
+32            android:multiprocess="true"
+32-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:29:13-40
+33            android:taskAffinity=""
+33-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:30:13-36
+34            android:theme="@style/FragmentScenarioEmptyFragmentActivityTheme" >
+34-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:31:13-78
+35            <intent-filter>
+35-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:32:13-34:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:33:17-69
+36-->[androidx.fragment:fragment-testing-manifest:1.6.0] C:\Users\Lenovo\.gradle\caches\transforms-3\56c3cef42735bbccf701dad699baffee\transformed\fragment-testing-manifest-1.6.0\AndroidManifest.xml:33:25-66
+37            </intent-filter>
+38        </activity>
+39        <activity
+39-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:27:9-34:20
+40            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+40-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:28:13-99
+41            android:exported="true"
+41-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:29:13-36
+42            android:theme="@style/WhiteBackgroundTheme" >
+42-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:30:13-56
+43            <intent-filter android:priority="-100" >
+43-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:13-33:29
+43-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:28-51
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:17-77
+44-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:27-74
+45            </intent-filter>
+46        </activity>
+47        <activity
+47-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:35:9-42:20
+48            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+48-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:36:13-95
+49            android:exported="true"
+49-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:37:13-36
+50            android:theme="@style/WhiteBackgroundTheme" >
+50-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:38:13-56
+51            <intent-filter android:priority="-100" >
+51-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:13-33:29
+51-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:28-51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:17-77
+52-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:27-74
+53            </intent-filter>
+54        </activity>
+55        <activity
+55-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:43:9-50:20
+56            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+56-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:44:13-103
+57            android:exported="true"
+57-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:45:13-36
+58            android:theme="@style/WhiteBackgroundDialogTheme" >
+58-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:46:13-62
+59            <intent-filter android:priority="-100" >
+59-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:13-33:29
+59-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:31:28-51
+60                <category android:name="android.intent.category.LAUNCHER" />
+60-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:17-77
+60-->[androidx.test:core:1.5.0] C:\Users\Lenovo\.gradle\caches\transforms-3\a4e54351e69c6b3b282cfb529d121169\transformed\core-1.5.0\AndroidManifest.xml:32:27-74
+61            </intent-filter>
+62        </activity>
+63    </application>
+64
+65</manifest>
