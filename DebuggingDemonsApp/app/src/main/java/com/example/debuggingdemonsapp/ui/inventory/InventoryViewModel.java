@@ -77,4 +77,13 @@ public class InventoryViewModel extends ViewModel {
             }
         });
     }
+
+    /**
+     * This gets the collection reference to the items in the database
+     * @return
+     *     Reference to item collection in database
+     */
+    public CollectionReference getItemsRef() {
+        return itemsRef;
+    }
 }

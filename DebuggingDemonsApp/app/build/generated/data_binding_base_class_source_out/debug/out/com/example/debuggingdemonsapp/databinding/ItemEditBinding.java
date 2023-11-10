@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
@@ -36,6 +38,15 @@ public final class ItemEditBinding implements ViewBinding {
   public final EditText description;
 
   @NonNull
+  public final ImageButton editImage1;
+
+  @NonNull
+  public final ImageButton editImage2;
+
+  @NonNull
+  public final ImageButton editImage3;
+
+  @NonNull
   public final EditText estimatedValue;
 
   @NonNull
@@ -45,21 +56,30 @@ public final class ItemEditBinding implements ViewBinding {
   public final EditText model;
 
   @NonNull
+  public final TextView photos;
+
+  @NonNull
   public final EditText serialNumber;
 
   private ItemEditBinding(@NonNull LinearLayout rootView, @NonNull Button backButton,
       @NonNull EditText comment, @NonNull Button confirmButton, @NonNull EditText dateOfPurchase,
-      @NonNull EditText description, @NonNull EditText estimatedValue, @NonNull EditText make,
-      @NonNull EditText model, @NonNull EditText serialNumber) {
+      @NonNull EditText description, @NonNull ImageButton editImage1,
+      @NonNull ImageButton editImage2, @NonNull ImageButton editImage3,
+      @NonNull EditText estimatedValue, @NonNull EditText make, @NonNull EditText model,
+      @NonNull TextView photos, @NonNull EditText serialNumber) {
     this.rootView = rootView;
     this.backButton = backButton;
     this.comment = comment;
     this.confirmButton = confirmButton;
     this.dateOfPurchase = dateOfPurchase;
     this.description = description;
+    this.editImage1 = editImage1;
+    this.editImage2 = editImage2;
+    this.editImage3 = editImage3;
     this.estimatedValue = estimatedValue;
     this.make = make;
     this.model = model;
+    this.photos = photos;
     this.serialNumber = serialNumber;
   }
 
@@ -120,6 +140,24 @@ public final class ItemEditBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.editImage1;
+      ImageButton editImage1 = ViewBindings.findChildViewById(rootView, id);
+      if (editImage1 == null) {
+        break missingId;
+      }
+
+      id = R.id.editImage2;
+      ImageButton editImage2 = ViewBindings.findChildViewById(rootView, id);
+      if (editImage2 == null) {
+        break missingId;
+      }
+
+      id = R.id.editImage3;
+      ImageButton editImage3 = ViewBindings.findChildViewById(rootView, id);
+      if (editImage3 == null) {
+        break missingId;
+      }
+
       id = R.id.estimated_value;
       EditText estimatedValue = ViewBindings.findChildViewById(rootView, id);
       if (estimatedValue == null) {
@@ -138,6 +176,12 @@ public final class ItemEditBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.photos;
+      TextView photos = ViewBindings.findChildViewById(rootView, id);
+      if (photos == null) {
+        break missingId;
+      }
+
       id = R.id.serial_number;
       EditText serialNumber = ViewBindings.findChildViewById(rootView, id);
       if (serialNumber == null) {
@@ -145,7 +189,8 @@ public final class ItemEditBinding implements ViewBinding {
       }
 
       return new ItemEditBinding((LinearLayout) rootView, backButton, comment, confirmButton,
-          dateOfPurchase, description, estimatedValue, make, model, serialNumber);
+          dateOfPurchase, description, editImage1, editImage2, editImage3, estimatedValue, make,
+          model, photos, serialNumber);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
