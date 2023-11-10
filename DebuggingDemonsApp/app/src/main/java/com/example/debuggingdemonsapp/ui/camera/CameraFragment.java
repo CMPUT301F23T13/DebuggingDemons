@@ -151,7 +151,9 @@ public void onDestroyView() {
 
         /**
          * Used to create the new camera object by binding to the preview view in fragment_camera.xml
-         * @param cameraProvider
+         * Outstanding Issue: Keep getting SurfaceTexture dequeue buffer error. Tried using image.close() and cameraProvider.unbindall()
+         *                      to fix this but didn't work. After researching, some say that error is a bug with Android
+         * @param cameraProvider ProcessCameraProvider object which is used to bind camera elements to view lifecycle
          */
         void bindPreview(@NonNull ProcessCameraProvider cameraProvider){
         // The following code is from the Android Studio CameraX page + their CameraX tutorial

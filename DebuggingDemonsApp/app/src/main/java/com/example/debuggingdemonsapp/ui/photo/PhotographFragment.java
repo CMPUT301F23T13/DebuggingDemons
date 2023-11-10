@@ -95,7 +95,7 @@ public class PhotographFragment extends Fragment {
 
     /**
      * Used to add ImageViews to the 'Saved Photos' page when photos are taken with the app's camera
-     * @param binding
+     * @param binding FragmentPhotolistBinding object which allows items
      * @param photo
      */
     public void addPhotoView(FragmentPhotolistBinding binding, Photograph photo){

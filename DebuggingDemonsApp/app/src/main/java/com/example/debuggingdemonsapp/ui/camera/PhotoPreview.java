@@ -26,7 +26,9 @@ import java.io.ByteArrayOutputStream;
 
 import static androidx.navigation.Navigation.findNavController;
 
-
+/**
+ * This is a fragment which displays the photo after the user has taken it with the options to retake the image or save
+ */
 public class PhotoPreview extends Fragment {
 
     private FragmentPictureBinding binding;
@@ -82,6 +84,11 @@ public class PhotoPreview extends Fragment {
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
                 // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
+                // A directory is created for the current_user's photos if it doesn't already exist
+                // Photos are added with the name 'image' + the current size of the items list
+
+                // Outstanding Issue (to be fixed for project part 4): When the app closes, the appPhotos list resets but the database still has
+                //    all the photos. Thus, when this line runs it overwrites old photos. Need to have appPhotos fetch data from database.
                 StorageReference storageRef = storage.getReference(((MainActivity) getActivity()).current_user+"/image"+((MainActivity) getActivity()).appPhotos.getPhotos().size()+".jpg");
                 ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 
@@ -95,6 +102,8 @@ public class PhotoPreview extends Fragment {
                 rotatednewPhoto.compress(Bitmap.CompressFormat.JPEG, 100, byteOutput);
                 byte[] imageData = byteOutput.toByteArray();
 
+
+                // Upload the image data to the firebase storage associated with the current_user
                 storageRef.putBytes(imageData).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull @NotNull Exception e) {
@@ -106,6 +115,8 @@ public class PhotoPreview extends Fragment {
                         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                // Sets the Uri in the newPhoto Photograph object to the Uri that firebase storage creates
+                                // This is so that it can be used later on for display images
                                 newPhoto.setUri(uri.toString());
                             }
                         });
@@ -113,6 +124,7 @@ public class PhotoPreview extends Fragment {
                     }
                 });
 
+                //
                 ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
 
 
