@@ -73,6 +73,11 @@ public class PhotographUITest {
             assertTrue(activity.appPhotos.isEmpty());
         });
 
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         // Clicks on the retake button
         onView(withId(R.id.retake_button)).perform(click());
 
@@ -97,7 +102,13 @@ public class PhotographUITest {
         onView(withId(R.id.camera_button)).perform(click());
         // Checks whether the fragment has changed to the 'photo preview' page
         //  Does this by checking if a button that is on the 'photo preview' page is displayed
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         onView(withId(R.id.retake_button)).check(matches(isDisplayed()));
+
 
         // Clicks the save button
         onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
@@ -114,7 +125,7 @@ public class PhotographUITest {
     }
 
     @Test
-    public void DeletePhotoTest(){
+    public void DeletePhotoTest() {
         // Method to test photo deletion
 
         // Take a new photo
@@ -122,6 +133,11 @@ public class PhotographUITest {
         // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
 
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.navigation_inventory)).perform(click());
@@ -132,6 +148,7 @@ public class PhotographUITest {
         onView(withId(R.id.addImage1)).perform(click());
 
         onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
 
         onView(withId(R.id.photoContainer)).perform(click());
 
@@ -202,8 +219,14 @@ public class PhotographUITest {
         // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
 
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
 
+        // Navigate to the inventory menu
         onView(withId(R.id.navigation_inventory)).perform(click());
 
         onView(withId(R.id.add_button)).perform(click());
