@@ -65,7 +65,7 @@ public class AddTagUITest {
         // assert new tag is present
         onView(withText(mockTagName())).check(matches(isDisplayed()));
 
-        // revert changes
+        // revert changes made by test to database
         Query query = db.collection("tags").whereEqualTo("name", mockTagName());
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

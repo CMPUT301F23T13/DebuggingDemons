@@ -1,7 +1,6 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
@@ -21,7 +19,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryFragment extends Fragment implements EquipTagsFragment.OnFragmentInteractionListener {
 
@@ -66,6 +63,16 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         newFragment.show(getChildFragmentManager(), "equip_tags");
     }
 
+
+    /**
+     * Deletes the selected items from the inventory.
+     *
+     * This method first retrieves a list of selected items from the adapter. If no items are selected,
+     * it displays a Snackbar message indicating that no items are selected for deletion. If there are
+     * selected items, it iterates through each item and attempts to delete them using the
+     * {@link InventoryViewModel#deleteItem} method. Upon deletion, it either shows a confirmation
+     * message for successful deletion or an error message with a retry option in case of failure.
+     */
     private void deleteSelectedItems() {
         ArrayList<Item> selectedItems = adapter.getSelectedItems();
 

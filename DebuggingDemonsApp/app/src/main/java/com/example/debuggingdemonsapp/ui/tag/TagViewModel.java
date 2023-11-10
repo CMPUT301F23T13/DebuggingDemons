@@ -45,7 +45,7 @@ public class TagViewModel extends ViewModel {
      *     List of Tags to overwrite current Tags
      */
     public void setTags(ArrayList<Tag> newTags) {
-        tags.setValue(newTags);
+        tags.postValue(newTags);
     }
 
     /**
@@ -72,7 +72,7 @@ public class TagViewModel extends ViewModel {
     }
 
     /**
-     * This retrieves List of Tags from FirebaseFirestore database
+     * This retrieves List of Tags from Firebase Firestore database
      */
     public void fetchTags() {
         tagsRef.get().addOnCompleteListener(task -> {

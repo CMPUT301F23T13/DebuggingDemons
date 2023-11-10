@@ -1,11 +1,8 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.debuggingdemonsapp.model.Item;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,11 +22,30 @@ public class InventoryViewModel extends ViewModel {
         fetchItems();
     }
 
+    /**
+     * Interface for handling the result of an item deletion operation.
+     */
     public interface DeletionListener {
+        /**
+         * Called when an item is successfully deleted.
+         */
         void onDeletionSuccessful();
+        /**
+         * Called when an item deletion operation fails.
+         */
         void onDeletionFailed();
     }
 
+    /**
+     * Deletes a specified item and notifies the result through a listener.
+     *
+     * This method attempts to delete an item from a Firebase database. Upon completion
+     * of the deletion operation, it either removes the item from the current LiveData
+     * if successful, or notifies of a failure through the provided listener.
+     *
+     * @param item The item to be deleted.
+     * @param listener The listener that will be notified of the deletion result.
+     */
     public void deleteItem(Item item, DeletionListener listener) {
         // Deleting the item in Firebase
         itemsRef.document(item.getId()).delete()
