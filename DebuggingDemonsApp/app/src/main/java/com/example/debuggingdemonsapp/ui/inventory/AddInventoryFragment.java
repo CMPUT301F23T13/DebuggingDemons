@@ -64,7 +64,7 @@ public class AddInventoryFragment extends Fragment {
 
 
         // Need to figure out how to make this process more efficient
-        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one boxes' image was changed
+        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one box's image was changed
         liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image1");
         liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
@@ -75,14 +75,7 @@ public class AddInventoryFragment extends Fragment {
 
             }
         });
-        addImage1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                chooseImage(addImage1,container);
-
-            }
-        });
+        chooseImage(addImage1,container);
 
 
         liveData2 = Navigation.findNavController(container).getCurrentBackStackEntry()
@@ -108,6 +101,7 @@ public class AddInventoryFragment extends Fragment {
             }
         });
         chooseImage(addImage3,container);
+
 
         view.findViewById(R.id.button_cancel).setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(view);

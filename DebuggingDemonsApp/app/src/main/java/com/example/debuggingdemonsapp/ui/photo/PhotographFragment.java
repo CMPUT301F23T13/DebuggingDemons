@@ -11,6 +11,7 @@ import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.databinding.FragmentPhotolistBinding;
 import com.example.debuggingdemonsapp.model.Photograph;
+import com.example.debuggingdemonsapp.model.SavedPhotoList;
 
 import java.util.ArrayList;
 
