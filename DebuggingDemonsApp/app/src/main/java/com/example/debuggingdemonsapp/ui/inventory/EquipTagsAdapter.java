@@ -96,6 +96,7 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
      */
     public void setTags(ArrayList<Tag> newTags) {
         this.tags = newTags;
+        notifyDataSetChanged();
     }
 
     /**
