@@ -3,6 +3,19 @@
   <component name="AndroidTestResultsUserPreferences">
     <option name="androidTestResultsTableState">
       <map>
+        <entry key="-2141244107">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-2000221701">
           <value>
             <AndroidTestResultsTableState>
@@ -35,6 +48,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
                   <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Tests" value="360" />
@@ -51,6 +65,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -89,7 +104,9 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -116,6 +133,19 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="69750472">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -169,6 +199,7 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -188,6 +219,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="649925488">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_XL_API_34" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="687865858">
           <value>
             <AndroidTestResultsTableState>
@@ -195,6 +239,7 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_API_UpsideDownCakePrivacySandbox" value="120" />
+                  <entry key="Pixel_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -207,6 +252,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -274,6 +320,8 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
+                  <entry key="Pixel_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -313,6 +361,7 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_XL_API_33" value="120" />
+                  <entry key="Pixel_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -326,6 +375,8 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_2_API_30" value="120" />
+                  <entry key="Pixel_7_Pro_API_30" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Pixel_XL_API_33" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -352,7 +403,10 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
+                  <entry key="Pixel_XL_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>
@@ -380,6 +434,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_7_Pro_API_30" value="120" />
                   <entry key="Pixel_7_Pro_API_33" value="120" />
+                  <entry key="Pixel_7_Pro_API_34" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>

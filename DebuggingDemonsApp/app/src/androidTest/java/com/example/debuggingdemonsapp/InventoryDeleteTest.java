@@ -32,6 +32,7 @@ public class InventoryDeleteTest {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
 
+        // Checking if all the component are show on the screen
         onView(withId(R.id.filter_button)).check(ViewAssertions.matches(isDisplayed()));
 
         onView(withId(R.id.sortby_button)).check(ViewAssertions.matches(isDisplayed()));
@@ -51,8 +52,10 @@ public class InventoryDeleteTest {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
 
+        // Clicking the delete button
         onView(withId(R.id.delete_button)).perform(click());
 
+        // Checking whether the correct snackbar message show up
         onView(withText("No items selected to be deleted."))
                 .check(ViewAssertions.matches(isDisplayed()));
     }
@@ -71,6 +74,7 @@ public class InventoryDeleteTest {
         onView(withId(R.id.recycler_view))
                 .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
 
+        // Clicking the delete button
         onView(withId(R.id.delete_button)).perform(click());
 
         try {
@@ -79,6 +83,7 @@ public class InventoryDeleteTest {
             throw new RuntimeException(e);
         }
 
+        // Checking whether the correct snackbar message show up
         onView(withText("Item deleted successfully"))
                 .check(ViewAssertions.matches(isDisplayed()));
 
@@ -88,10 +93,9 @@ public class InventoryDeleteTest {
             throw new RuntimeException(e);
         }
 
-        // Assuming the text "item" is the first one on the Recycle view as input in the item description
-
+        // Assuming the text "test" is the first one on the Recycle view as input in the item description
         onView(withId(R.id.recycler_view))
-                .check(ViewAssertions.matches(not(hasDescendant(withText("item")))));
+                .check(ViewAssertions.matches(not(hasDescendant(withText("test")))));
 
     }
 

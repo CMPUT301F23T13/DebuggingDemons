@@ -15,12 +15,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
+/**
+ * Activity for handling user login and registration.
+ * <p>
+ * This activity provides UI for users to either log in or register. It interacts with
+ * FirebaseFirestore to store and validate user credentials.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private String username;
     private EditText usernameEditText;
 
+    /**
+     * Initializes the activity.
+     * <p>
+     * This method sets up the layout for the activity, initializes Firestore database instance,
+     * and sets up click listeners for the login and register buttons.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     *                           shut down then this Bundle contains the data it most recently
+     *                           supplied in onSaveInstanceState(Bundle). Note: Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> loginUser());
     }
 
+    /**
+     * Handles the user registration process.
+     * <p>
+     * This method checks if the entered username is not empty and unique. If it is unique,
+     * it registers the user in the Firestore database and navigates to the main activity.
+     * Otherwise, it shows an appropriate error message.
+     */
     private void registerUser() {
         username = usernameEditText.getText().toString();
 
@@ -63,6 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Handles the user login process.
+     * <p>
+     * This method checks if the entered username is not empty and exists in the Firestore database.
+     * If the user exists, it logs in the user and navigates to the main activity. Otherwise,
+     * it shows an appropriate error message.
+     */
     private void loginUser() {
         username = usernameEditText.getText().toString();
 
@@ -86,6 +116,11 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Navigates to the MainActivity.
+     * <p>
+     * This method starts the MainActivity and passes the current username as an extra in the intent.
+     */
     private void navigateToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("current_user", username);
@@ -93,6 +128,15 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Displays a message dialog to the user.
+     * <p>
+     * This method shows an AlertDialog with the provided message. If a non-null Runnable is provided,
+     * it is executed when the dialog is dismissed.
+     *
+     * @param message   The message to be displayed in the dialog.
+     * @param onDismiss The Runnable to be executed when the dialog is dismissed, can be null.
+     */
     private void showMessageDialog(String message, Runnable onDismiss) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(message)
