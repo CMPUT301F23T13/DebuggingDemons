@@ -24,6 +24,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
+/**
+ * Fragment for editing item details.
+ */
 public class EditItemFragment extends Fragment {
     private EditText DoP;
     private EditText Description;
@@ -35,16 +38,27 @@ public class EditItemFragment extends Fragment {
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
 
+    /**
+     * Default constructor for EditItemFragment.
+     */
     public EditItemFragment() {
 
     }
-
+    /**
+     * Creates and returns the view associated with the fragment.
+     *
+     * @param inflater           LayoutInflater that can be used to inflate views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment will be re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+    // Initialize Database and collection reference
         db = FirebaseFirestore.getInstance();
         itemsRef = db.collection("items");
-
+    // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_edit, container, false);
         DoP = view.findViewById(R.id.dateOfPurchase);
         Description = view.findViewById(R.id.description);
@@ -57,7 +71,7 @@ public class EditItemFragment extends Fragment {
         Button confirmButton = view.findViewById(R.id.confirm_button);
         Button cancelButton = view.findViewById(R.id.back_button);
 
-
+        // Retrieve data from bundle if not null and initialize the UI
         Bundle bundle = getArguments();
         if (bundle != null) {
             System.out.println(bundle.getString("doP"));
@@ -69,7 +83,6 @@ public class EditItemFragment extends Fragment {
             String estimatedValue = bundle.getString("estimatedValue");
             String comment = bundle.getString("comment");
 
-            // 初始化界面
             DoP.setText(doP);
             Description.setText(description);
             Make.setText(make);
@@ -80,10 +93,12 @@ public class EditItemFragment extends Fragment {
         }
 
 
+        // Set click listeners for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveData();
+                // Fetch updated items from ViewModel
                 InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
                 viewModel.fetchItems();
             }
@@ -91,15 +106,19 @@ public class EditItemFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Navigate back to the inventory fragment
                 NavController navController = Navigation.findNavController(getView());
                 navController.navigate(R.id.navigation_inventory);
-//                Navigation.findNavController(v).popBackStack();
             }
         });
         return view;
     }
 
+    /**
+     * Save edited item data to Database.
+     */
     private void saveData(){
+        // Retrieve updated data from UI elements
         String updatedDoP = DoP.getText().toString();
         String updatedDescription = Description.getText().toString();
         String updatedMake = Make.getText().toString();
@@ -107,13 +126,17 @@ public class EditItemFragment extends Fragment {
         String updatedSerialNumber = SerialNumber.getText().toString();
         String updatedEstimatedValue = EstimatedValue.getText().toString();
         String updatedComment = Comment.getText().toString();
+
+        // Query data for the item with the specified description
         Query query = itemsRef.whereEqualTo("description", updatedDescription);
 
+        // Perform the query and update the item details
         query.get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        // Update item details in Database
                         document.getReference().update("dateOfPurchase", updatedDoP,
                                         "make", updatedMake,
                                         "model", updatedModel,
@@ -123,6 +146,7 @@ public class EditItemFragment extends Fragment {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
+                                        // Show a Toast message based on the update result
                                         if (task.isSuccessful()) {
                                             Toast.makeText(getActivity(), "Update successfully!", Toast.LENGTH_SHORT).show();
                                         } else {
