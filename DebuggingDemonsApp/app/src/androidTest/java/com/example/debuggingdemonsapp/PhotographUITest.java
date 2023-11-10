@@ -2,20 +2,29 @@ package com.example.debuggingdemonsapp;
 
 
 import android.Manifest;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageButton;
+import androidx.test.annotation.UiThreadTest;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 
@@ -27,6 +36,7 @@ public class PhotographUITest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenario = new
             ActivityScenarioRule<MainActivity>(MainActivity.class);
+
 
     // The following rule is from https://stackoverflow.com/questions/63837978/how-do-i-grant-permission-in-espresso
     @Rule
@@ -61,7 +71,6 @@ public class PhotographUITest {
         // Makes sure that the appPhotos list is empty as no photo has been saved
         scenario.getScenario().onActivity(activity -> {
             assertTrue(activity.appPhotos.isEmpty());
-
         });
 
         // Clicks on the retake button
@@ -91,7 +100,7 @@ public class PhotographUITest {
         onView(withId(R.id.retake_button)).check(matches(isDisplayed()));
 
         // Clicks the save button
-        onView(withId(R.id.save_button)).perform(click());
+        onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
 
         // Once the image is saved the app should return to the camera page
         // Checks whether the page is now the camera page
@@ -107,17 +116,60 @@ public class PhotographUITest {
     @Test
     public void DeletePhotoTest(){
         // Method to test photo deletion
-    }
 
-    @Test
-    public void AddPhoto(){
-        // Method to add photo to an item
+        // Take a new photo
+        onView(withId(R.id.navigation_camera)).perform(click());
+        // Perform click on camera button
+        onView(withId(R.id.camera_button)).perform(click());
+
+        onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.navigation_inventory)).perform(click());
 
         onView(withId(R.id.add_button)).perform(click());
 
-        // Checks that each of the image buttons go to the correct page
+        // Checks that photo is added to the imageView of the imagebutton that was pressed on
+        onView(withId(R.id.addImage1)).perform(click());
+
+        onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.photoContainer)).perform(click());
+
+        // Change description of item to identify it
+        onView(withId(R.id.editTextDescription)).perform(replaceText("delete"));
+
+        // Save changes
+        onView(withId(R.id.button_ok)).perform(click());
+
+        onView(withId(R.id.navigation_inventory)).check(matches(isDisplayed()));
+
+        // Click on the created item which opens a dialog fragment
+        onView(withText("delete")).perform(click());
+
+        onView(withText("EDIT")).inRoot(isDialog()).check(matches((isDisplayed()))).perform(click());
+
+        onView(withText("EDIT")).check(matches(isDisplayed()));
+
+        // Clicks on item to delete it from the item
+        onView(withId(R.id.editImage1)).perform(click());
+
+        // Checks that after click the 'edit page' is still selected
+        onView(withText("EDIT")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.confirm_button)).check(matches(isDisplayed())).perform(click());
+
+
+    }
+
+    @Test
+    public void photoListNavigateTest(){
+        // Method to test whether clicking on image button correctly navigates to saved photos list
+        //  Also checks that back button's functionality is correct
+
+        onView(withId(R.id.navigation_inventory)).perform(click());
+
+        onView(withId(R.id.add_button)).perform(click());
+        // Checks that each of the image buttons go to the correct page and back navigation works
 
         onView(withId(R.id.addImage1)).perform(click());
 
@@ -138,9 +190,35 @@ public class PhotographUITest {
         onView(withId(R.id.photoList_back)).perform(click());
 
 
-        // Check
+    }
 
+    @Test
+    public void addPhotoTest() {
+        // Method to check adding photo to an item
 
+        // Take a new photo
+
+        onView(withId(R.id.navigation_camera)).perform(click());
+        // Perform click on camera button
+        onView(withId(R.id.camera_button)).perform(click());
+
+        onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
+
+        onView(withId(R.id.navigation_inventory)).perform(click());
+
+        onView(withId(R.id.add_button)).perform(click());
+
+        // Checks that photo is added to the imageView of the imagebutton that was pressed on
+        onView(withId(R.id.addImage1)).perform(click());
+
+        onView(withText("Saved Photos")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.photoContainer)).perform(click());
+
+        onView(withId(R.id.addImage1)).check(matches(isDisplayed()));
+        // Need to find a way to check whether the image has changed
+        // So far relying on no error messages occurring to verify that action is successful
 
     }
+
 }
