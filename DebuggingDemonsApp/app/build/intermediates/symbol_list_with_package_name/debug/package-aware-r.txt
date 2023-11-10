@@ -3336,6 +3336,9 @@ id easeInOut
 id easeOut
 id east
 id edge
+id editImage1
+id editImage2
+id editImage3
 id editTextComment
 id editTextDateOfPurchase
 id editTextDescription
@@ -3379,6 +3382,7 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
+id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
@@ -3560,6 +3564,7 @@ id performance
 id photoContainer
 id photoList_add
 id photoList_back
+id photos
 id photos_button
 id pin
 id position
@@ -3872,8 +3877,8 @@ layout fragment_camera
 layout fragment_home
 layout fragment_inventory
 layout fragment_notifications
+layout fragment_photolist
 layout fragment_picture
-layout fragment_saved
 layout fragment_tag
 layout fragment_tag_equip
 layout inventory_content
@@ -4139,6 +4144,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string photos
 string project_id
 string register
 string retake_button

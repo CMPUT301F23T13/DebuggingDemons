@@ -38,6 +38,9 @@ id container
 id dateOfPurchase
 id delete_button
 id description
+id editImage1
+id editImage2
+id editImage3
 id editTextComment
 id editTextDateOfPurchase
 id editTextDescription
@@ -74,6 +77,7 @@ id navigation_tag
 id photoContainer
 id photoList_add
 id photoList_back
+id photos
 id photos_button
 id recycler_view
 id registerButton
@@ -102,8 +106,8 @@ layout fragment_camera
 layout fragment_home
 layout fragment_inventory
 layout fragment_notifications
+layout fragment_photolist
 layout fragment_picture
-layout fragment_saved
 layout fragment_tag
 layout fragment_tag_equip
 layout inventory_content
@@ -133,6 +137,7 @@ string google_storage_bucket
 string login
 string make
 string model
+string photos
 string project_id
 string register
 string retake_button

@@ -11,7 +11,7 @@ public class Item {
     private String serialNumber;
     private String estimatedValue;
     private String comment;
-    private ArrayList<Tag> tags;
+    private ArrayList<String> tagNames;
 
     private String image1;
     private String image2;
@@ -21,11 +21,11 @@ public class Item {
 
     // Constructors
     public Item() {
-        tags = new ArrayList<>();
+        tagNames = new ArrayList<>();
     }
 
     // Constructor with all fields for convenience
-    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3) {
+    public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3, ArrayList<String> tagNames) {
         this.description = description;
         this.dateOfPurchase = dateOfPurchase;
         this.make = make;
@@ -36,7 +36,7 @@ public class Item {
         this.image1 = image1;
         this.image2 = image2;
         this.image3 = image3;
-        tags = new ArrayList<>();
+        this.tagNames = tagNames;
     }
 
     // Getters and Setters
@@ -96,21 +96,14 @@ public class Item {
         this.comment = comment;
     }
 
-    public ArrayList<Tag> getTags() {
-        return tags;
-    }
-
     public ArrayList<String> getTagNames() {
-        ArrayList<String> tagNames = new ArrayList<>();
-        for (Tag tag : tags) {
-            tagNames.add(tag.getName());
-        }
         return tagNames;
     }
 
     public void addTag(Tag tag) {
-        if (!getTagNames().contains(tag.getName())) {
-            tags.add(tag);
+        String name = tag.getName();
+        if (!tagNames.contains(name)) {
+            tagNames.add(name);
         }
     }
 

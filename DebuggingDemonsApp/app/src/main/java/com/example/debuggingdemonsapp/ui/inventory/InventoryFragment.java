@@ -17,6 +17,8 @@ import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
 import com.example.debuggingdemonsapp.model.Tag;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +113,14 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
             for (Tag tag : selectedTags) {
                 item.addTag(tag);
             }
+            Query query = inventoryViewModel.getItemsRef().whereEqualTo("description", item.getDescription());
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        document.getReference().update("tagNames", item.getTagNames());
+                    }
+                }
+            });
         }
     }
 }

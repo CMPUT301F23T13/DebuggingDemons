@@ -26,6 +26,7 @@
     <string name="login">Login</string>
     <string name="make">Make</string>
     <string name="model">Model</string>
+    <string name="photos">Photos</string>
     <string name="project_id" translatable="false">debuggingdemons</string>
     <string name="register">Register</string>
     <string name="retake_button">Retake Photo</string>
