@@ -76,7 +76,7 @@ public class CameraFragment extends Fragment {
                 new ViewModelProvider(this).get(CameraViewModel.class);
 
         binding = FragmentCameraBinding.inflate(inflater, container, false);
-//        binding2 = FragmentPictureBinding.inflate(inflater,container,false);
+
         View root = binding.getRoot();
 
 
@@ -88,7 +88,7 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Issue: When the button is pressed to many times in a short timeframe the TakePictureManager says 'There is already a request in-flight'
-                //      and it refuses to take picture
+                //      and it refuses to take picture (FIXED)
                 Executor cameraExector = new Executor() {
                     @Override
                     public void execute(Runnable runnable) {
@@ -103,8 +103,9 @@ public class CameraFragment extends Fragment {
                     // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("Image", image.toBitmap());
+                    image.close();
+                    cameraProvider.unbindAll();
 
-                    ActivityMainBinding main = ActivityMainBinding.inflate(inflater,container,false);
                     findNavController(container).navigate(R.id.navigation_photoPreview, bundle);
 
             }
@@ -146,6 +147,7 @@ private void openCamera() {
 @Override
 public void onDestroyView() {
         super.onDestroyView();
+        cameraProvider.unbindAll();
         binding = null;
 }
 
@@ -176,7 +178,7 @@ public void onDestroyView() {
         }
         // Creates a new camera object using the cameraProvider which is bound to the 'selectCamera'
         //      and the 'preview' Preview object that was created in this method
-        Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, selectCamera, takePhoto, preview);
+        Camera camera = cameraProvider.bindToLifecycle(getViewLifecycleOwner(), selectCamera, takePhoto, preview);
         }
 
 }
