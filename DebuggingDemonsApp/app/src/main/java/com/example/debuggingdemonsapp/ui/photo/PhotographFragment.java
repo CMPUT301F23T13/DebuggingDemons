@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.ui.photo;
 
+import static androidx.navigation.Navigation.findNavController;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +16,6 @@ import com.example.debuggingdemonsapp.model.Photograph;
 import com.example.debuggingdemonsapp.model.SavedPhotoList;
 
 import java.util.ArrayList;
-
-import static androidx.navigation.Navigation.findNavController;
 
 /**
  * Class creates a fragment which displays all the photos that the user saved in the app
