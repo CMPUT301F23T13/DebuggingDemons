@@ -1,78 +1,133 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
-import com.example.debuggingdemonsapp.ui.inventory.ItemAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.example.debuggingdemonsapp.model.Tag;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
-public class InventoryFragment extends Fragment implements AddInventoryFragment.OnFragmentInteractionListener {
+public class InventoryFragment extends Fragment implements EquipTagsFragment.OnFragmentInteractionListener {
 
-    private ArrayList<Item> itemList;
-    private ItemAdapter itemAdapter;
-    private FirebaseFirestore db;
-    private CollectionReference itemsRef;
+    private FragmentInventoryBinding binding;
+    private InventoryViewModel inventoryViewModel;
+    private ItemAdapter adapter;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        inventoryViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
+        binding = FragmentInventoryBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
-        itemList = new ArrayList<>();
-        itemAdapter = new ItemAdapter(getContext(), itemList);
+        RecyclerView recyclerView = binding.recyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        RecyclerView itemsRecyclerView = view.findViewById(R.id.itemsRecyclerView);
-        itemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        itemsRecyclerView.setAdapter(itemAdapter);
+        adapter = new ItemAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
 
-        FloatingActionButton addButton = view.findViewById(R.id.addButton);
-        addButton.setOnClickListener(v -> {
-            AddInventoryFragment addInventoryFragment = new AddInventoryFragment();
-            addInventoryFragment.show(getChildFragmentManager(), "ADD_ITEM");
+        inventoryViewModel.getItems().observe(getViewLifecycleOwner(), newItems -> {
+            adapter.setItems(newItems);
+            adapter.notifyDataSetChanged();
         });
 
-        itemsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot querySnapshots, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.e("Firestore", error.toString());
-                    return;
-                }
-                if (querySnapshots != null) {
-                    itemList.clear();
-                    for (QueryDocumentSnapshot doc : querySnapshots) {
-                        Item item = doc.toObject(Item.class);
-                        itemList.add(item);
-                    }
-                    itemAdapter.notifyDataSetChanged();
-                }
-            }
+        binding.tagButton.setOnClickListener(v -> openEquipTagsDialog());
+
+        binding.deleteButton.setOnClickListener(v -> deleteSelectedItems());
+
+        binding.addButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
         });
 
-        return view;
+        return root;
+    }
+
+    /**
+     * This creates a new EquipTagsFragment and displays it
+     */
+    private void openEquipTagsDialog() {
+        EquipTagsFragment newFragment = new EquipTagsFragment();
+        newFragment.show(getChildFragmentManager(), "equip_tags");
+    }
+
+
+    /**
+     * Deletes the selected items from the inventory.
+     *
+     * This method first retrieves a list of selected items from the adapter. If no items are selected,
+     * it displays a Snackbar message indicating that no items are selected for deletion. If there are
+     * selected items, it iterates through each item and attempts to delete them using the
+     * {@link InventoryViewModel#deleteItem} method. Upon deletion, it either shows a confirmation
+     * message for successful deletion or an error message with a retry option in case of failure.
+     */
+    private void deleteSelectedItems() {
+        ArrayList<Item> selectedItems = adapter.getSelectedItems();
+
+        if (selectedItems.isEmpty()) {
+            // Display the message when user didn't select any items and click the delete button
+            Snackbar.make(getView(), "No items selected to be deleted.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Deleting the item from the database and the RecycleView
+        for (Item item : selectedItems) {
+            inventoryViewModel.deleteItem(item, new InventoryViewModel.DeletionListener() {
+                @Override
+                public void onDeletionSuccessful() {
+                    // Snackbar to confirm deletion
+                    Snackbar.make(getView(), "Item deleted successfully", Snackbar.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onDeletionFailed() {
+                    // Snackbar to inform about the failure and retry
+                    Snackbar.make(getView(), "Failed to delete item", Snackbar.LENGTH_LONG)
+                            .setAction("Retry", v -> deleteSelectedItems()) // Provide a retry button
+                            .show();
+                }
+            });
+        }
     }
 
     @Override
-    public void onOKPressed(Item item) {
-        itemList.add(item);
-        itemAdapter.notifyDataSetChanged();
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    /**
+     * This equips given Tags (that were selected by user) to currently selected Items in adapter
+     * @param selectedTags
+     *     List of selected Tags from a EquipTagsFragment
+     */
+    @Override
+    public void onEquipTags(ArrayList<Tag> selectedTags) {
+        ArrayList<Item> selectedItems = adapter.getSelectedItems();
+        for (Item item : selectedItems) {
+            for (Tag tag : selectedTags) {
+                item.addTag(tag);
+            }
+            Query query = inventoryViewModel.getItemsRef().whereEqualTo("description", item.getDescription());
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        document.getReference().update("tagNames", item.getTagNames());
+                    }
+                }
+            });
+        }
     }
 }
