@@ -45,7 +45,7 @@
             android:id="@+id/total_estimated_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Total Estimated Value: $0"
+            android:text="@string/total_estimated_value_0"
             android:textSize="18sp"
             android:textStyle="bold"
             android:background="#EFEFEF"
