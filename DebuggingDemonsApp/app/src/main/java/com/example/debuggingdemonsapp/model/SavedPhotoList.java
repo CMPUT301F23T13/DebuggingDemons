@@ -1,6 +1,6 @@
 package com.example.debuggingdemonsapp.model;
 
-import com.example.debuggingdemonsapp.model.Photograph;
+
 
 
 import java.util.ArrayList;
