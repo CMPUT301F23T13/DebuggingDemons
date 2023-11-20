@@ -30,14 +30,6 @@ public class TagFragment extends Fragment implements AddTagFragment.OnFragmentIn
     private TagAdapter tagAdapter;
 
     /**
-     *
-     * @return
-     */
-    public static TagFragment newInstance() {
-        return new TagFragment();
-    }
-
-    /**
      * This creates a new Fragment to display the list of Tags
      * @param inflater
      *     The LayoutInflater object that can be used to inflate

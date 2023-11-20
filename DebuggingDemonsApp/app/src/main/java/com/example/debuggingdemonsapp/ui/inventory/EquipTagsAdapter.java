@@ -6,13 +6,10 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Tag;
+import com.example.debuggingdemonsapp.R;
 
 import java.util.ArrayList;
 
@@ -96,6 +93,7 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
      */
     public void setTags(ArrayList<Tag> newTags) {
         this.tags = newTags;
+        notifyDataSetChanged();
     }
 
     /**

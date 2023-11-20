@@ -8,9 +8,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import org.hamcrest.Matcher;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -20,6 +22,7 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InventoryDeleteTest {
 
     @Rule
@@ -27,7 +30,7 @@ public class InventoryDeleteTest {
 
 
     @Test
-    public void testIsInventoryFragmentDisplayed() {
+    public void test1_IsInventoryFragmentDisplayed() {
 
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
@@ -48,7 +51,7 @@ public class InventoryDeleteTest {
     }
 
     @Test
-    public void testClickDeleteButton_WithoutAnyCheckbox(){
+    public void test2_ClickDeleteButton_WithoutAnyCheckbox(){
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
 
@@ -61,7 +64,7 @@ public class InventoryDeleteTest {
     }
 
     @Test
-    public void testCheckbox_CheckingAndDelete() throws InterruptedException {
+    public void test3_Checkbox_CheckingAndDelete() throws InterruptedException {
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
         // Assuming you have a checkbox with the ID checkbox_id in your layout
@@ -98,6 +101,54 @@ public class InventoryDeleteTest {
                 .check(ViewAssertions.matches(not(hasDescendant(withText("test")))));
 
     }
+
+
+    @Test
+    public void test4_Checkbox_MultipleCheckingAndDelete() throws InterruptedException {
+        // Navigate to inventory
+        onView(withId(R.id.navigation_inventory)).perform(click());
+        // Assuming you have a checkbox with the ID checkbox_id in your layout
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // First, click on the checkbox to change its state
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
+
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItemAtPosition(1, clickOnViewChild(R.id.item_checkbox)));
+
+        // Clicking the delete button
+        onView(withId(R.id.delete_button)).perform(click());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Checking whether the correct snackbar message show up
+        onView(withText("Item deleted successfully"))
+                .check(ViewAssertions.matches(isDisplayed()));
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Assuming the text "Multiple" is the first one on the Recycle view as input in the item description
+        // The text "Delete" is the second one
+        onView(withId(R.id.recycler_view))
+                .check(ViewAssertions.matches(not(hasDescendant(withText("Multiple")))));
+        onView(withId(R.id.recycler_view))
+                .check(ViewAssertions.matches(not(hasDescendant(withText("Delete")))));
+
+
+    }
+
 
     // Helper method to perform click on a child view with specified id within the RecyclerView item
     public static ViewAction clickOnViewChild(final int id) {

@@ -3,6 +3,9 @@ package com.example.debuggingdemonsapp.model;
 import java.util.ArrayList;
 import android.graphics.drawable.Drawable;
 
+/**
+ * Model class for an Item object. Holds all properties of a Item object along with getter and setter methods of object
+ */
 public class Item {
     private String description;
     private String dateOfPurchase;
@@ -19,12 +22,17 @@ public class Item {
 
     private String id; // Used to uniquely identify an entry in the database.
 
-    // Constructors
+    /**
+     * Constructors
+      */
+
     public Item() {
         tagNames = new ArrayList<>();
     }
 
-    // Constructor with all fields for convenience
+    /**
+     * Constructor with all fields for convenience
+     */
     public Item(String description, String dateOfPurchase, String make, String model, String serialNumber, String estimatedValue, String comment, String image1, String image2, String image3, ArrayList<String> tagNames) {
         this.description = description;
         this.dateOfPurchase = dateOfPurchase;
@@ -39,7 +47,10 @@ public class Item {
         this.tagNames = tagNames;
     }
 
-    // Getters and Setters
+    /**
+     *  Getters and Setters
+      */
+
     public String getDescription() {
         return description;
     }

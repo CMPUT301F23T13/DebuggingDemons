@@ -1,13 +1,10 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.os.Parcelable;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.content.DialogInterface;
-import android.net.Uri;
-import android.net.http.UrlRequest;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +12,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -147,5 +140,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemName = itemView.findViewById(R.id.item_name);
             itemCheckbox = itemView.findViewById(R.id.item_checkbox);
         }
+    }
+
+    public double getTotalEstimatedValue() {
+        double totalValue = 0;
+        for (Item item : items) {
+            try {
+                double value = Double.parseDouble(item.getEstimatedValue());
+                totalValue += value;
+            } catch (NumberFormatException e) {
+                Log.e("ItemAdapter", "not able to estimate value: " + item.getEstimatedValue());
+            }
+        }
+        return totalValue;
     }
 }
