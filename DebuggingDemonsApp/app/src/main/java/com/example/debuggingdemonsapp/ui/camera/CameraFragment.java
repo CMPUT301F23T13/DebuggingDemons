@@ -142,7 +142,8 @@ public void onDestroyView() {
         Preview preview = new Preview.Builder().build();
 
         // Sets the mode for the 'cameraView' PreviewView object from fragment_camera.xml
-        binding.cameraView.setImplementationMode(PreviewView.ImplementationMode.COMPATIBLE);
+            // Changing the following line from 'PreviewView.ImplementationMode.COMPATIBLE' to 'PreviewView.ImplementationMode.PERFORMANCE' fixed 'SurfaceTexture' Error
+        binding.cameraView.setImplementationMode(PreviewView.ImplementationMode.PERFORMANCE);
         preview.setSurfaceProvider(binding.cameraView.getSurfaceProvider());
 
         // Used to select the back camera as the one that is used
