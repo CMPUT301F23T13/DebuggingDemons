@@ -3,32 +3,6 @@ package com.example.debuggingdemonsapp.ui.camera;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-<<<<<<< Updated upstream
-=======
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.ActivityResultLauncherKt;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.OptIn;
-import androidx.camera.core.*;
-import androidx.camera.core.Camera;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleOwner;
-
-import com.example.debuggingdemonsapp.MainActivity;
-import com.example.debuggingdemonsapp.R;
-import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
-
-import com.example.debuggingdemonsapp.databinding.FragmentCameraBinding;
-import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
-import com.example.debuggingdemonsapp.ui.scanning.Scanner;
-import com.google.common.util.concurrent.ListenableFuture;
->>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentCameraBinding;
+import com.example.debuggingdemonsapp.ui.scanning.Scanner;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.jetbrains.annotations.NotNull;
 
