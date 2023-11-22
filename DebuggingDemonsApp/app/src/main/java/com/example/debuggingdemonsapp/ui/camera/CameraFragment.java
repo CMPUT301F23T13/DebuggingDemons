@@ -3,6 +3,32 @@ package com.example.debuggingdemonsapp.ui.camera;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+<<<<<<< Updated upstream
+=======
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.ActivityResultLauncherKt;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.OptIn;
+import androidx.camera.core.*;
+import androidx.camera.core.Camera;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.example.debuggingdemonsapp.MainActivity;
+import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
+
+import com.example.debuggingdemonsapp.databinding.FragmentCameraBinding;
+import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
+import com.example.debuggingdemonsapp.ui.scanning.Scanner;
+import com.google.common.util.concurrent.ListenableFuture;
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +60,7 @@ import static androidx.navigation.Navigation.findNavController;
 public class CameraFragment extends Fragment {
 
     private FragmentCameraBinding binding;
+    private Scanner imageScanner;
     private ProcessCameraProvider cameraProvider;
 
     private ImageCapture takePhoto;
@@ -55,7 +82,7 @@ public class CameraFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentCameraBinding.inflate(inflater, container, false);
-
+        imageScanner = new Scanner();
         View root = binding.getRoot();
 
 
@@ -82,9 +109,10 @@ public class CameraFragment extends Fragment {
                     // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("Image", image.toBitmap());
-                    image.close();
-                    cameraProvider.unbindAll();
 
+                    cameraProvider.unbindAll();
+                    imageScanner.scanImage(image.toBitmap(), image.getImageInfo().getRotationDegrees());
+                    image.close();
                     findNavController(container).navigate(R.id.navigation_photoPreview, bundle);
 
             }

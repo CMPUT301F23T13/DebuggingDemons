@@ -15,6 +15,7 @@ import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
 import com.example.debuggingdemonsapp.model.Photograph;
+import com.example.debuggingdemonsapp.ui.scanning.Scanner;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +33,7 @@ import static androidx.navigation.Navigation.findNavController;
 public class PhotoPreview extends Fragment {
 
     private FragmentPictureBinding binding;
+//    private Scanner imageScanner;
     private Photograph newPhoto;
     private FirebaseStorage storage;
 
@@ -59,11 +61,13 @@ public class PhotoPreview extends Fragment {
         newImage = getArguments().getParcelable("Image");
         newPhoto = new Photograph(newImage);
 
+//        imageScanner = new Scanner();
+
         binding.imageView.setImageBitmap(newImage);
 
         storage = FirebaseStorage.getInstance();
 
-
+//        imageScanner.scanImage(newPhoto.photoBitmap());
 
 
         // Calls 'enable' method from MainActivity with 'false' passed in, which makes it so that you can't press the bottom navigation icons
@@ -120,7 +124,6 @@ public class PhotoPreview extends Fragment {
                                 newPhoto.setUri(uri.toString());
                             }
                         });
-
                     }
                 });
 
