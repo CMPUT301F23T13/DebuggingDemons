@@ -127,7 +127,6 @@ public class PhotoPreview extends Fragment {
                     }
                 });
 
-                //
                 ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
 
 

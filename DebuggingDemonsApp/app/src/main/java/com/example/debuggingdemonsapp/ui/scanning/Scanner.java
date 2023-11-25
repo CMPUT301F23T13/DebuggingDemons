@@ -2,18 +2,12 @@ package com.example.debuggingdemonsapp.ui.scanning;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.camera.core.impl.ImageOutputConfig;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
 import com.google.mlkit.vision.common.InputImage;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
