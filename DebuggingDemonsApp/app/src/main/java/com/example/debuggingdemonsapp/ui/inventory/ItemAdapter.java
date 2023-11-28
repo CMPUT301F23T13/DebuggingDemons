@@ -19,12 +19,12 @@ import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private ArrayList<Item> items;
     private ArrayList<Item> selectedItems;
-
     public ItemAdapter(ArrayList<Item> items) {
         this.items = items;
         selectedItems = new ArrayList<>();
@@ -142,16 +142,57 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
     }
 
+    /**
+     * Calculates the total estimated value of all items in the list.
+     * This method iterates through each item in the list, tries to parse the estimated value
+     * as a double, and sums it up. If the estimated value cannot be parsed as a double,
+     * it logs an error and continues with the next item.
+     *
+     * @return The total estimated value of all items.
+     */
     public double getTotalEstimatedValue() {
-        double totalValue = 0;
+        double totalValue = 0; // Initialize the total value
+
+        // Iterate through each item in the list
         for (Item item : items) {
             try {
+                // Try to parse the estimated value of the item as a double
                 double value = Double.parseDouble(item.getEstimatedValue());
-                totalValue += value;
+                totalValue += value; // Add the value to the total
             } catch (NumberFormatException e) {
+                // Log an error if the value cannot be parsed
                 Log.e("ItemAdapter", "not able to estimate value: " + item.getEstimatedValue());
             }
         }
+
+        // Return the total estimated value
         return totalValue;
     }
+
+
+    /**
+     * Retrieves the current list of items managed by this adapter.
+     *
+     * @return A list of Item objects currently held by this adapter.
+     */
+    public List<Item> getItems() {
+        // Return the current list of items
+        return items;
+    }
+
+    /**
+     * Sets a new list of items for the adapter and notifies any registered observers that the
+     * underlying data has been changed.
+     * This method is useful for updating the adapter's data source and refreshing the UI
+     * that depends on this data.
+     *
+     * @param newItems The new list of Item objects to be managed by this adapter.
+     */
+    public void setItems(List<Item> newItems) {
+        // Set the new items list, ensuring it's a separate copy
+        this.items = new ArrayList<>(newItems);
+        // Notify any registered observers that the data set has changed
+        notifyDataSetChanged();
+    }
+
 }
