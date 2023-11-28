@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is used to retrieve the current user's stored photos from the storage database
+     * @param firebaseStorage FirebaseStorage object which references the Firebase Storage for this application
+     */
     public void getDBPhotos(FirebaseStorage firebaseStorage) {
         // List to hold the indices of items from the firebase storage
         //  Used to ensure that photos are added to the photo list in the correct order
@@ -131,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
                                             indices.add(listResult.getItems().indexOf(item));
                                             indices.sort(Collections.reverseOrder());
                                             appPhotos.addInPosition(indices.indexOf(listResult.getItems().indexOf(item)),photo);
-//
+
                                         }
-//
+
                                     } catch (Exception e) {
                                         throw new RuntimeException(e);
                                     }

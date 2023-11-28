@@ -15,12 +15,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class AddInventoryFragment extends Fragment {
@@ -57,8 +59,9 @@ public class AddInventoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+"/"+((MainActivity)getActivity()).current_user + "/" + "items");
 
         View view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
@@ -176,7 +179,9 @@ public class AddInventoryFragment extends Fragment {
                     if (isAdded()) {
                         Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
-                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+//                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                        InventoryViewModel viewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
+
                         viewModel.fetchItems();
 
                         NavController navController = Navigation.findNavController(getView());
