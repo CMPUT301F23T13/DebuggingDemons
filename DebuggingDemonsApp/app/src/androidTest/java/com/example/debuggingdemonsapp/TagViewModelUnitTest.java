@@ -2,6 +2,8 @@ package com.example.debuggingdemonsapp;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import com.example.debuggingdemonsapp.model.Tag;
 import com.example.debuggingdemonsapp.ui.tag.TagViewModel;
 import com.google.firebase.firestore.CollectionReference;
@@ -10,6 +12,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.checkerframework.checker.units.qual.A;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,9 +20,10 @@ import java.util.Collections;
 
 public class TagViewModelUnitTest {
 
+
     @Test
     public void testGetTags() {
-        TagViewModel tagViewModel = new TagViewModel();
+        TagViewModel tagViewModel = new TagViewModel(null);
 
         // get tag names from db
         FirebaseFirestore db = FirebaseFirestore.getInstance();

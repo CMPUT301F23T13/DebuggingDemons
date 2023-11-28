@@ -17,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -66,7 +67,7 @@ public class EditItemFragment extends Fragment {
                              Bundle savedInstanceState) {
     // Initialize Database and collection reference
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+ "/" + ((MainActivity)getActivity()).current_user + "/" + "items");
     // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_edit, container, false);
         DoP = view.findViewById(R.id.dateOfPurchase);
@@ -143,7 +144,9 @@ public class EditItemFragment extends Fragment {
             public void onClick(View v) {
                 saveData();
                 // Fetch updated items from ViewModel
-                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                InventoryViewModel viewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
+
+//                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
                 viewModel.fetchItems();
             }
         });

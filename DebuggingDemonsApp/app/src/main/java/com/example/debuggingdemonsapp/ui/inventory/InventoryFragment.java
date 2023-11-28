@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentInventoryBinding;
 import com.example.debuggingdemonsapp.model.Item;
@@ -32,7 +33,7 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        inventoryViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
+        inventoryViewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
         binding = FragmentInventoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 

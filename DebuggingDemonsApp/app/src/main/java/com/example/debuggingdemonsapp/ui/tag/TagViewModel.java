@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.model.Tag;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,9 +24,14 @@ public class TagViewModel extends ViewModel {
     /**
      * This creates a new TagViewModel, connects to database, and fetches Tags from database
      */
-    public TagViewModel() {
+    public TagViewModel(String current_user) {
         db = FirebaseFirestore.getInstance();
-        tagsRef = db.collection("tags");
+        if (current_user == null){
+           tagsRef = db.collection("tags");
+        }else{
+            tagsRef = db.collection("users"+"/"+current_user + "/" + "tags");
+        }
+
         tags = new MutableLiveData<>(new ArrayList<>());
         fetchTags();
     }
@@ -60,6 +66,7 @@ public class TagViewModel extends ViewModel {
 
         // return false if tag has duplicate name
         for (Tag aTag : currentTags) {
+
             if (aTag.getName().equals(tag.getName())) {
                 return false;
             }
