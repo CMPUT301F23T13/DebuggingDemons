@@ -34,6 +34,8 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    buildToolsVersion = "29.0.2"
+
 }
 
 dependencies {
@@ -43,6 +45,8 @@ dependencies {
     implementation("androidx.camera:camera-video:1.3.0")
     implementation("androidx.camera:camera-view:1.3.0")
     implementation("androidx.camera:camera-extensions:1.3.0")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+
     implementation("com.google.firebase:firebase-firestore")
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-storage-ktx:20.3.0")

@@ -15,11 +15,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.databinding.FragmentTagBinding;
 import com.example.debuggingdemonsapp.model.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This is a class that displays a list of Tags from a TagViewModel
@@ -47,7 +49,7 @@ public class TagFragment extends Fragment implements AddTagFragment.OnFragmentIn
      */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tagViewModel = new ViewModelProvider(this).get(TagViewModel.class);
+        tagViewModel = new TagViewModel(((MainActivity) requireActivity()).current_user);
 
         binding = FragmentTagBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

@@ -29,13 +29,21 @@ public class SavedPhotoList {
    }
 
    /**
-    * Method is used to add a new Photograph object to the list of photos
+    * Method is used to add a new Photograph object to the beginning of the list of photos
     * @param newPhoto Photograph object which should be added to list
     */
    public void addPhoto(Photograph newPhoto){
       this.photos.add(0,newPhoto);
    }
 
+   /**
+    * Method is used to append a new Photograph object to the end of the list of photos
+    * @param newPhoto Photograph object which should be added to list
+    */
+   public void appendPhoto(Photograph newPhoto){this.photos.add(newPhoto);}
+   public void addInPosition(int position,Photograph newPhoto){
+      this.photos.add(position, newPhoto);
+   }
    /**
     * Method is used to delete a specific Photograph object from the list of photos
     * @param photo Photograph object to delete from the list

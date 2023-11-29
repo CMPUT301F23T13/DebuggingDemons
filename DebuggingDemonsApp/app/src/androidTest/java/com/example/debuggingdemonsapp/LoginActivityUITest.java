@@ -19,7 +19,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.*;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LoginActivityTest {
+public class LoginActivityUITest {
 
     @Rule
     public ActivityScenarioRule<LoginActivity> activityScenarioRule

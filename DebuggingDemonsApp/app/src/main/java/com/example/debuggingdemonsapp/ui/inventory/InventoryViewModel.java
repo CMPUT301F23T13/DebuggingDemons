@@ -17,9 +17,10 @@ public class InventoryViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference itemsRef = db.collection("items");
+    private CollectionReference itemsRef;
 
-    public InventoryViewModel() {
+    public InventoryViewModel(String current_user) {
+        itemsRef = db.collection("users"+"/"+current_user +"/"+ "items");
         items.setValue(new ArrayList<>());
         fetchItems();
     }
