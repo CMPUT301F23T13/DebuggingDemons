@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/description_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Filter by description"
+        android:inputType="text"
+        android:minHeight="48dp"/>
+    <EditText
+        android:id="@+id/date_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Select date"
+        android:inputType="date"
+        android:minHeight="48dp"/>
+    <EditText
+        android:id="@+id/make_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Filter by make"
+        android:inputType="text"
+        android:minHeight="48dp"/>
+    <EditText
+        android:id="@+id/tag_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Filter by tag"
+        android:inputType="text"
+        android:minHeight="48dp"/>
+
+</LinearLayout>

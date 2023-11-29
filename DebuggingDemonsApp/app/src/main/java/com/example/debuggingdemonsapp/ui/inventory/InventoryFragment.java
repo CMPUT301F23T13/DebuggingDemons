@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,13 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
 
         binding.addButton.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
+        });
+
+        binding.filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFilterFragment();
+            }
         });
 
         return root;
@@ -135,5 +143,16 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
     private void updateTotalEstimatedValue() {
         double totalValue = adapter.getTotalEstimatedValue();
         binding.totalEstimatedValue.setText("Total Estimated Value: " + totalValue);
+    }
+
+    private void openFilterFragment() {
+        FilterFragment filterFragment = new FilterFragment();
+        filterFragment.setFilterSelectedListener(new FilterFragment.OnFilterSelectedListener() {
+            @Override
+            public void onFilterSelected(String keyword) {
+                inventoryViewModel.filterItemByKeyword(keyword);
+            }
+        });
+        filterFragment.show(getChildFragmentManager(), "FilterFragment");
     }
 }
