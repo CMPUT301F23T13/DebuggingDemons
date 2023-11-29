@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp.ui.camera;
 
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
@@ -24,6 +27,7 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -33,7 +37,8 @@ import static androidx.navigation.Navigation.findNavController;
 public class PhotoPreview extends Fragment {
 
     private FragmentPictureBinding binding;
-//    private Scanner imageScanner;
+    private int rotationDegrees;
+    private Scanner imageScanner;
     private Photograph newPhoto;
     private FirebaseStorage storage;
 
@@ -59,15 +64,16 @@ public class PhotoPreview extends Fragment {
 
         binding = FragmentPictureBinding.inflate(inflater, container, false);
         newImage = getArguments().getParcelable("Image");
-        newPhoto = new Photograph(newImage);
+        rotationDegrees = getArguments().getInt("Rotation");
 
-//        imageScanner = new Scanner();
+        newPhoto = new Photograph(newImage);
+        imageScanner = new Scanner();
 
         binding.imageView.setImageBitmap(newImage);
 
         storage = FirebaseStorage.getInstance();
 
-//        imageScanner.scanImage(newPhoto.photoBitmap());
+
 
 
         // Calls 'enable' method from MainActivity with 'false' passed in, which makes it so that you can't press the bottom navigation icons
@@ -80,10 +86,81 @@ public class PhotoPreview extends Fragment {
                 backToCamera(container);
             }
         });
-
+        binding.scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Scans the image for any
+                imageScan();
+            }
+        });
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                savePhoto(container);
+
+                backToCamera(container);
+            }});
+
+
+        View root = binding.getRoot();
+
+        return root;
+    }
+
+    /**
+     * This method is used to convert the list of barcode values into a long string separated by newline characters
+     * @param barcodeList A list of the raw value(s) from the barcode(s) that were scanned
+     * @return String  A string object which contains the list of barcodes in a format that the dialog message builder can take
+     */
+    private String displayBarcodes(List<String> barcodeList){
+        StringBuilder barcodeMessage = new StringBuilder();
+        for(String value: barcodeList){
+            barcodeMessage.append("Barcode " + (barcodeList.indexOf(value)+1) +": ");
+            if (barcodeList.indexOf(value) == barcodeList.size()-1){
+                barcodeMessage.append(value);
+            }else{
+                barcodeMessage.append(value).append('\n');
+            }
+
+        }
+        return barcodeMessage.toString();
+    }
+
+    private void imageScan(){
+        MutableLiveData<List> barcodeData = imageScanner.scanImageBarcodes(newPhoto.photoBitmap(),rotationDegrees);
+
+        imageScanner.scanSerialNumber(newPhoto.photoBitmap(), rotationDegrees);
+        barcodeData.observe(getViewLifecycleOwner(), list -> {
+            if(list.isEmpty()){
+                Toast.makeText(getContext(),"No Barcode Found", Toast.LENGTH_SHORT).show();
+            }else{
+                // Add pop-up which displays barcode information
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Barcode(s) Found")
+                        .setMessage(displayBarcodes(list))
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(), "Save photo to save information", Toast.LENGTH_SHORT).show();
+                                // The barcode values of the photo is set to the list of strings received from the imageScanner barcode scanner
+                                newPhoto.setBarcodeValues(barcodeData.getValue());
+
+
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+    }
+    /**
+     * This method is used to save the photo when the 'save button' is pressed
+     * @param container This is a ViewGroup object that is used to
+     */
+    private void savePhoto(ViewGroup container) {
+
 
                 Toast.makeText(getContext(), "Photo Saved", getId()).show();
 
@@ -128,20 +205,10 @@ public class PhotoPreview extends Fragment {
                 });
 
                 ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
-
-
-                backToCamera(container);
-            }
-        });
-
-
-        View root = binding.getRoot();
-
-        return root;
     }
 
 
-        @Override
+    @Override
         public void onDestroyView() {
             super.onDestroyView();
             binding = null;
@@ -151,7 +218,7 @@ public class PhotoPreview extends Fragment {
      * Navigates back to the Camera screen which is used to take photos
      * @param container The container object is from onCreateView and is used for navigation
      */
-    public void backToCamera(ViewGroup container){
+    private void backToCamera(ViewGroup container){
             ((MainActivity) getActivity()).enable(true);
             findNavController(container).navigate(R.id.navigation_camera);
         }

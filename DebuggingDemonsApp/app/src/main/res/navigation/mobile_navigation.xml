@@ -54,7 +54,7 @@
         android:id="@+id/navigation_photoPreview"
         android:name="com.example.debuggingdemonsapp.ui.camera.PhotoPreview"
         android:label="Photo"
-        tools:layout="@layout/fragment_picture">
+        tools:layout="@layout/fragment_picturepreview">
         <action
             android:id="@+id/action_navigation_photo_to_navigation_camera2"
             app:destination="@id/navigation_camera" />

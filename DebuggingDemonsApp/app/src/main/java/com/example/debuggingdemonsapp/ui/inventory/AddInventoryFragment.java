@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -22,7 +21,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class AddInventoryFragment extends Fragment {
@@ -152,13 +150,13 @@ public class AddInventoryFragment extends Fragment {
 
         // Gets the storageURI of an image when an image has been added to the ImageButton
         if (liveData1.getValue() != null){
-            image1 = liveData1.getValue().storageURI();
+            image1 = liveData1.getValue().getUri();
         }
         if(liveData2.getValue() != null){
-            image2 = liveData2.getValue().storageURI();
+            image2 = liveData2.getValue().getUri();
         }
         if(liveData3.getValue() != null){
-            image3 = liveData3.getValue().storageURI();
+            image3 = liveData3.getValue().getUri();
         }
 
 

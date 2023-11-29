@@ -2,6 +2,7 @@ package com.example.debuggingdemonsapp;
 
 
 import android.Manifest;
+import android.view.View;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -10,12 +11,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.hasWindowLayoutParams;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -120,7 +124,7 @@ public class PhotographUITest {
     public void DeletePhotoTest() {
         // Method to test photo deletion
 
-        // Take a new photo
+ //        Take a new photo
         onView(withId(R.id.navigation_camera)).perform(click());
         // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
@@ -133,9 +137,9 @@ public class PhotographUITest {
         onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.navigation_inventory)).perform(click());
-
+//
         onView(withId(R.id.add_button)).perform(click());
-
+//
         // Checks that photo is added to the imageView of the imagebutton that was pressed on
         onView(withId(R.id.addImage1)).perform(click());
 
