@@ -15,15 +15,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.Matchers.not;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollTo;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class InventoryDeleteTest {
+public class InventoryDeleteUITest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
@@ -73,9 +75,48 @@ public class InventoryDeleteTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        // First, click on the checkbox to change its state
+
+        onView(withId(R.id.add_button)).perform(click());
+
+
+        onView(withId(R.id.editTextDescription)).perform(typeText("test"), closeSoftKeyboard());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        onView(withId(R.id.button_ok)).perform(click());
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
         onView(withId(R.id.recycler_view))
-                .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
+                .perform(scrollTo(hasDescendant(withText("test"))));
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItem(hasDescendant(withText("test")), clickOnViewChild(R.id.item_checkbox)));
+
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
 
         // Clicking the delete button
         onView(withId(R.id.delete_button)).perform(click());
@@ -113,12 +154,68 @@ public class InventoryDeleteTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        // First, click on the checkbox to change its state
-        onView(withId(R.id.recycler_view))
-                .perform(actionOnItemAtPosition(0, clickOnViewChild(R.id.item_checkbox)));
+
+        onView(withId(R.id.add_button)).perform(click());
+
+
+        onView(withId(R.id.editTextDescription)).perform(typeText("test1"), closeSoftKeyboard());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        onView(withId(R.id.button_ok)).perform(click());
+
+
+        onView(withId(R.id.add_button)).perform(click());
+
+
+        onView(withId(R.id.editTextDescription)).perform(typeText("test2"), closeSoftKeyboard());
+
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        onView(withId(R.id.button_ok)).perform(click());
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
 
         onView(withId(R.id.recycler_view))
-                .perform(actionOnItemAtPosition(1, clickOnViewChild(R.id.item_checkbox)));
+                .perform(scrollTo(hasDescendant(withText("test1"))));
+
+        onView(withId(R.id.recycler_view))
+                .perform(scrollTo(hasDescendant(withText("test2"))));
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItem(hasDescendant(withText("test1")), clickOnViewChild(R.id.item_checkbox)));
+
+        onView(withId(R.id.recycler_view))
+                .perform(actionOnItem(hasDescendant(withText("test2")), clickOnViewChild(R.id.item_checkbox)));
+
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         // Clicking the delete button
         onView(withId(R.id.delete_button)).perform(click());
@@ -142,9 +239,9 @@ public class InventoryDeleteTest {
         // Assuming the text "Multiple" is the first one on the Recycle view as input in the item description
         // The text "Delete" is the second one
         onView(withId(R.id.recycler_view))
-                .check(ViewAssertions.matches(not(hasDescendant(withText("Multiple")))));
+                .check(ViewAssertions.matches(not(hasDescendant(withText("test1")))));
         onView(withId(R.id.recycler_view))
-                .check(ViewAssertions.matches(not(hasDescendant(withText("Delete")))));
+                .check(ViewAssertions.matches(not(hasDescendant(withText("test2")))));
 
 
     }
@@ -170,4 +267,5 @@ public class InventoryDeleteTest {
             }
         };
     }
+
 }

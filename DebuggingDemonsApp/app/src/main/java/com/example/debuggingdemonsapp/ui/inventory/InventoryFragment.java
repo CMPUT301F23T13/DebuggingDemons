@@ -20,8 +20,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-public class InventoryFragment extends Fragment implements EquipTagsFragment.OnFragmentInteractionListener {
+public class InventoryFragment extends Fragment implements EquipTagsFragment.OnFragmentInteractionListener, SortByItemFragment.SortByItemListener {
 
     private FragmentInventoryBinding binding;
     private InventoryViewModel inventoryViewModel;
@@ -49,6 +52,8 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         binding.tagButton.setOnClickListener(v -> openEquipTagsDialog());
 
         binding.deleteButton.setOnClickListener(v -> deleteSelectedItems());
+
+        binding.sortbyButton.setOnClickListener(v -> showSortByDialog());
 
         binding.addButton.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_inventoryFragment_to_addInventoryFragment);
@@ -133,8 +138,78 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         }
     }
 
+    /**
+     * Updates the display of the total estimated value of all items in the inventory.
+     * This method retrieves the total estimated value from the adapter and sets this value
+     * in the appropriate TextView in the UI.
+     */
     private void updateTotalEstimatedValue() {
-        double totalValue = adapter.getTotalEstimatedValue();
-        binding.totalEstimatedValue.setText("Total Estimated Value: " + totalValue);
+        double totalValue = adapter.getTotalEstimatedValue(); // Retrieve the total estimated value from the adapter
+        binding.totalEstimatedValue.setText("Total Estimated Value: " + totalValue); // Update the TextView with the new value
     }
+
+
+
+    /**
+     * Displays the dialog to select sorting criteria and order for inventory items.
+     * This method creates an instance of SortByItemFragment, sets the current class as the listener,
+     * and displays the fragment.
+     */
+    private void showSortByDialog() {
+        SortByItemFragment sortByFragment = new SortByItemFragment();
+        sortByFragment.setSortByItemListener(this);
+        sortByFragment.show(getChildFragmentManager(), "sort_by_dialog");
+    }
+
+    /**
+     * Callback method invoked when a sorting option is selected in the SortByItemFragment.
+     * This method is responsible for calling the method to sort inventory items based on the selected criteria.
+     *
+     * @param sortBy The criterion by which to sort (e.g., date, description, make, value).
+     * @param isAscending The order of sorting: true for ascending, false for descending.
+     */
+    @Override
+    public void onSortSelected(String sortBy, boolean isAscending) {
+        // Assuming you have a method to sort inventory items
+        sortInventoryItems(sortBy, isAscending);
+    }
+
+    /**
+     * Sorts the inventory items based on the specified criterion and order.
+     * This method retrieves the current list of items from the adapter, sorts them based on the
+     * selected criteria and order, and then updates the adapter with the sorted list.
+     *
+     * @param sortBy The criterion by which to sort (e.g., date, description, make, value).
+     * @param isAscending The order of sorting: true for ascending, false for descending.
+     */
+    private void sortInventoryItems(String sortBy, boolean isAscending) {
+        List<Item> itemList = adapter.getItems(); // Assuming your adapter has a method to get the current list of items
+
+        Comparator<Item> comparator = null;
+        switch (sortBy) {
+            case "date":
+                comparator = Comparator.comparing(Item::getDateOfPurchase); // Replace getDateOfPurchase with the appropriate getter method
+                break;
+            case "description":
+                comparator = Comparator.comparing(Item::getDescription);
+                break;
+            case "make":
+                comparator = Comparator.comparing(Item::getMake);
+                break;
+            case "value":
+                comparator = Comparator.comparing(Item::getEstimatedValue); // Ensure this method returns a Comparable type
+                break;
+        }
+
+        if (comparator != null) {
+            if (!isAscending) {
+                comparator = comparator.reversed();
+            }
+            Collections.sort(itemList, comparator);
+            adapter.setItems(itemList); // Update the adapter's data
+            adapter.notifyDataSetChanged(); // Notify that data has changed
+        }
+    }
+
+
 }

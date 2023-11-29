@@ -28,5 +28,11 @@
     <string name="confirm">CONFIRM</string>
     <string name="photos">Photos</string>
     <string name="total_estimated_value_0">Total Estimated Value: $0</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_by_descrioption">Sort by descrioption</string>
+    <string name="sort_by_make">Sort by make</string>
+    <string name="sort_by_value">Sort by value</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
     <string name="scan_button">Scan Button</string>
 </resources>
