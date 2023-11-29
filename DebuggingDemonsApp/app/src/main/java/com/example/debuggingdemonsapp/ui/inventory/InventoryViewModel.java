@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.text.TextUtils;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -102,5 +104,24 @@ public class InventoryViewModel extends ViewModel {
      */
     public CollectionReference getItemsRef() {
         return itemsRef;
+    }
+
+    public void filterItemByKeyword(String keyword) {
+        if(TextUtils.isEmpty(keyword)) {
+            fetchItems();
+        } else {
+            itemsRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        if (item.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                            filteredItems.add(item);
+                        }
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
     }
 }

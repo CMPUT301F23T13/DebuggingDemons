@@ -3300,6 +3300,7 @@ id cut
 id dark
 id dataBinding
 id dateOfPurchase
+id date_filter
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3309,6 +3310,7 @@ id delete_button
 id deltaRelative
 id dependency_ordering
 id description
+id description_filter
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3435,6 +3437,7 @@ id loginButton
 id ltr
 id m3_side_sheet
 id make
+id make_filter
 id marquee
 id masked
 id match_constraint
@@ -3661,6 +3664,7 @@ id tag_accessibility_heading
 id tag_accessibility_pane_title
 id tag_button
 id tag_checkbox
+id tag_filter
 id tag_list
 id tag_name
 id tag_name_editText
@@ -3703,6 +3707,7 @@ id title_template
 id toggle
 id top
 id topPanel
+id total_estimated_value
 id touch_outside
 id transitionToEnd
 id transitionToStart
@@ -3883,6 +3888,7 @@ layout fragment_tag
 layout fragment_tag_equip
 layout inventory_content
 layout item_edit
+layout item_filter
 layout item_layout
 layout list_item
 layout m3_alert_dialog
@@ -4167,6 +4173,7 @@ string title_notifications
 string title_sort
 string title_tag
 string title_tag_tab
+string total_estimated_value_0
 string username
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
