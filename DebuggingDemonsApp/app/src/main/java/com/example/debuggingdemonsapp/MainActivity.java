@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         // List to hold the indices of items from the firebase storage
         //  Used to ensure that photos are added to the photo list in the correct order
         ArrayList<Integer> indices = new ArrayList<>();
+        if (current_user == null){
+            current_user = "newuser";
+        }
         StorageReference storageReference = firebaseStorage.getReference(current_user);
         storageReference.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
             @Override
