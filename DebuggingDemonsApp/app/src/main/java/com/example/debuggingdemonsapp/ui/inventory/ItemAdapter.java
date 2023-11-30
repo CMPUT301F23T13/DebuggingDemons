@@ -89,6 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             bundle.putString("serialNumber", item.getSerialNumber());
                             bundle.putString("estimatedValue", item.getEstimatedValue());
                             bundle.putString("comment", item.getComment());
+                            bundle.putStringArrayList("tagNames", item.getTagNames());
                             bundle.putString("image1", item.getImage1());
                             bundle.putString("image2", item.getImage2());
                             bundle.putString("image3", item.getImage3());

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,9 +39,13 @@ public final class FragmentInventoryBinding implements ViewBinding {
   @NonNull
   public final Button tagButton;
 
+  @NonNull
+  public final TextView totalEstimatedValue;
+
   private FragmentInventoryBinding(@NonNull ConstraintLayout rootView, @NonNull Button addButton,
       @NonNull Button deleteButton, @NonNull Button filterButton,
-      @NonNull RecyclerView recyclerView, @NonNull Button sortbyButton, @NonNull Button tagButton) {
+      @NonNull RecyclerView recyclerView, @NonNull Button sortbyButton, @NonNull Button tagButton,
+      @NonNull TextView totalEstimatedValue) {
     this.rootView = rootView;
     this.addButton = addButton;
     this.deleteButton = deleteButton;
@@ -48,6 +53,7 @@ public final class FragmentInventoryBinding implements ViewBinding {
     this.recyclerView = recyclerView;
     this.sortbyButton = sortbyButton;
     this.tagButton = tagButton;
+    this.totalEstimatedValue = totalEstimatedValue;
   }
 
   @Override
@@ -113,8 +119,14 @@ public final class FragmentInventoryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.total_estimated_value;
+      TextView totalEstimatedValue = ViewBindings.findChildViewById(rootView, id);
+      if (totalEstimatedValue == null) {
+        break missingId;
+      }
+
       return new FragmentInventoryBinding((ConstraintLayout) rootView, addButton, deleteButton,
-          filterButton, recyclerView, sortbyButton, tagButton);
+          filterButton, recyclerView, sortbyButton, tagButton, totalEstimatedValue);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

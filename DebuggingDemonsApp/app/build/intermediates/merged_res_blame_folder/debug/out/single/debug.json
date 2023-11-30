@@ -1,158 +1,162 @@
 [
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_home.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_activity_login.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/activity_login.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_item_layout.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/item_layout.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_tag_equip.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_tag_equip.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_picture.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_picture.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_inventory.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_inventory.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_tag.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_tag.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_photolist.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_photolist.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/navigation_mobile_navigation.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/navigation/mobile_navigation.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_notifications.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_notifications.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/drawable/ic_dashboard_black_24dp.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_notifications_black_24dp.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/drawable/ic_notifications_black_24dp.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_tag.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_tag_equip_content.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/tag_equip_content.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_activity_login.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/activity_login.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_photolist.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_photolist.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/drawable/ic_notifications_black_24dp.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/xml/data_extraction_rules.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/drawable/ic_launcher_background.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_item_edit.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/item_edit.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/menu/bottom_nav_menu.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_home.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_home.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_item_layout.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/item_layout.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_picture.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_picture.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_add_tag.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_add_tag.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_camera.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_camera.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/drawable/ic_launcher_foreground.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_home_black_24dp.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_inventory_content.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/inventory_content.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_list_item.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/list_item.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_tag_content.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/tag_content.xml"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_tag_equip_content.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/tag_equip_content.xml"
     },
     {
         "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_item_edit.xml.flat",
         "source": "com.example.debuggingdemonsapp-main-62:/layout/item_edit.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_dashboard_black_24dp.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/drawable/ic_dashboard_black_24dp.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_activity_main.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/menu_bottom_nav_menu.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/menu/bottom_nav_menu.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_camera.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_camera.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/drawable_ic_home_black_24dp.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/drawable/ic_home_black_24dp.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_list_item.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/list_item.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_add_tag.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_add_tag.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/navigation_mobile_navigation.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/navigation/mobile_navigation.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_activity_main.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/activity_main.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_tag_equip.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_tag_equip.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_inventory_content.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/inventory_content.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/xml_backup_rules.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/xml/backup_rules.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_notifications.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_notifications.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_add_item.xml.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/layout/fragment_add_item.xml"
     },
     {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_inventory.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_inventory.xml"
-    },
-    {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xxhdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_fragment_add_item.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/fragment_add_item.xml"
-    },
-    {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/layout_tag_content.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/layout/tag_content.xml"
-    },
-    {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/mipmap-xxxhdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.debuggingdemonsapp-merged_res-60:/xml_backup_rules.xml.flat",
-        "source": "com.example.debuggingdemonsapp-main-62:/xml/backup_rules.xml"
+        "merged": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-merged_res-60:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/elialex15/.gradle/daemon/8.0/com.example.debuggingdemonsapp-main-62:/mipmap-xxxhdpi/ic_launcher.webp"
     }
 ]

@@ -28,4 +28,5 @@
     <string name="confirm">CONFIRM</string>
     <string name="photos">Photos</string>
     <string name="total_estimated_value_0">Total Estimated Value: $0</string>
+    <string name="update_tags_button_text">Update Tags</string>
 </resources>

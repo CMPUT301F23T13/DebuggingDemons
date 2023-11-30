@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.model.Tag;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,10 +28,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
+import java.util.ArrayList;
+
 /**
  * Fragment for editing item details.
  */
-public class EditItemFragment extends Fragment {
+public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnFragmentInteractionListener{
     private EditText DoP;
     private EditText Description;
     private EditText Make;
@@ -38,6 +41,8 @@ public class EditItemFragment extends Fragment {
     private EditText SerialNumber;
     private EditText EstimatedValue;
     private EditText Comment;
+    private Button updateTagsButton;
+    ArrayList<String> tagNames;
     private ImageButton imageButton1;
     private String image1;
     private ImageButton imageButton2;
@@ -76,6 +81,8 @@ public class EditItemFragment extends Fragment {
         SerialNumber = view.findViewById(R.id.serial_number);
         EstimatedValue = view.findViewById(R.id.estimated_value);
         Comment = view.findViewById(R.id.comment);
+
+        updateTagsButton = view.findViewById(R.id.update_tags_button);
 
         imageButton1 = view.findViewById(R.id.editImage1);
         imageButton2 = view.findViewById(R.id.editImage2);
@@ -117,6 +124,8 @@ public class EditItemFragment extends Fragment {
             String estimatedValue = bundle.getString("estimatedValue");
             String comment = bundle.getString("comment");
 
+            tagNames = bundle.getStringArrayList("tagNames");
+
             // Gets image Uri's from the bundle for images that exist
             // If an image wasn't selected in the add menu then the string is empty (i.e. the object would be null)
             image1 = bundle.getString("image1");
@@ -136,6 +145,14 @@ public class EditItemFragment extends Fragment {
             Comment.setText(comment);
         }
 
+        // open dialog to update tags when updateTagsButton is clicked
+        updateTagsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateTagsFragment newFragment = new UpdateTagsFragment(tagNames);
+                newFragment.show(getChildFragmentManager(), "update_tags");
+            }
+        });
 
         // Set click listeners for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +252,7 @@ public class EditItemFragment extends Fragment {
                                         "serialNumber", updatedSerialNumber,
                                         "estimatedValue", updatedEstimatedValue,
                                         "comment", updatedComment,
+                                        "tagNames", tagNames,
                                         "image1",updatedImage1,
                                         "image2", updatedImage2,
                                         "image3", updatedImage3
@@ -256,4 +274,16 @@ public class EditItemFragment extends Fragment {
         });
     }
 
+    /**
+     * Update tags of selected item
+     * @param tags
+     *    New list of tags to be assigned to selected item
+     */
+    @Override
+    public void onUpdateTags(ArrayList<Tag> tags) {
+        tagNames.clear();
+        for (Tag tag : tags) {
+            tagNames.add(tag.getName());
+        }
+    }
 }

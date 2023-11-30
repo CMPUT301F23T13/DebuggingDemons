@@ -3703,6 +3703,7 @@ id title_template
 id toggle
 id top
 id topPanel
+id total_estimated_value
 id touch_outside
 id transitionToEnd
 id transitionToStart
@@ -3716,6 +3717,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id update_tags_button
 id useLogo
 id usernameEditText
 id vertical_only
@@ -4167,6 +4169,8 @@ string title_notifications
 string title_sort
 string title_tag
 string title_tag_tab
+string total_estimated_value_0
+string update_tags_button_text
 string username
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
