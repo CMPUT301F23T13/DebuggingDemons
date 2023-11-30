@@ -109,7 +109,6 @@ public class PhotographFragment extends Fragment {
         imageButton.setImageBitmap(photo.photoBitmap());
         imageButton.setId(View.generateViewId());
 
-
         imageButtons.add(imageButton);
         binding.photoContainer.addView(imageButton);
     }

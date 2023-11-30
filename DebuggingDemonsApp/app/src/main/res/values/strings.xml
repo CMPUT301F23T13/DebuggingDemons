@@ -34,5 +34,5 @@
     <string name="sort_by_value">Sort by value</string>
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
-    <string name="scan_button">Scan Button</string>
+    <string name="scan_button">Scan</string>
 </resources>

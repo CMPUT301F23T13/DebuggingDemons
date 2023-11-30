@@ -29,12 +29,16 @@ public final class FragmentPictureBinding implements ViewBinding {
   @NonNull
   public final Button saveButton;
 
+  @NonNull
+  public final Button scanButton;
+
   private FragmentPictureBinding(@NonNull ConstraintLayout rootView, @NonNull ImageView imageView,
-      @NonNull Button retakeButton, @NonNull Button saveButton) {
+      @NonNull Button retakeButton, @NonNull Button saveButton, @NonNull Button scanButton) {
     this.rootView = rootView;
     this.imageView = imageView;
     this.retakeButton = retakeButton;
     this.saveButton = saveButton;
+    this.scanButton = scanButton;
   }
 
   @Override
@@ -82,8 +86,14 @@ public final class FragmentPictureBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.scan_button;
+      Button scanButton = ViewBindings.findChildViewById(rootView, id);
+      if (scanButton == null) {
+        break missingId;
+      }
+
       return new FragmentPictureBinding((ConstraintLayout) rootView, imageView, retakeButton,
-          saveButton);
+          saveButton, scanButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

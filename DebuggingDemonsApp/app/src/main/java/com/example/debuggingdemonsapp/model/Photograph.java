@@ -6,11 +6,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Photograph object which is has a bitmap and the uri of the image corresponding to
  *      its database uri
  */
 public class Photograph implements Parcelable {
+    private List<String> barcodeValues = new ArrayList<>();
+    private String serialNumber;
     private Bitmap photo;
     private String uri = "";
 
@@ -43,8 +48,33 @@ public class Photograph implements Parcelable {
      * This method returns the photo's Uri
      * @return String uri  The uri as a string which is associated with a specific Photograph object
      */
-    public String storageURI(){
+    public String getUri(){
         return this.uri;
+    }
+
+    /**
+     * This method sets the Barcode Value of this photograph based on what is passed to the function
+     * @param barcodeValues The barcode values--as a list of strings--found from the image when it is scanned
+     */
+    public void setBarcodeValues(List<String> barcodeValues){
+        this.barcodeValues = barcodeValues;
+    }
+
+    /**
+     * This method returns the saved barcode values
+     * @return barcodeValues the list of strings that contains all barcode values found in the image
+     */
+    public List<String> getBarcodeValues(){
+        return this.barcodeValues;
+    }
+
+
+    /**
+     * This method sets the Serial Number based on what is passed to the function
+     * @param serialNumber The serial number--as a string--that is found from the scanned image
+     */
+    public void setSerialNumber(String serialNumber){
+        this.serialNumber = serialNumber;
     }
 
     /**

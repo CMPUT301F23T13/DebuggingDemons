@@ -33,7 +33,7 @@ public class PhotographUnitTest {
         String mockURI = "fakeURI";
         photo.setUri(mockURI);
 
-        assert photo.storageURI() == mockURI;
+        assert photo.getUri() == mockURI;
 
     }
 }
