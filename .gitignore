@@ -6,3 +6,5 @@
 *.txt
 *.bin
 *.lock
+*.dex
+*.class
