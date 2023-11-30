@@ -67,7 +67,7 @@ public class LoginActivityUITest {
     @Test
     public void test4_RegisterButton_withValidUsername() throws InterruptedException {
         // Assume "newuser" is not already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        onView(withId(R.id.usernameEditText)).perform(typeText("testuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
         // We expect to see a successful registration message
         onView(withText("Register Successfully"))
@@ -88,7 +88,7 @@ public class LoginActivityUITest {
     @Test
     public void test5_LoginButton_withValidUsername() {
         // Assume "newuser" is already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        onView(withId(R.id.usernameEditText)).perform(typeText("testuser"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
         // We expect to see a successful login message
         onView(withText("Logged in successfully"))
@@ -110,7 +110,7 @@ public class LoginActivityUITest {
     @Test
     public void test6_RegisterButton_withExistUsername() {
         // Assume "newuser" is already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        onView(withId(R.id.usernameEditText)).perform(typeText("testuser"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
         // We expect to see a user already exits message
         onView(withText("Username already exists"))

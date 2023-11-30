@@ -81,7 +81,7 @@ public class EstimatedValueUITest {
     }
 
     @Test
-    public void testValueUpdateAfterAddingItem() {
+    public void testValueUpdateAfterAddingItem() throws InterruptedException {
 
         // Navigate to inventory
         onView(withId(R.id.navigation_inventory)).perform(click());
