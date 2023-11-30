@@ -51,13 +51,12 @@ public class CameraFragment extends Fragment {
      * @param savedInstanceState If non-null, this fragment is being re-constructed
      * from a previous saved state as given here.
      *
-     * @return View  This is a View object that allows the fragment to be displayed
+     * @return View  This is a View object that allows the fragment to be displayedrf
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentCameraBinding.inflate(inflater, container, false);
-//        imageScanner = new Scanner();
         View root = binding.getRoot();
 
 
@@ -98,6 +97,13 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cameraProvider.unbindAll(); //Ensures that camera unbinds so if user navigates back to camera it will create a new binding
+                findNavController(container).navigate(R.id.navigation_photosList);
+            }
+        });
+
+        binding.photosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 findNavController(container).navigate(R.id.navigation_photosList);
             }
         });
