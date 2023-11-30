@@ -1,9 +1,12 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -19,6 +22,8 @@ import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +80,30 @@ public class AddInventoryFragment extends Fragment {
         addImage2 = view.findViewById(R.id.addImage2);
         addImage3 = view.findViewById(R.id.addImage3);
 
+        EditText dateOfPurchase = view.findViewById(R.id.editTextDateOfPurchase);
+        dateOfPurchase.setFocusable(false);
+        dateOfPurchase.setInputType(InputType.TYPE_NULL);
+        dateOfPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                // Format the date and set it to the EditText
+                                String selectedDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                dateOfPurchase.setText(selectedDate);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
 
         // Need to figure out how to make this process more efficient
         // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one box's image was changed
@@ -122,7 +151,43 @@ public class AddInventoryFragment extends Fragment {
         });
 
         view.findViewById(R.id.button_ok).setOnClickListener(v -> {
-            addItemToDatabase();
+            boolean isValid = true;
+            if (editTextDescription.getText().toString().trim().isEmpty()) {
+                editTextDescription.setError("Description cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextDateOfPurchase.getText().toString().trim().isEmpty()) {
+                editTextDateOfPurchase.setError("Date of purchase cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextMake.getText().toString().trim().isEmpty()) {
+                editTextMake.setError("Make cannot be empty");
+                isValid = false;
+            }
+            if (editTextModel.getText().toString().trim().isEmpty()) {
+                editTextModel.setError("Description cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextEstimatedValue.getText().toString().trim().isEmpty()) {
+                editTextEstimatedValue.setError("Date of purchase cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextComment.getText().toString().trim().isEmpty()) {
+                editTextComment.setError("Make cannot be empty");
+                isValid = false;
+            }
+            if (!isValid) {
+                // Show a general Toast message
+                Toast.makeText(getContext(), "Please fill out all required fields.", Toast.LENGTH_SHORT).show();
+                return; // Stay on the fragment, do not proceed further
+            } else {
+                // Proceed to add item to database if all fields are valid
+                addItemToDatabase();
+            }
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_inventory);
         });
