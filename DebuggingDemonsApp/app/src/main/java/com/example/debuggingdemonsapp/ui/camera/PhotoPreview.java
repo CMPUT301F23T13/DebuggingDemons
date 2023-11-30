@@ -101,8 +101,8 @@ public class PhotoPreview extends Fragment {
             @Override
             public void onClick(View view) {
 
-               savePhoto(container);
-               backToCamera(container);
+                savePhoto(container);
+                backToCamera(container);
             }
         });
 
@@ -236,19 +236,19 @@ public class PhotoPreview extends Fragment {
             }
         });
     }
-        @Override
-        public void onDestroyView() {
-            super.onDestroyView();
-            binding = null;
-        }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
     /**
      * Navigates back to the Camera screen which is used to take photos
      * @param container The container object is from onCreateView and is used for navigation
      */
     public void backToCamera(ViewGroup container){
-            ((MainActivity) getActivity()).enable(true);
-            findNavController(container).navigate(R.id.navigation_camera);
-        }
+        ((MainActivity) getActivity()).enable(true);
+        findNavController(container).navigate(R.id.navigation_camera);
+    }
 
 }
