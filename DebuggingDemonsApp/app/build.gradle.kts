@@ -34,7 +34,7 @@ android {
         viewBinding = true
         dataBinding = true
     }
-    buildToolsVersion = "29.0.2"
+
 
 }
 
