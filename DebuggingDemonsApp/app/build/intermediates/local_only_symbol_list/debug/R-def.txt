@@ -17,6 +17,7 @@ drawable ic_notifications_black_24dp
 id action_addItemFragment_to_inventoryFragment
 id action_inventoryFragment_to_addInventoryFragment
 id action_navigation_addItem_to_navigation_photosList
+id action_navigation_editItem_to_navigation_photosList
 id action_navigation_photo_to_navigation_camera2
 id action_navigation_photosList_to_navigation_addItem
 id addImage1
@@ -54,6 +55,7 @@ id estimatedValue
 id estimated_value
 id filter_button
 id fragment_container
+id fragment_edit_item
 id imageView
 id itemImage1
 id itemImage2
@@ -78,6 +80,7 @@ id navigation_photoPreview
 id navigation_photosList
 id navigation_tag
 id photoContainer
+id photoListFragment
 id photoList_add
 id photoList_back
 id photos
@@ -86,8 +89,16 @@ id recycler_view
 id registerButton
 id retake_button
 id save_button
+id scan_button
 id serialNumber
 id serial_number
+id sort_ascending
+id sort_by_date
+id sort_by_description
+id sort_by_make
+id sort_by_value
+id sort_descending
+id sort_order_group
 id sortby_button
 id tag_button
 id tag_checkbox
@@ -113,6 +124,7 @@ layout fragment_inventory
 layout fragment_notifications
 layout fragment_photolist
 layout fragment_picture
+layout fragment_sort_by_item
 layout fragment_tag
 layout fragment_tag_equip
 layout inventory_content
@@ -128,10 +140,12 @@ mipmap ic_launcher_round
 navigation mobile_navigation
 string add_item
 string app_name
+string ascending
 string back
 string comment
 string confirm
 string dateofpurchase
+string descending
 string description
 string edit_view
 string estimated_value
@@ -148,7 +162,12 @@ string project_id
 string register
 string retake_button
 string save_button
+string scan_button
 string serial_number
+string sort_by_date
+string sort_by_descrioption
+string sort_by_make
+string sort_by_value
 string title_add
 string title_camera
 string title_delete
