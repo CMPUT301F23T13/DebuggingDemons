@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -243,7 +244,7 @@ public class AddInventoryFragment extends Fragment {
                         Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
 //                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
-                        InventoryViewModel viewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
+                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
 
                         viewModel.fetchItems();
 

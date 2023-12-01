@@ -58,18 +58,19 @@ public class PhotographFragment extends Fragment {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String key = null;
+                    String key = "";
                     int button_id = (int) getArguments().get("button");
                     // Sets key based on value of the button id that was passed through in the bundle
-                    if (button_id == R.id.addImage1){
+                    if (button_id == R.id.addImage1 || button_id == R.id.editImage1){
                         key = "image1";
-                    } else if (button_id == R.id.addImage2) {
+                    } else if (button_id == R.id.addImage2 || button_id == R.id.editImage2) {
                         key = "image2";
-                    } else if (button_id == R.id.addImage3) {
+                    } else if (button_id == R.id.addImage3 || button_id == R.id.editImage3) {
                         key = "image3";
                     }
 
                     Photograph photoObj = photoList.getPhotos().get(imageButtons.indexOf(imageButton));
+//                    System.out.println(photoObj);
                     // Sets the MutableLiveData object corresponding to the key to the bitmap of the selected image
                     // Then returns to the add item details page
                     findNavController(container).getPreviousBackStackEntry().getSavedStateHandle().set(key,  photoObj);

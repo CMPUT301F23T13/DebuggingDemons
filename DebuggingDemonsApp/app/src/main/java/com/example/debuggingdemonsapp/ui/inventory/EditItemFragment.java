@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -16,12 +17,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -43,11 +48,14 @@ public class EditItemFragment extends Fragment {
     private EditText EstimatedValue;
     private EditText Comment;
     private ImageButton imageButton1;
+    private MutableLiveData<Photograph> liveData1;
     private String image1;
-    private ImageButton imageButton2;
     private String image2;
-    private ImageButton imageButton3;
     private String image3;
+    private ImageButton imageButton2;
+    private MutableLiveData<Photograph> liveData2;
+    private ImageButton imageButton3;
+    private MutableLiveData<Photograph> liveData3;
 
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
@@ -62,7 +70,7 @@ public class EditItemFragment extends Fragment {
 
     public void onSelectImageClick(View view) {
         // Create an AlertDialog to show the options
-        final CharSequence[] options = {"Choose from Gallery", "Choose from Photo List"};
+        final CharSequence[] options = {"Choose from Gallery", "Choose from Photo List", "Remove Photo"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Choose Photo");
@@ -74,7 +82,13 @@ public class EditItemFragment extends Fragment {
                     startActivityForResult(intent, GALLERY_REQUEST_CODE); // You need to define this constant
                 } else if (options[item].equals("Choose from Photo List")) {
                     // You need to define this action in your navigation graph
-                    Navigation.findNavController(view).navigate(R.id.action_navigation_editItem_to_navigation_photosList);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("button", view.getId());
+                    Navigation.findNavController(view).navigate(R.id.action_navigation_editItem_to_navigation_photosList,bundle);
+                } else if (options[item].equals("Remove Photo")){
+                    ImageButton imageButton = (ImageButton) view;
+                    imageButton.setImageDrawable(null);
+
                 }
             }
         });
@@ -92,8 +106,9 @@ public class EditItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     // Initialize Database and collection reference
+        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+"/"+((MainActivity)getActivity()).current_user+"/"+"items");
     // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_edit, container, false);
         DoP = view.findViewById(R.id.dateOfPurchase);
@@ -117,10 +132,10 @@ public class EditItemFragment extends Fragment {
         imageButton2.setOnClickListener(this::onSelectImageClick);
         imageButton3.setOnClickListener(this::onSelectImageClick);
 
+        getChosenImage(container);
         // Retrieve data from bundle if not null and initialize the UI
         Bundle bundle = getArguments();
         if (bundle != null) {
-            System.out.println(bundle.getString("doP"));
             String doP = bundle.getString("doP");
             String description = bundle.getString("description");
             String make = bundle.getString("make");
@@ -135,8 +150,9 @@ public class EditItemFragment extends Fragment {
             image2 = bundle.getString("image2");
             image3 = bundle.getString("image3");
 
+            // Sets the imageButtons' image to the one matching the saved URIs
             setImage(image1, imageButton1);
-            setImage(image2, imageButton2);
+            setImage(image2,imageButton2);
             setImage(image3, imageButton3);
 
             DoP.setText(doP);
@@ -155,8 +171,15 @@ public class EditItemFragment extends Fragment {
             public void onClick(View v) {
                 saveData();
                 // Fetch updated items from ViewModel
-                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
-                viewModel.fetchItems();
+//                viewModel.fetchItems();
+                try{
+                    // As the navigation request occurs before the data saving ends, Thread.sleep is needed to ensure that the data is saved before navigating
+                    Thread.sleep(200);
+                }catch (Exception e){
+                    Toast.makeText(getContext(),"Error Occurred", Toast.LENGTH_SHORT).show();
+                }
+                NavController navController = Navigation.findNavController(getView());
+                navController.navigate(R.id.navigation_inventory);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +192,45 @@ public class EditItemFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    /**
+     * This method is used to get live data that is passed from the photo list when an image is chosen
+     * @param container This is a ViewGroup object that is used to work with the navigation controller
+     */
+    private void getChosenImage(ViewGroup container) {
+        liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image1");
+        liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData1.getValue().getUri(), imageButton1);
+//                imageButton1.setRotation(90);
+
+            }
+        });
+
+        liveData2 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image2");
+        liveData2.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData2.getValue().getUri(), imageButton2);
+//                imageButton2.setRotation(90);
+
+            }
+        });
+
+        liveData3 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image3");
+        liveData3.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData3.getValue().getUri(), imageButton3);
+//                imageButton3.setRotation(90);
+
+            }
+        });
     }
 
     /**
@@ -197,22 +259,37 @@ public class EditItemFragment extends Fragment {
      */
     public String updateImage(ImageButton imageButton,int imageNumber){
         Drawable updatedDrawable = imageButton.getDrawable();
-        String updatedImage = null;
-        if(updatedDrawable == null){
-            updatedImage = "";
-        }else{
-            switch (imageNumber){
+        String updatedImage = "";
+
+        switch (imageNumber){
                 case 1:
-                    updatedImage = image1;
+                    if (liveData1.getValue() != null){
+                        updatedImage = liveData1.getValue().getUri();
+                    } else{
+                        if(imageButton.getDrawable() != null){
+                            updatedImage = image1;
+                        }
+                    }
                     break;
                 case 2:
-                    updatedImage = image2;
+                    if(liveData2.getValue() != null){
+                        updatedImage = liveData2.getValue().getUri();
+                    }else{
+                        if(imageButton.getDrawable() != null){
+                            updatedImage = image2;
+                        }
+                    }
                     break;
                 case 3:
-                    updatedImage = image3;
+                    if(liveData3.getValue() != null){
+                        updatedImage = liveData3.getValue().getUri();
+                    }else{
+                        if(imageButton.getDrawable() != null) {
+                            updatedImage = image3;
+                        }
+                    }
                     break;
             }
-        }
         return updatedImage;
     }
     private void saveData(){
@@ -227,6 +304,7 @@ public class EditItemFragment extends Fragment {
 
         // Get the updated images for all three images
         // As of right now this just focuses on deleting images; Future -> add choosing new image functionality
+
         String updatedImage1 = updateImage(imageButton1, 1);
         String updatedImage2 = updateImage(imageButton2,2);
         String updatedImage3 = updateImage(imageButton3,3);
@@ -238,9 +316,11 @@ public class EditItemFragment extends Fragment {
         query.get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         // Update item details in Database
+                        System.out.println(document.getReference());
                         document.getReference().update("dateOfPurchase", updatedDoP,
                                         "make", updatedMake,
                                         "model", updatedModel,
@@ -255,8 +335,10 @@ public class EditItemFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         // Show a Toast message based on the update result
+
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(getActivity(), "Update successfully!", Toast.LENGTH_SHORT).show();
+
+                                            Toast.makeText(getActivity(), "Updated successfully!", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Toast.makeText(getActivity(), "Update failed, please try again later.", Toast.LENGTH_SHORT).show();
                                         }
