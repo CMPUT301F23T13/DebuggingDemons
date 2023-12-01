@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * This class implements ViewModelProvider.Factory and is used to be able to call the InventoryViewModel with an argument
+ * Code for creating class that implements ViewModelProvider.Factory from https://stackoverflow.com/questions/46283981/android-viewmodel-additional-arguments
  */
 public class InventoryViewModelFactory implements ViewModelProvider.Factory {
 
