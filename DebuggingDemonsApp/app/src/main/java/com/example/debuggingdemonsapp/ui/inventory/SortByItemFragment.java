@@ -65,6 +65,7 @@ public class SortByItemFragment extends DialogFragment {
         view.findViewById(R.id.sort_by_description).setOnClickListener(v -> sortBy = "description");
         view.findViewById(R.id.sort_by_make).setOnClickListener(v -> sortBy = "make");
         view.findViewById(R.id.sort_by_value).setOnClickListener(v -> sortBy = "value");
+        view.findViewById(R.id.sort_by_tag).setOnClickListener(v -> sortBy = "tag");
 
         // Setup dialog buttons
         builder.setPositiveButton("Confirm", null); // Initially null for custom behavior

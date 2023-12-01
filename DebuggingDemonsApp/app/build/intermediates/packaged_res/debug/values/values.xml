@@ -36,8 +36,9 @@
     <string name="scan_button">Scan</string>
     <string name="serial_number">Serial Number</string>
     <string name="sort_by_date">Sort by date</string>
-    <string name="sort_by_descrioption">Sort by descrioption</string>
+    <string name="sort_by_descrioption">Sort by description</string>
     <string name="sort_by_make">Sort by make</string>
+    <string name="sort_by_tag">Sort by tag</string>
     <string name="sort_by_value">Sort by value</string>
     <string name="title_add">ADD</string>
     <string name="title_camera">Camera</string>
@@ -50,6 +51,7 @@
     <string name="title_tag">TAGS</string>
     <string name="title_tag_tab">Tag</string>
     <string name="total_estimated_value_0">Total Estimated Value: $0</string>
+    <string name="update_tags_button_text">Update Tags</string>
     <string name="username">Username</string>
     <style name="Theme.DebuggingDemonsApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         

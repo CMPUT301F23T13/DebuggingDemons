@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.model;
 
+import static java.util.Collections.sort;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class Item {
         this.image2 = image2;
         this.image3 = image3;
         this.tagNames = tagNames;
+        sort(this.tagNames);
     }
 
     /**
@@ -115,10 +118,15 @@ public class Item {
         return tagNames;
     }
 
+    public String compareTagNames() {
+        return tagNames.toString();
+    }
+
     public void addTag(Tag tag) {
         String name = tag.getName();
         if (!tagNames.contains(name)) {
             tagNames.add(name);
+            sort(tagNames);
         }
     }
 

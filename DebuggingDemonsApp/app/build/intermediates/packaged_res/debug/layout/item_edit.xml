@@ -69,6 +69,12 @@
         android:inputType="textMultiLine"
         android:minHeight="48dp" />
 
+    <Button
+        android:id="@+id/update_tags_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_tags_button_text"/>
+
     <TextView
         android:id="@+id/photos"
         android:layout_width="match_parent"
