@@ -11,12 +11,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <string name="add_item">Add</string>
     <string name="app_name">DebuggingDemonsApp</string>
-    <string name="ascending">Ascending</string>
     <string name="back">BACK</string>
     <string name="comment">Comment</string>
     <string name="confirm">CONFIRM</string>
     <string name="dateofpurchase">Date of Purchase</string>
-    <string name="descending">Descending</string>
     <string name="description">Description</string>
     <string name="edit_view">EDIT</string>
     <string name="estimated_value">Estimated Value</string>
@@ -33,12 +31,7 @@
     <string name="register">Register</string>
     <string name="retake_button">Retake Photo</string>
     <string name="save_button">Save Photo</string>
-    <string name="scan_button">Scan</string>
     <string name="serial_number">Serial Number</string>
-    <string name="sort_by_date">Sort by date</string>
-    <string name="sort_by_descrioption">Sort by descrioption</string>
-    <string name="sort_by_make">Sort by make</string>
-    <string name="sort_by_value">Sort by value</string>
     <string name="title_add">ADD</string>
     <string name="title_camera">Camera</string>
     <string name="title_delete">DELETE</string>

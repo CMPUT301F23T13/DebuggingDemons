@@ -51,12 +51,13 @@ public class CameraFragment extends Fragment {
      * @param savedInstanceState If non-null, this fragment is being re-constructed
      * from a previous saved state as given here.
      *
-     * @return View  This is a View object that allows the fragment to be displayedrf
+     * @return
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentCameraBinding.inflate(inflater, container, false);
+        imageScanner = new Scanner();
         View root = binding.getRoot();
 
 
@@ -83,10 +84,9 @@ public class CameraFragment extends Fragment {
                     // from https://stackoverflow.com/questions/33797036/how-to-send-the-bitmap-into-bundle
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("Image", image.toBitmap());
-                    bundle.putInt("Rotation", image.getImageInfo().getRotationDegrees());
 
                     cameraProvider.unbindAll();
-//                    imageScanner.scanImage(image.toBitmap(), image.getImageInfo().getRotationDegrees());
+                    imageScanner.scanImage(image.toBitmap(), image.getImageInfo().getRotationDegrees());
                     image.close();
                     findNavController(container).navigate(R.id.navigation_photoPreview, bundle);
 
@@ -97,13 +97,6 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cameraProvider.unbindAll(); //Ensures that camera unbinds so if user navigates back to camera it will create a new binding
-                findNavController(container).navigate(R.id.navigation_photosList);
-            }
-        });
-
-        binding.photosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 findNavController(container).navigate(R.id.navigation_photosList);
             }
         });

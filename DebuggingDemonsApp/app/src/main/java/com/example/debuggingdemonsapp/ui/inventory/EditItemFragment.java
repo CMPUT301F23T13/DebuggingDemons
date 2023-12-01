@@ -1,11 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +48,6 @@ public class EditItemFragment extends Fragment {
 
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
-    private int GALLERY_REQUEST_CODE = 203;
 
     /**
      * Default constructor for EditItemFragment.
@@ -59,28 +55,6 @@ public class EditItemFragment extends Fragment {
     public EditItemFragment() {
 
     }
-
-    public void onSelectImageClick(View view) {
-        // Create an AlertDialog to show the options
-        final CharSequence[] options = {"Choose from Gallery", "Choose from Photo List"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Choose Photo");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Choose from Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, GALLERY_REQUEST_CODE); // You need to define this constant
-                } else if (options[item].equals("Choose from Photo List")) {
-                    // You need to define this action in your navigation graph
-                    Navigation.findNavController(view).navigate(R.id.action_navigation_editItem_to_navigation_photosList);
-                }
-            }
-        });
-        builder.show();
-    }
-
     /**
      * Creates and returns the view associated with the fragment.
      * @param inflater           LayoutInflater that can be used to inflate views in the fragment.
@@ -93,7 +67,7 @@ public class EditItemFragment extends Fragment {
                              Bundle savedInstanceState) {
     // Initialize Database and collection reference
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+ "/" + ((MainActivity)getActivity()).current_user + "/" + "items");
     // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_edit, container, false);
         DoP = view.findViewById(R.id.dateOfPurchase);
@@ -112,11 +86,26 @@ public class EditItemFragment extends Fragment {
         Button cancelButton = view.findViewById(R.id.back_button);
 
         // When any of the three image buttons are pressed in the edit page the image is removed from the item
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton1.setImageDrawable(null);
+            }
+        });
 
-        imageButton1.setOnClickListener(this::onSelectImageClick);
-        imageButton2.setOnClickListener(this::onSelectImageClick);
-        imageButton3.setOnClickListener(this::onSelectImageClick);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton2.setImageDrawable(null);
+            }
+        });
 
+        imageButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageButton3.setImageDrawable(null);
+            }
+        });
         // Retrieve data from bundle if not null and initialize the UI
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -155,7 +144,9 @@ public class EditItemFragment extends Fragment {
             public void onClick(View v) {
                 saveData();
                 // Fetch updated items from ViewModel
-                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                InventoryViewModel viewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
+
+//                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
                 viewModel.fetchItems();
             }
         });

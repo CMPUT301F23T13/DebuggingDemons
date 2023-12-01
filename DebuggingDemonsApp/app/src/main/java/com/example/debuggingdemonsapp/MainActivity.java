@@ -137,11 +137,7 @@ public class MainActivity extends AppCompatActivity {
                                         }else{
                                             indices.add(listResult.getItems().indexOf(item));
                                             indices.sort(Collections.reverseOrder());
-                                            if (indices.indexOf(listResult.getItems().indexOf(item)) > appPhotos.getPhotos().size()){
-                                                appPhotos.addInPosition(indices.indexOf(listResult.getItems().indexOf(item))%appPhotos.getPhotos().size(),photo);
-                                            }else{
                                             appPhotos.addInPosition(indices.indexOf(listResult.getItems().indexOf(item)),photo);
-                                            }
 
                                         }
 

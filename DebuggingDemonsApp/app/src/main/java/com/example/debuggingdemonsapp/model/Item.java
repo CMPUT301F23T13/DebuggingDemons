@@ -1,8 +1,6 @@
 package com.example.debuggingdemonsapp.model;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.drawable.Drawable;
 
 /**
@@ -18,8 +16,6 @@ public class Item {
     private String comment;
     private ArrayList<String> tagNames;
 
-    private List<String> imageUris;
-    // getters and setters for imageUris
     private String image1;
     private String image2;
     private String image3;
