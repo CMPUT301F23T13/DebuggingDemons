@@ -20,6 +20,7 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
 
     private ArrayList<Tag> tags;
     private ArrayList<Tag> selectedTags;
+    private ArrayList<String> initialSelectedTagNames;
 
     /**
      * This creates a new EquipTagsAdapter with given Tags
@@ -29,6 +30,19 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
     public EquipTagsAdapter(ArrayList<Tag> tags) {
         this.tags = tags;
         selectedTags = new ArrayList<>();
+    }
+
+    /**
+     * This creates a new EquipTagsAdapter with given Tags and selectedTags
+     * @param tags
+     *     List of Tags
+     * @param initialSelectedTagNames
+     *    List of Tag names selected initially
+     */
+    public EquipTagsAdapter(ArrayList<Tag> tags, ArrayList<String> initialSelectedTagNames) {
+        this.tags = tags;
+        selectedTags = new ArrayList<>();
+        this.initialSelectedTagNames = initialSelectedTagNames;
     }
 
     /**
@@ -61,6 +75,17 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
     public void onBindViewHolder(@NonNull EquipTagsViewHolder holder, int position) {
         Tag tag = tags.get(position);
         holder.tagName.setText(tag.getName());
+
+        // select checkbox if tag is in selected tags
+        if (initialSelectedTagNames != null) {
+            for (String name : initialSelectedTagNames) {
+                if (tag.getName().equals(name)) {
+                    holder.tagCheckBox.setChecked(true);
+                    selectedTags.add(tag);
+                    break;
+                }
+            }
+        }
 
         // keep track of currently selected Tags
         holder.tagCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
