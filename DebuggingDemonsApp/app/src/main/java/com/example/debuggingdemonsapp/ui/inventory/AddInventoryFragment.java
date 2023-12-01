@@ -180,7 +180,7 @@ public class AddInventoryFragment extends Fragment {
                         Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
 //                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
-                        InventoryViewModel viewModel = new InventoryViewModel(((MainActivity)getActivity()).current_user);
+                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
 
                         viewModel.fetchItems();
 
