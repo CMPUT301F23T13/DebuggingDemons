@@ -51,7 +51,6 @@ public class Item {
         this.image2 = image2;
         this.image3 = image3;
         this.tagNames = tagNames;
-        sort(this.tagNames);
     }
 
     /**
@@ -115,18 +114,20 @@ public class Item {
     }
 
     public ArrayList<String> getTagNames() {
+        tagNames.sort(String::compareToIgnoreCase);
         return tagNames;
     }
 
     public String compareTagNames() {
-        return tagNames.toString();
+        tagNames.sort(String::compareToIgnoreCase);
+        return tagNames.toString().toLowerCase();
     }
 
     public void addTag(Tag tag) {
         String name = tag.getName();
         if (!tagNames.contains(name)) {
             tagNames.add(name);
-            sort(tagNames);
+            tagNames.sort(String::compareToIgnoreCase);
         }
     }
 
