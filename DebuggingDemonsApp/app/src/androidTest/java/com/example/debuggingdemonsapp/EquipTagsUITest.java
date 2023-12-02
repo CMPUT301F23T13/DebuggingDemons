@@ -52,7 +52,6 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class EquipTagsUITest {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
@@ -197,7 +196,6 @@ public class EquipTagsUITest {
 
     @Test
     public void EquipTagsTest(){
-
         // navigate to inventory tab
         onView(withId(R.id.navigation_inventory)).perform(click());
 

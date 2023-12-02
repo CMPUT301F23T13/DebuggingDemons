@@ -34,7 +34,6 @@ import java.util.ArrayList;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class EditItemsTagsUITest {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
