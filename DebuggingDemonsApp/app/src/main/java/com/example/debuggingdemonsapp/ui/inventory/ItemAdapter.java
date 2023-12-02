@@ -123,11 +123,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return items != null ? items.size() : 0;
     }
 
+    /**
+     * This sets items of ItemAdapter to newItems
+     * @param newItems
+     *     List of Items to update ItemAdapter
+     */
     public void setItems(ArrayList<Item> newItems) {
         this.items = newItems;
         notifyDataSetChanged();
     }
 
+    /**
+     * This returns items currently selected (checked)
+     * @return
+     *     Returns selectedItems
+     */
     public ArrayList<Item> getSelectedItems() {
         return selectedItems;
     }
