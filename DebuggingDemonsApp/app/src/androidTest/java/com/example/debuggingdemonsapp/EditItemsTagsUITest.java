@@ -2,26 +2,17 @@ package com.example.debuggingdemonsapp;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.any;
-import static org.hamcrest.Matchers.isA;
 
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.ViewAssertion;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -30,28 +21,19 @@ import androidx.test.filters.LargeTest;
 import com.example.debuggingdemonsapp.model.Item;
 import com.example.debuggingdemonsapp.model.Tag;
 import com.example.debuggingdemonsapp.ui.inventory.EquipTagsAdapter;
-import com.example.debuggingdemonsapp.ui.inventory.InventoryViewModel;
 import com.example.debuggingdemonsapp.ui.inventory.ItemAdapter;
-import com.example.debuggingdemonsapp.ui.tag.TagAdapter;
-import com.example.debuggingdemonsapp.ui.tag.TagViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class EquipTagsUITest {
+public class EditItemsTagsUITest {
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
@@ -80,10 +62,7 @@ public class EquipTagsUITest {
             ArrayList<Item> mockData = new ArrayList<>();
             Item item1 = new Item();
             item1.setDescription("first item");
-            Item item2 = new Item();
-            item2.setDescription("second item");
             mockData.add(item1);
-            mockData.add(item2);
 
             // set recycler view's adapter to mock data
             adapter.setItems(mockData);
@@ -91,7 +70,7 @@ public class EquipTagsUITest {
     }
 
     /*
-    Set equip tags list to custom data
+    Set update tags list to custom data
      */
     public class EquipTagsListCustomAdapter implements ViewAction {
 
@@ -123,29 +102,7 @@ public class EquipTagsUITest {
     }
 
     /*
-    Check box of specific item in recycler view
-     */
-    public class ItemCheckView implements ViewAction {
-
-        @Override
-        public String getDescription() {
-            return null;
-        }
-
-        @Override
-        public Matcher<View> getConstraints() {
-            return any(View.class);
-        }
-
-        @Override
-        public void perform(UiController uiController, View view) {
-            CheckBox checkBox = view.findViewById(R.id.item_checkbox);
-            checkBox.setChecked(true);
-        }
-    }
-
-    /*
-   Check box of specific tag in recycler view
+   Check or uncheck box of specific tag in recycler view
     */
     public class TagCheckView implements ViewAction {
 
@@ -162,14 +119,14 @@ public class EquipTagsUITest {
         @Override
         public void perform(UiController uiController, View view) {
             CheckBox checkBox = view.findViewById(R.id.tag_checkbox);
-            checkBox.setChecked(true);
+            checkBox.setChecked(!checkBox.isChecked());  // flip state of checkbox
         }
     }
 
     /*
-    Check both tags are equipped on both items
+    Check both tags are equipped
      */
-    public class CheckAdapterContents implements ViewAction {
+    public class CheckForTags implements ViewAction {
 
         @Override
         public String getDescription() {
@@ -194,8 +151,34 @@ public class EquipTagsUITest {
         }
     }
 
+    /*
+    Check no tags are equipped
+     */
+    public class CheckForNoTags implements ViewAction {
+
+        @Override
+        public String getDescription() {
+            return null;
+        }
+
+        @Override
+        public Matcher<View> getConstraints() {
+            return any(View.class);
+        }
+
+        @Override
+        public void perform(UiController uiController, View view) {
+            RecyclerView recyclerView = (RecyclerView) view;
+            ItemAdapter itemAdapter = (ItemAdapter) recyclerView.getAdapter();
+            for (Item item : itemAdapter.getSelectedItems()) {
+                ArrayList<String> tags = item.getTagNames();
+                assert tags.size() == 0;
+            }
+        }
+    }
+
     @Test
-    public void EquipTagsTest(){
+    public void EditItemsTagsTest() {
         // navigate to inventory tab
         onView(withId(R.id.navigation_inventory)).perform(click());
 
@@ -205,24 +188,24 @@ public class EquipTagsUITest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.recycler_view)).perform(new ItemListCustomAdapter());
+        onView(withId(R.id.recycler_view)).perform(new EditItemsTagsUITest.ItemListCustomAdapter());
 
-        // check boxes for both items
+        // click on item
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new ItemCheckView()));
-        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new ItemCheckView()));
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // navigate to equip tags fragment
+        // navigate to update tags fragment
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.tag_button)).perform(click());
+        onView(withId(android.R.id.button3)).perform((click()));  // edit button
+        onView(withId(R.id.update_tags_button)).perform(click());
 
         // create mock tag data set
         try {
@@ -230,7 +213,7 @@ public class EquipTagsUITest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.tag_list)).perform(new EquipTagsListCustomAdapter());
+        onView(withId(R.id.tag_list)).perform(new EditItemsTagsUITest.EquipTagsListCustomAdapter());
 
         // check boxes for both tags
         try {
@@ -238,10 +221,10 @@ public class EquipTagsUITest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new TagCheckView()));
-        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new TagCheckView()));
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new EditItemsTagsUITest.TagCheckView()));
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new EditItemsTagsUITest.TagCheckView()));
 
-        // equip both new tags to both new items
+        // click ok
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -249,11 +232,85 @@ public class EquipTagsUITest {
         }
         onView(withText("OK")).perform(click());
 
+        // confirm changes
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        onView(withId(R.id.recycler_view)).perform(new CheckAdapterContents());
+        onView(withId(R.id.confirm_button)).perform(click());
+
+        // assert item has both tags equipped
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.recycler_view)).perform(new EditItemsTagsUITest.CheckForTags());
+
+        // click on item
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        // navigate to update tags fragment
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(android.R.id.button3)).perform((click()));  // edit button
+        onView(withId(R.id.update_tags_button)).perform(click());
+
+        // re-create mock tag data set (and check boxes for both tags)
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.tag_list)).perform(new EditItemsTagsUITest.EquipTagsListCustomAdapter());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new EditItemsTagsUITest.TagCheckView()));
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new EditItemsTagsUITest.TagCheckView()));
+
+        // uncheck boxes for both tags
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, new EditItemsTagsUITest.TagCheckView()));
+        onView(withId(R.id.tag_list)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new EditItemsTagsUITest.TagCheckView()));
+
+        // click ok
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withText("OK")).perform(click());
+
+        // confirm changes
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.confirm_button)).perform(click());
+
+        // assert item has no tags equipped
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        onView(withId(R.id.recycler_view)).perform(new EditItemsTagsUITest.CheckForNoTags());
     }
 }
