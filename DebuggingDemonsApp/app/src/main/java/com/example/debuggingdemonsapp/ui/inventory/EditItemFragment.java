@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -51,7 +52,7 @@ public class EditItemFragment extends Fragment {
 
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
-    private int GALLERY_REQUEST_CODE = 203;
+    private ImageButton currentSelectedImageButton;
 
     /**
      * Default constructor for EditItemFragment.
@@ -60,26 +61,43 @@ public class EditItemFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK && data != null && data.getData() != null) {
+            Uri selectedImageUri = data.getData();
+
+            if (currentSelectedImageButton != null) {
+                Glide.with(this).load(selectedImageUri).into(currentSelectedImageButton);
+            }
+        }
+    }
+
     public void onSelectImageClick(View view) {
-        // Create an AlertDialog to show the options
+        if (view instanceof ImageButton) {
+            currentSelectedImageButton = (ImageButton) view;
+        } else {
+            return;
+        }
+
         final CharSequence[] options = {"Choose from Gallery", "Choose from Photo List"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Choose Photo");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Choose from Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, GALLERY_REQUEST_CODE); // You need to define this constant
-                } else if (options[item].equals("Choose from Photo List")) {
-                    // You need to define this action in your navigation graph
-                    Navigation.findNavController(view).navigate(R.id.action_navigation_editItem_to_navigation_photosList);
-                }
+        builder.setItems(options, (dialog, item) -> {
+            if ("Choose from Gallery".equals(options[item])) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+            } else if ("Choose from Photo List".equals(options[item])) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("button", view.getId());
+                Navigation.findNavController(view).navigate(R.id.navigation_photosList, bundle);
             }
         });
         builder.show();
     }
+
 
     /**
      * Creates and returns the view associated with the fragment.
@@ -267,5 +285,6 @@ public class EditItemFragment extends Fragment {
             }
         });
     }
+
 
 }

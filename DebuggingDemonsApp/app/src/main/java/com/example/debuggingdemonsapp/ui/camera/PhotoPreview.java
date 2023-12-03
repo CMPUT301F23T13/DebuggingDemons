@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,8 +28,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -250,5 +256,55 @@ public class PhotoPreview extends Fragment {
         ((MainActivity) getActivity()).enable(true);
         findNavController(container).navigate(R.id.navigation_camera);
     }
+
+    // This method should be called after the barcode is scanned
+    public void onBarcodeScanned(String barcode) {
+        fetchProductInformation(barcode);
+    }
+
+    private void fetchProductInformation(String barcode) {
+        try {
+            // Load the JSON file (Assuming the file is named 'products.json' and located in the assets folder)
+            String json = loadJSONFromAsset("products.json");
+            JSONArray productsArray = new JSONArray(json);
+
+            for (int i = 0; i < productsArray.length(); i++) {
+                JSONObject product = productsArray.getJSONObject(i);
+                if (product.getString("barcode").equals(barcode)) {
+                    // Assuming product information includes a description
+                    String description = product.getString("description");
+                    updateUIWithProductInfo(description);
+                    return;
+                }
+            }
+            // Handle case where the product is not found
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle error
+        }
+    }
+
+    private String loadJSONFromAsset(String filename) {
+        String json = null;
+        try {
+            InputStream is = getActivity().getAssets().open(filename);  // Use getActivity() to get the context
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    private void updateUIWithProductInfo(String description) {
+        TextView descriptionView = getView().findViewById(R.id.itemdetail);
+        descriptionView.setText(description);
+    }
+
+
 
 }
