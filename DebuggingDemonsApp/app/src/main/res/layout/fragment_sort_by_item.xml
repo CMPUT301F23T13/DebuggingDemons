@@ -31,6 +31,12 @@
             android:layout_height="wrap_content"
             android:text="@string/sort_by_value" />
 
+    <Button
+        android:id="@+id/sort_by_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_by_tag" />
+
     <!-- 在这里可以添加更多的按钮或切换开关来选择升序或降序 -->
 
 

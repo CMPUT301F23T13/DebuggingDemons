@@ -64,13 +64,16 @@ public final class ItemEditBinding implements ViewBinding {
   @NonNull
   public final EditText serialNumber;
 
+  @NonNull
+  public final Button updateTagsButton;
+
   private ItemEditBinding(@NonNull LinearLayout rootView, @NonNull Button backButton,
       @NonNull EditText comment, @NonNull Button confirmButton, @NonNull EditText dateOfPurchase,
       @NonNull EditText description, @NonNull ImageButton editImage1,
       @NonNull ImageButton editImage2, @NonNull ImageButton editImage3,
       @NonNull EditText estimatedValue, @NonNull LinearLayout fragmentEditItem,
       @NonNull EditText make, @NonNull EditText model, @NonNull TextView photos,
-      @NonNull EditText serialNumber) {
+      @NonNull EditText serialNumber, @NonNull Button updateTagsButton) {
     this.rootView = rootView;
     this.backButton = backButton;
     this.comment = comment;
@@ -86,6 +89,7 @@ public final class ItemEditBinding implements ViewBinding {
     this.model = model;
     this.photos = photos;
     this.serialNumber = serialNumber;
+    this.updateTagsButton = updateTagsButton;
   }
 
   @Override
@@ -195,9 +199,15 @@ public final class ItemEditBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.update_tags_button;
+      Button updateTagsButton = ViewBindings.findChildViewById(rootView, id);
+      if (updateTagsButton == null) {
+        break missingId;
+      }
+
       return new ItemEditBinding((LinearLayout) rootView, backButton, comment, confirmButton,
           dateOfPurchase, description, editImage1, editImage2, editImage3, estimatedValue,
-          fragmentEditItem, make, model, photos, serialNumber);
+          fragmentEditItem, make, model, photos, serialNumber, updateTagsButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -17,12 +18,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
+import com.example.debuggingdemonsapp.model.Photograph;
+import com.example.debuggingdemonsapp.model.Tag;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,10 +38,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
+import java.util.ArrayList;
+
 /**
  * Fragment for editing item details.
  */
-public class EditItemFragment extends Fragment {
+public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnFragmentInteractionListener {
     private EditText DoP;
     private EditText Description;
     private EditText Make;
@@ -43,12 +51,17 @@ public class EditItemFragment extends Fragment {
     private EditText SerialNumber;
     private EditText EstimatedValue;
     private EditText Comment;
+    private Button updateTagsButton;
+    ArrayList<String> tagNames;
     private ImageButton imageButton1;
+    private MutableLiveData<Photograph> liveData1;
     private String image1;
-    private ImageButton imageButton2;
     private String image2;
-    private ImageButton imageButton3;
     private String image3;
+    private ImageButton imageButton2;
+    private MutableLiveData<Photograph> liveData2;
+    private ImageButton imageButton3;
+    private MutableLiveData<Photograph> liveData3;
 
     private FirebaseFirestore db;
     private CollectionReference itemsRef;
@@ -110,8 +123,9 @@ public class EditItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     // Initialize Database and collection reference
+        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+"/"+((MainActivity)getActivity()).current_user+"/"+"items");
     // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.item_edit, container, false);
         DoP = view.findViewById(R.id.dateOfPurchase);
@@ -121,6 +135,8 @@ public class EditItemFragment extends Fragment {
         SerialNumber = view.findViewById(R.id.serial_number);
         EstimatedValue = view.findViewById(R.id.estimated_value);
         Comment = view.findViewById(R.id.comment);
+
+        updateTagsButton = view.findViewById(R.id.update_tags_button);
 
         imageButton1 = view.findViewById(R.id.editImage1);
         imageButton2 = view.findViewById(R.id.editImage2);
@@ -135,10 +151,10 @@ public class EditItemFragment extends Fragment {
         imageButton2.setOnClickListener(this::onSelectImageClick);
         imageButton3.setOnClickListener(this::onSelectImageClick);
 
+        getChosenImage(container);
         // Retrieve data from bundle if not null and initialize the UI
         Bundle bundle = getArguments();
         if (bundle != null) {
-            System.out.println(bundle.getString("doP"));
             String doP = bundle.getString("doP");
             String description = bundle.getString("description");
             String make = bundle.getString("make");
@@ -147,14 +163,17 @@ public class EditItemFragment extends Fragment {
             String estimatedValue = bundle.getString("estimatedValue");
             String comment = bundle.getString("comment");
 
+            tagNames = bundle.getStringArrayList("tagNames");
+
             // Gets image Uri's from the bundle for images that exist
             // If an image wasn't selected in the add menu then the string is empty (i.e. the object would be null)
             image1 = bundle.getString("image1");
             image2 = bundle.getString("image2");
             image3 = bundle.getString("image3");
 
+            // Sets the imageButtons' image to the one matching the saved URIs
             setImage(image1, imageButton1);
-            setImage(image2, imageButton2);
+            setImage(image2,imageButton2);
             setImage(image3, imageButton3);
 
             DoP.setText(doP);
@@ -166,6 +185,14 @@ public class EditItemFragment extends Fragment {
             Comment.setText(comment);
         }
 
+        // open dialog to update tags when updateTagsButton is clicked
+        updateTagsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateTagsFragment newFragment = new UpdateTagsFragment(tagNames);
+                newFragment.show(getChildFragmentManager(), "update_tags");
+            }
+        });
 
         // Set click listeners for confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -173,8 +200,15 @@ public class EditItemFragment extends Fragment {
             public void onClick(View v) {
                 saveData();
                 // Fetch updated items from ViewModel
-                InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
-                viewModel.fetchItems();
+//                viewModel.fetchItems();
+                try{
+                    // As the navigation request occurs before the data saving ends, Thread.sleep is needed to ensure that the data is saved before navigating
+                    Thread.sleep(200);
+                }catch (Exception e){
+                    Toast.makeText(getContext(),"Error Occurred", Toast.LENGTH_SHORT).show();
+                }
+                NavController navController = Navigation.findNavController(getView());
+                navController.navigate(R.id.navigation_inventory);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +221,45 @@ public class EditItemFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    /**
+     * This method is used to get live data that is passed from the photo list when an image is chosen
+     * @param container This is a ViewGroup object that is used to work with the navigation controller
+     */
+    private void getChosenImage(ViewGroup container) {
+        liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image1");
+        liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData1.getValue().getUri(), imageButton1);
+//                imageButton1.setRotation(90);
+
+            }
+        });
+
+        liveData2 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image2");
+        liveData2.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData2.getValue().getUri(), imageButton2);
+//                imageButton2.setRotation(90);
+
+            }
+        });
+
+        liveData3 = Navigation.findNavController(container).getCurrentBackStackEntry()
+                .getSavedStateHandle().getLiveData("image3");
+        liveData3.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
+            @Override
+            public void onChanged(Photograph photo) {
+                setImage(liveData3.getValue().getUri(), imageButton3);
+//                imageButton3.setRotation(90);
+
+            }
+        });
     }
 
     /**
@@ -215,22 +288,37 @@ public class EditItemFragment extends Fragment {
      */
     public String updateImage(ImageButton imageButton,int imageNumber){
         Drawable updatedDrawable = imageButton.getDrawable();
-        String updatedImage = null;
-        if(updatedDrawable == null){
-            updatedImage = "";
-        }else{
-            switch (imageNumber){
+        String updatedImage = "";
+
+        switch (imageNumber){
                 case 1:
-                    updatedImage = image1;
+                    if (liveData1.getValue() != null){
+                        updatedImage = liveData1.getValue().getUri();
+                    } else{
+                        if(imageButton.getDrawable() != null){
+                            updatedImage = image1;
+                        }
+                    }
                     break;
                 case 2:
-                    updatedImage = image2;
+                    if(liveData2.getValue() != null){
+                        updatedImage = liveData2.getValue().getUri();
+                    }else{
+                        if(imageButton.getDrawable() != null){
+                            updatedImage = image2;
+                        }
+                    }
                     break;
                 case 3:
-                    updatedImage = image3;
+                    if(liveData3.getValue() != null){
+                        updatedImage = liveData3.getValue().getUri();
+                    }else{
+                        if(imageButton.getDrawable() != null) {
+                            updatedImage = image3;
+                        }
+                    }
                     break;
             }
-        }
         return updatedImage;
     }
     private void saveData(){
@@ -245,6 +333,7 @@ public class EditItemFragment extends Fragment {
 
         // Get the updated images for all three images
         // As of right now this just focuses on deleting images; Future -> add choosing new image functionality
+
         String updatedImage1 = updateImage(imageButton1, 1);
         String updatedImage2 = updateImage(imageButton2,2);
         String updatedImage3 = updateImage(imageButton3,3);
@@ -256,15 +345,18 @@ public class EditItemFragment extends Fragment {
         query.get(Source.SERVER).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         // Update item details in Database
+                        System.out.println(document.getReference());
                         document.getReference().update("dateOfPurchase", updatedDoP,
                                         "make", updatedMake,
                                         "model", updatedModel,
                                         "serialNumber", updatedSerialNumber,
                                         "estimatedValue", updatedEstimatedValue,
                                         "comment", updatedComment,
+                                        "tagNames", tagNames,
                                         "image1",updatedImage1,
                                         "image2", updatedImage2,
                                         "image3", updatedImage3
@@ -273,8 +365,10 @@ public class EditItemFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         // Show a Toast message based on the update result
+
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(getActivity(), "Update successfully!", Toast.LENGTH_SHORT).show();
+
+                                            Toast.makeText(getActivity(), "Updated successfully!", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Toast.makeText(getActivity(), "Update failed, please try again later.", Toast.LENGTH_SHORT).show();
                                         }
@@ -286,5 +380,17 @@ public class EditItemFragment extends Fragment {
         });
     }
 
+    /**
+     * Update tags of selected item
+     * @param tags
+     *    New list of tags to be assigned to selected item
+     */
+    @Override
+    public void onUpdateTags(ArrayList<Tag> tags) {
+        tagNames.clear();
+        for (Tag tag : tags) {
+            tagNames.add(tag.getName());
+        }
+    }
 
 }

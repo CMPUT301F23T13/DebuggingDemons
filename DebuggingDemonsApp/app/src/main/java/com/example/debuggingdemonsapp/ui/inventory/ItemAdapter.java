@@ -89,6 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             bundle.putString("serialNumber", item.getSerialNumber());
                             bundle.putString("estimatedValue", item.getEstimatedValue());
                             bundle.putString("comment", item.getComment());
+                            bundle.putStringArrayList("tagNames", item.getTagNames());
                             bundle.putString("image1", item.getImage1());
                             bundle.putString("image2", item.getImage2());
                             bundle.putString("image3", item.getImage3());
@@ -122,11 +123,21 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return items != null ? items.size() : 0;
     }
 
+    /**
+     * This sets items of ItemAdapter to newItems
+     * @param newItems
+     *     List of Items to update ItemAdapter
+     */
     public void setItems(ArrayList<Item> newItems) {
         this.items = newItems;
         notifyDataSetChanged();
     }
 
+    /**
+     * This returns items currently selected (checked)
+     * @return
+     *     Returns selectedItems
+     */
     public ArrayList<Item> getSelectedItems() {
         return selectedItems;
     }

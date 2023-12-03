@@ -218,6 +218,9 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
             case "value":
                 comparator = Comparator.comparing(Item::getEstimatedValue); // Ensure this method returns a Comparable type
                 break;
+            case "tag":
+                comparator = Comparator.comparing(Item::compareTagNames);
+                break;
         }
 
         if (comparator != null) {

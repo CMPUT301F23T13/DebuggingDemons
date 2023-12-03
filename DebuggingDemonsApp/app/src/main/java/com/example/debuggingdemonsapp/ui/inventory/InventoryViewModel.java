@@ -73,6 +73,11 @@ public class InventoryViewModel extends ViewModel {
         return items;
     }
 
+    /**
+     * This sets InventoryViewModel's items to newItems
+     * @param newItems
+     *     List of items to update InventoryViewModel
+     */
     public void setItems(ArrayList<Item> newItems) {
         items.setValue(newItems);
     }
@@ -83,6 +88,9 @@ public class InventoryViewModel extends ViewModel {
         items.setValue(currentItems);
     }
 
+    /**
+     * This fetches Items from database and updates it into InventoryViewModel's items
+     */
     public void fetchItems() {
         itemsRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
