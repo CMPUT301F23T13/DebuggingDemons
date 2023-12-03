@@ -205,8 +205,10 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onChanged(Photograph photo) {
                 setImage(liveData1.getValue().getUri(), imageButton1);
-//                imageButton1.setRotation(90);
-
+                if(liveData1.getValue().getSerialNumber() != null){
+                    System.out.println("Serial number found");
+                    SerialNumber.setText(liveData1.getValue().getSerialNumber());
+                }
             }
         });
 
@@ -216,8 +218,10 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onChanged(Photograph photo) {
                 setImage(liveData2.getValue().getUri(), imageButton2);
-//                imageButton2.setRotation(90);
-
+                if(liveData2.getValue().getSerialNumber() != null){
+                    System.out.println("Serial number found");
+                    SerialNumber.setText(liveData2.getValue().getSerialNumber());
+                }
             }
         });
 
@@ -227,8 +231,10 @@ public class EditItemFragment extends Fragment {
             @Override
             public void onChanged(Photograph photo) {
                 setImage(liveData3.getValue().getUri(), imageButton3);
-//                imageButton3.setRotation(90);
-
+                if(liveData3.getValue().getSerialNumber() != null){
+                    System.out.println("Serial number found");
+                    SerialNumber.setText(liveData3.getValue().getSerialNumber());
+                }
             }
         });
     }
@@ -320,7 +326,6 @@ public class EditItemFragment extends Fragment {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         // Update item details in Database
-                        System.out.println(document.getReference());
                         document.getReference().update("dateOfPurchase", updatedDoP,
                                         "make", updatedMake,
                                         "model", updatedModel,

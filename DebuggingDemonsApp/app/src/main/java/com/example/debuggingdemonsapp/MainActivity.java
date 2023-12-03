@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -11,10 +12,15 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.widget.Toast;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.example.debuggingdemonsapp.model.Photograph;
 import com.example.debuggingdemonsapp.model.SavedPhotoList;
+import com.example.debuggingdemonsapp.ui.scanning.Scanner;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,6 +34,7 @@ import com.example.debuggingdemonsapp.databinding.ActivityMainBinding;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import org.jetbrains.annotations.Async;
 
@@ -61,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
-
         appPhotos = new SavedPhotoList();
         getDBPhotos(firebaseStorage);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -127,8 +133,16 @@ public class MainActivity extends AppCompatActivity {
 
                                         // A new Photograph is created with the rotated bitmap so that it can be added to the in-app photos
                                         Photograph photo = new Photograph(rotatedImage);
-                                        photo.setUri(uri.toString());
 
+                                        // Gets the serial number from the image's metadata in Firebase Storage and sets the photo object's serial number to that value
+                                        item.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+                                            @Override
+                                            public void onSuccess(StorageMetadata storageMetadata) {
+                                                photo.setSerialNumber(storageMetadata.getCustomMetadata("serial"));
+                                            }
+                                        });
+
+                                        photo.setUri(uri.toString());
                                         // Photo is added at a position based on the indices of items from the database when they are sorted from most recent to oldest
                                         if (indices.isEmpty()){
                                             appPhotos.appendPhoto(photo);
@@ -146,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
                                         }
 
                                     } catch (Exception e) {
-                                        throw new RuntimeException(e);
+                                        System.out.println("Error Occurred");
+                                        System.out.println(e);
                                     }
                                 });
 

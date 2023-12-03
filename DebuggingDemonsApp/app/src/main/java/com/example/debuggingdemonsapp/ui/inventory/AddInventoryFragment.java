@@ -106,8 +106,7 @@ public class AddInventoryFragment extends Fragment {
         });
 
 
-        // Need to figure out how to make this process more efficient
-        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one box's image was changed
+        // Sets the image bitmaps of the clicked ImageButton with the image that was selected in the photolist
         liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image1");
         liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
@@ -115,6 +114,11 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage1.setImageBitmap(liveData1.getValue().photoBitmap());
                 addImage1.setRotation(90);
+                if(liveData1.getValue().getSerialNumber() != null){
+
+                    editTextSerialNumber.setText(liveData1.getValue().getSerialNumber());
+
+                }
 
             }
         });
@@ -128,6 +132,10 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage2.setImageBitmap(liveData2.getValue().photoBitmap());
                 addImage2.setRotation(90);
+                if(liveData2.getValue().getSerialNumber() != null){
+
+                    editTextSerialNumber.setText(liveData2.getValue().getSerialNumber());
+                }
 
             }
         });
@@ -140,6 +148,11 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage3.setImageBitmap(liveData3.getValue().photoBitmap());
                 addImage3.setRotation(90);
+                if(liveData3.getValue().getSerialNumber() != null){
+                    System.out.println("Serial number found");
+                    editTextSerialNumber.setText(liveData3.getValue().getSerialNumber());
+
+                }
 
             }
         });
@@ -243,7 +256,6 @@ public class AddInventoryFragment extends Fragment {
                     if (isAdded()) {
                         Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
-//                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
                         InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
 
                         viewModel.fetchItems();
@@ -266,7 +278,7 @@ public class AddInventoryFragment extends Fragment {
      * @param container  The container that is created in the onCreateView method
      */
 
-    public void chooseImage(ImageButton imageButton, ViewGroup container){
+    private void chooseImage(ImageButton imageButton, ViewGroup container){
         // Called to listen for a click on the imageButton that is passed as an argument
 
         imageButton.setOnClickListener(new View.OnClickListener() {

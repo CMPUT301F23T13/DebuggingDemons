@@ -24,7 +24,7 @@ import java.util.List;
  * Class creates a Barcode Scanner object which is used to scan images for any barcodes
  */
 public class Scanner {
-    BarcodeScanner imageScanner;
+    private BarcodeScanner imageScanner;
 
     /**
      * Constructor method that is used to initialize the scanner
@@ -77,6 +77,12 @@ public class Scanner {
 
     }
 
+    /**
+     * This method is used to scan the image for any serial numbers using the TextRecognition library
+     * @param image This is a Bitmap object that corresponds to the image being scanned
+     * @param rotationDegrees This is an int object that corresponds to the degrees of rotation of the image
+     * @return MutableLiveData String object is returned which relates to the serial number that was found
+     */
     public MutableLiveData<String> scanSerialNumber(Bitmap image, int rotationDegrees){
         MutableLiveData<String> serialMutableData = new MutableLiveData<>();
         // Code from https://developers.google.com/ml-kit/vision/text-recognition/v2/android for creating the text recognizer
@@ -93,12 +99,11 @@ public class Scanner {
                         for(Text.TextBlock block : task.getResult().getTextBlocks()){
                             for(Text.Line line: block.getLines()){
                                 if(line.getText().contains("Serial") || line.getText().contains("S/N") || line.getText().contains("serial")){
-                                    serialMutableData.setValue(line.getText());
+                                    serialMutableData.setValue(line.getElements().get(1).getText());
                                 }
                             }
                         }
 
-//                        System.out.println(task.getResult());
                     }
                 });
         return serialMutableData;

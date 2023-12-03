@@ -34,6 +34,13 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            java {
+                srcDirs("src\\main\\java", "src\\test")
+            }
+        }
+    }
 
 
 }

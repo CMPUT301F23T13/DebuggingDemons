@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import com.example.debuggingdemonsapp.LoginActivity;
 import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.databinding.FragmentPictureBinding;
@@ -24,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +45,7 @@ public class PhotoPreview extends Fragment {
 
     private FragmentPictureBinding binding;
     private Scanner imageScanner;
+
     private int rotationDegrees;
     private Photograph newPhoto;
     private FirebaseStorage storage;
@@ -131,22 +135,35 @@ public class PhotoPreview extends Fragment {
         return barcodeMessage.toString();
     }
 
+    /**
+     * This method is used to scan the image that is being previewed
+     */
     private void imageScan(){
         MutableLiveData<List> barcodeData = imageScanner.scanImageBarcodes(newPhoto.photoBitmap(),rotationDegrees);
 
-        imageScanner.scanSerialNumber(newPhoto.photoBitmap(), rotationDegrees);
+        MutableLiveData<String> serialData = imageScanner.scanSerialNumber(newPhoto.photoBitmap(), rotationDegrees);
+        serialData.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s != null){
+                    newPhoto.setSerialNumber(s);
+                    // Shows that a serial number was found in the image
+                    Toast.makeText(getContext(), "Serial Number Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         barcodeData.observe(getViewLifecycleOwner(), list -> {
             if(list.isEmpty()){
-                Toast.makeText(getContext(),"No Barcode Found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"No barcode found. Please retake photo", Toast.LENGTH_SHORT).show();
             }else{
                 // Add pop-up which displays barcode information
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Barcode(s) Found")
-                        .setMessage(displayBarcodes(list))
+                        .setMessage("Save photo to save barcode(s)\n\n" + displayBarcodes(list))
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getContext(), "Save photo to save information", Toast.LENGTH_SHORT).show();
                                 // The barcode values of the photo is set to the list of strings received from the imageScanner barcode scanner
                                 newPhoto.setBarcodeValues(barcodeData.getValue());
 
@@ -162,7 +179,7 @@ public class PhotoPreview extends Fragment {
      * This method is used to save the photo when the 'save button' is pressed
      * @param container This is a ViewGroup object that is used to
      */
-    public void savePhoto(ViewGroup container){
+    private void savePhoto(ViewGroup container){
 
         // Adding images to the Firestore Storage from https://firebase.google.com/docs/storage/web/upload-files
         // A directory is created for the current_user's photos if it doesn't already exist
@@ -188,7 +205,7 @@ public class PhotoPreview extends Fragment {
         storageRef.putBytes(imageData).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
-
+                System.out.println(e);
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -196,6 +213,18 @@ public class PhotoPreview extends Fragment {
                 storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+                        // The serial number of the image is added to its metadata in Firebase Storage based on the value returned by the 'getSerialNumber' method
+                        storageRef.updateMetadata(new StorageMetadata.Builder().setCustomMetadata("serial", newPhoto.getSerialNumber()).build()).addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+                            @Override
+                            public void onSuccess(StorageMetadata storageMetadata) {
+                                Toast.makeText(getContext(), "Serial number: " + newPhoto.getSerialNumber(),Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                System.out.println(e);
+                            }
+                        });
                         // Sets the Uri in the newPhoto Photograph object to the Uri that firebase storage creates
                         // This is so that it can be used later on for display images
                         newPhoto.setUri(uri.toString());
@@ -205,8 +234,7 @@ public class PhotoPreview extends Fragment {
             }
         });
 
-        //
-        ((MainActivity) getActivity()).appPhotos.addPhoto(newPhoto);
+        ((MainActivity)getActivity()).appPhotos.addPhoto(newPhoto);
 
 
         backToCamera(container);

@@ -77,6 +77,9 @@ public class Photograph implements Parcelable {
         this.serialNumber = serialNumber;
     }
 
+    public String getSerialNumber(){
+        return this.serialNumber;
+    }
     /**
      * This method sets the Uri of the photo based on a database uri that is passed in
      * @param databaseURI A Firebase Storage Uri as a string which is passed into the method
