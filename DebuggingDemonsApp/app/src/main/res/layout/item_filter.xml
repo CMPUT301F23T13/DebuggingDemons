@@ -1,36 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.inventory.SortByItemFragment">
     <EditText
         android:id="@+id/description_filter"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Filter by description"
         android:inputType="text"
         android:minHeight="48dp"/>
-    <EditText
-        android:id="@+id/date_filter"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/description_filter_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select date"
+        android:text="Filter by description" />
+    <EditText
+        android:id="@+id/start_date_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select start date"
         android:inputType="date"
         android:minHeight="48dp"/>
     <EditText
+        android:id="@+id/end_date_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select end date"
+        android:inputType="date"
+        android:minHeight="48dp"/>
+    <Button
+        android:id="@+id/filter_by_date_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter by date" />
+    <EditText
         android:id="@+id/make_filter"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Filter by make"
         android:inputType="text"
         android:minHeight="48dp"/>
+    <Button
+        android:id="@+id/filter_by_make_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter by make" />
     <EditText
         android:id="@+id/tag_filter"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Filter by tag"
         android:inputType="text"
         android:minHeight="48dp"/>
+    <Button
+        android:id="@+id/filter_by_tag_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter by tag" />
 
 </LinearLayout>
