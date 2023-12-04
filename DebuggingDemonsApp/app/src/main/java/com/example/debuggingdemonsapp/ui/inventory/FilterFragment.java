@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
-import java.util.Date;
+import java.util.*;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -20,8 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * A dialog fragment for filtering inventory items by description and date range.
@@ -53,6 +52,15 @@ public class FilterFragment extends DialogFragment {
         void filterByDate(Date startDate, Date endDate);
     }
 
+    public interface OnFilterByMakeListener {
+        void filterByMake(String make);
+    }
+
+    public interface OnFilterByTagsListener {
+        void filterByTags(List<String> tags);
+    }
+
+
     // UI elements and variables for date selection
     private EditText keywordEditText;
     private EditText startDateEditText;
@@ -61,6 +69,14 @@ public class FilterFragment extends DialogFragment {
     private Calendar endCalendar;
     private OnFilterByDescriptionListener filterByDescriptionListener;
     private OnFilterByDateListener filterByDateListener;
+
+    private EditText makeEditText;
+
+    private EditText tagEditText;
+
+    private OnFilterByMakeListener filterByMakeListener;
+
+    private OnFilterByTagsListener filterByTagsListener;
 
     /**
      * Create the dialog for filtering inventory items.
@@ -91,6 +107,12 @@ public class FilterFragment extends DialogFragment {
         Button descriptionFilterButton = dialogView.findViewById(R.id.description_filter_button);
         Button dateFilterButton = dialogView.findViewById(R.id.filter_by_date_button);
 
+        makeEditText = dialogView.findViewById(R.id.make_filter);
+        tagEditText = dialogView.findViewById(R.id.tag_filter);
+
+        Button makeFilterButton = dialogView.findViewById(R.id.filter_by_make_button);
+        Button tagsFilterButton = dialogView.findViewById(R.id.filter_by_tag_button);
+
         // Handle description filter button click
         descriptionFilterButton.setOnClickListener(v -> {
             String keyword = keywordEditText.getText().toString().trim();
@@ -114,6 +136,27 @@ public class FilterFragment extends DialogFragment {
             filterByDateListener.filterByDate(startDate, endDate);
             dismiss(); // Close the dialog after filtering by date range
         });
+
+        makeFilterButton.setOnClickListener(v -> {
+            String make = makeEditText.getText().toString().trim();
+            if (!TextUtils.isEmpty(make)) {
+                filterByMakeListener.filterByMake(make);
+                dismiss();
+            } else {
+                Toast.makeText(getContext(), "Please enter a make", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tagsFilterButton.setOnClickListener(v -> {
+            List<String> tags = parseTagsInput(tagEditText.getText().toString());
+            if (!tags.isEmpty()) {
+                filterByTagsListener.filterByTags(tags);
+                dismiss();
+            } else {
+                Toast.makeText(getContext(), "Please enter tags", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         // Set up dialog view and buttons
         builder.setView(dialogView)
@@ -181,6 +224,38 @@ public class FilterFragment extends DialogFragment {
             endDateEditText.setText(simpleDateFormat.format(endCalendar.getTime()));
             Log.d("DatePicker", "End date updated: " + endDateEditText.getText().toString());
         }
+    }
+
+
+    public void setFilterByMakeListener(OnFilterByMakeListener listener) {
+        this.filterByMakeListener = listener;
+    }
+
+    public void setFilterByTagsListener(OnFilterByTagsListener listener) {
+        this.filterByTagsListener = listener;
+    }
+
+    private List<String> parseTagsInput(String input) {
+        // Trim the input to remove leading and trailing whitespaces
+        input = input.trim();
+
+        // Check if the input is empty
+        if (input.isEmpty()) {
+            return new ArrayList<>(); // Return an empty list if the input is empty
+        }
+
+        // Split the input string by commas
+        String[] tagsArray = input.split(",");
+
+        // Convert the array to a list and trim each tag
+        List<String> tagsList = new ArrayList<>();
+        for (String tag : tagsArray) {
+            String trimmedTag = tag.trim();
+            if (!trimmedTag.isEmpty()) { // Add tag to the list if it's not empty
+                tagsList.add(trimmedTag);
+            }
+        }
+        return tagsList;
     }
 
 }
