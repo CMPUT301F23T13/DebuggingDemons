@@ -86,7 +86,7 @@ public class ScanningUITest {
     @Test
     public void autofillSerialNumberTest(){
         // This test is used to check that a saved photo can be used to autofill the serial number of an item
-        // 'bonobo' is an existing username in the databasee
+        // 'bonobo' is an existing username in the database
         onView(withId(R.id.usernameEditText)).perform(typeText("bonobo"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
 

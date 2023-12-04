@@ -12,12 +12,12 @@ public class HomeViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         mText.setValue("Welcome back!");
     }
-
-    public HomeViewModel(String current_user) {
+    public HomeViewModel(String current_user){
         mText = new MutableLiveData<>();
-        mText.setValue("Welcome back "+current_user+"!");
-    }
 
+        mText.setValue("Welcome back " + current_user + "!");
+    }
+  
     public LiveData<String> getText() {
         return mText;
     }
