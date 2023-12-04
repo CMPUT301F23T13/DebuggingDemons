@@ -5,4 +5,5 @@ com.example.debuggingdemonsapp.ui.home
 com.example.debuggingdemonsapp.ui.inventory
 com.example.debuggingdemonsapp.ui.notifications
 com.example.debuggingdemonsapp.ui.photo
+com.example.debuggingdemonsapp.ui.scanning
 com.example.debuggingdemonsapp.ui.tag
