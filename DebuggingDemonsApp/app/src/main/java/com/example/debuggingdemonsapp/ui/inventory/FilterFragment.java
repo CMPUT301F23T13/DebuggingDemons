@@ -153,7 +153,7 @@ public class FilterFragment extends DialogFragment {
                 filterByTagsListener.filterByTags(tags);
                 dismiss();
             } else {
-                Toast.makeText(getContext(), "Please enter tag", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Please enter tags", Toast.LENGTH_SHORT).show();
             }
         });
 
