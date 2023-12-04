@@ -175,4 +175,40 @@ public class InventoryViewModel extends ViewModel {
                     }
                 });
     }
+
+    public void filterItemByMake(String make) {
+        if (TextUtils.isEmpty(make)) {
+            fetchItems();
+        } else {
+            itemsRef.whereEqualTo("make", make).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        filteredItems.add(item);
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
+    }
+
+    public void filterItemByTags(List<String> tags) {
+        if (tags.isEmpty()) {
+            fetchItems();
+        } else {
+            itemsRef.whereArrayContainsAny("tagNames", tags).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        filteredItems.add(item);
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
+    }
+
+
 }
