@@ -27,92 +27,83 @@ public class LoginActivityUITest {
 
     @Test
     public void test1_ComponentsAreDisplayed() {
-        // Check if the username edit text is displayed
+        // Verify that the username input field is visible
         onView(withId(R.id.usernameEditText)).check(ViewAssertions.matches(isDisplayed()));
 
-        // Check if the login button is displayed
+        // Verify that the login button is visible
         onView(withId(R.id.loginButton)).check(ViewAssertions.matches(isDisplayed()));
 
-        // Check if the register button is displayed
+        // Verify that the register button is visible
         onView(withId(R.id.registerButton)).check(ViewAssertions.matches(isDisplayed()));
-
     }
 
     @Test
     public void test2_RegisterButton_withEmptyUsername() {
-        // input the empty username
+        // Enter an empty string as the username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
-        // click register button
+        // Click the register button
         onView(withId(R.id.registerButton)).perform(click());
-        // We expect to see a Username cannot be empty message
+        // Expect an error message stating that the username cannot be empty
         onView(withText("Username cannot be empty"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-
     }
 
     @Test
     public void test3_LoginButton_withEmptyUsername() {
-        // input the empty username
+        // Enter an empty string as the username
         onView(withId(R.id.usernameEditText)).perform(typeText(""), closeSoftKeyboard());
-        // click login button
+        // Click the login button
         onView(withId(R.id.loginButton)).perform(click());
-        // We expect to see a Username cannot be empty message
+        // Expect an error message stating that the username cannot be empty
         onView(withText("Username cannot be empty"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-
     }
 
     @Test
     public void test4_RegisterButton_withValidUsername() throws InterruptedException {
-        // Assume "newuser" is not already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        // Enter a valid username (assuming "user" is not already registered)
+        onView(withId(R.id.usernameEditText)).perform(typeText("user"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
-        // We expect to see a successful registration message
+        // Expect a successful registration message
         onView(withText("Register Successfully"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-        // After the message is shown, we expect to navigate to the MainActivity
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Check that the MainActivity is displayed
-        onView(withId(R.id.container)) // Use an actual ID from MainActivity
+        // Wait for 3 seconds before checking if MainActivity is displayed
+        Thread.sleep(3000);
+        // Verify that MainActivity is displayed
+        onView(withId(R.id.container)) // Replace with a valid ID from MainActivity
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
     @Test
     public void test5_LoginButton_withValidUsername() {
-        // Assume "newuser" is already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        // Enter a valid username (assuming "user" is already registered)
+        onView(withId(R.id.usernameEditText)).perform(typeText("user"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
-        // We expect to see a successful login message
+        // Expect a successful login message
         onView(withText("Logged in successfully"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
-        // Also, expect navigation to MainActivity after successful login
+        // Wait for 3 seconds before checking if MainActivity is displayed
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        // Check that the MainActivity is displayed
-        onView(withId(R.id.container)) // Use an actual ID from MainActivity
+        // Verify that MainActivity is displayed
+        onView(withId(R.id.container)) // Replace with a valid ID from MainActivity
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
-
     @Test
     public void test6_RegisterButton_withExistUsername() {
-        // Assume "newuser" is already in the database for this test
-        onView(withId(R.id.usernameEditText)).perform(typeText("newuser"), closeSoftKeyboard());
+        // Enter a username that is already registered (assuming "user" is registered)
+        onView(withId(R.id.usernameEditText)).perform(typeText("user"), closeSoftKeyboard());
         onView(withId(R.id.registerButton)).perform(click());
-        // We expect to see a user already exits message
+        // Expect a message indicating that the username already exists
         onView(withText("Username already exists"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
@@ -120,14 +111,15 @@ public class LoginActivityUITest {
 
     @Test
     public void test7_LoginButton_withNonExistUsername() {
-        // Assume "bonobo" is not in the database for this test
+        // Enter a username that is not in the database (assuming "nouser" is not registered)
         onView(withId(R.id.usernameEditText)).perform(typeText("nouser"), closeSoftKeyboard());
         onView(withId(R.id.loginButton)).perform(click());
-        // We expect to see a username does not exist message
+        // Expect a message indicating that the username does not exist
         onView(withText("Username does not exist"))
                 .inRoot(isDialog())
                 .check(ViewAssertions.matches(isDisplayed()));
     }
 
 }
+
 
