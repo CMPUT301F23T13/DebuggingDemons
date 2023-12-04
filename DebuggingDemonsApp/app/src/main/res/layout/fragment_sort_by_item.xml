@@ -37,8 +37,6 @@
         android:layout_height="wrap_content"
         android:text="@string/sort_by_tag" />
 
-    <!-- 在这里可以添加更多的按钮或切换开关来选择升序或降序 -->
-
 
     <RadioGroup
             android:id="@+id/sort_order_group"
@@ -49,14 +47,14 @@
         <RadioButton
                 android:id="@+id/sort_ascending"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/ascending" />
 
         <RadioButton
                 android:id="@+id/sort_descending"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/descending" />
     </RadioGroup>

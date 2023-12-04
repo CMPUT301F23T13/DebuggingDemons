@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class InventoryFragment extends Fragment implements EquipTagsFragment.OnFragmentInteractionListener, SortByItemFragment.SortByItemListener {
@@ -156,16 +157,36 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
         binding.totalEstimatedValue.setText("Total Estimated Value: " + totalValue); // Update the TextView with the new value
     }
 
+    /**
+     * Opens the FilterFragment for filtering items by description and date range.
+     * This method initializes the FilterFragment, sets listeners for filtering by description and date range
+     * and displays the FilterFragment dialog.
+     */
     private void openFilterFragment() {
+        // Initialize FilterFragment
         FilterFragment filterFragment = new FilterFragment();
-        filterFragment.setFilterSelectedListener(new FilterFragment.OnFilterSelectedListener() {
+
+        // Set listener for filtering by description
+        filterFragment.setFilterByDescriptionListener(new FilterFragment.OnFilterByDescriptionListener() {
             @Override
-            public void onFilterSelected(String keyword) {
+            public void filterByDescription(String keyword) {
+                // Invoke ViewModel method to filter items by keyword
                 inventoryViewModel.filterItemByKeyword(keyword);
             }
         });
+
+        // Set listener for filtering by date range
+        filterFragment.setFilterByDateListener(new FilterFragment.OnFilterByDateListener() {
+            @Override
+            public void filterByDate(Date startDate, Date endDate) {
+                // Invoke ViewModel method to filter items by date range
+                inventoryViewModel.filterItemByDate(startDate, endDate);
+            }
+        });
+        // Show the FilterFragment dialog
         filterFragment.show(getChildFragmentManager(), "FilterFragment");
     }
+
 
 
 
