@@ -1,6 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -8,10 +9,13 @@ import android.net.Uri;
 import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -39,6 +43,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Fragment for editing item details.
@@ -123,7 +128,7 @@ public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnF
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
     // Initialize Database and collection reference
-        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
+//        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
         db = FirebaseFirestore.getInstance();
         itemsRef = db.collection("users"+"/"+((MainActivity)getActivity()).current_user+"/"+"items");
     // Inflate the layout for this fragment
@@ -135,6 +140,29 @@ public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnF
         SerialNumber = view.findViewById(R.id.serial_number);
         EstimatedValue = view.findViewById(R.id.estimated_value);
         Comment = view.findViewById(R.id.comment);
+
+        // Add calender for users to edit the date of purchase.
+        DoP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                // Format the date and set it to the EditText
+                                String selectedDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                DoP.setText(selectedDate);
+                            }
+                        }, year, month, day);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+            }
+        });
 
         updateTagsButton = view.findViewById(R.id.update_tags_button);
 
@@ -199,16 +227,17 @@ public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnF
             @Override
             public void onClick(View v) {
                 saveData();
+
                 // Fetch updated items from ViewModel
-//                viewModel.fetchItems();
+                InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
+                viewModel.fetchItems();
+
                 try{
                     // As the navigation request occurs before the data saving ends, Thread.sleep is needed to ensure that the data is saved before navigating
                     Thread.sleep(200);
                 }catch (Exception e){
                     Toast.makeText(getContext(),"Error Occurred", Toast.LENGTH_SHORT).show();
                 }
-                NavController navController = Navigation.findNavController(getView());
-                navController.navigate(R.id.navigation_inventory);
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -217,7 +246,6 @@ public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnF
                 // Navigate back to the inventory fragment
                 NavController navController = Navigation.findNavController(getView());
                 navController.navigate(R.id.navigation_inventory);
-//                Navigation.findNavController(v).popBackStack();
             }
         });
         return view;
@@ -336,6 +364,14 @@ public class EditItemFragment extends Fragment implements UpdateTagsFragment.OnF
         String updatedSerialNumber = SerialNumber.getText().toString();
         String updatedEstimatedValue = EstimatedValue.getText().toString();
         String updatedComment = Comment.getText().toString();
+
+        // Except Serial Number, other features can not be empty.
+        if (TextUtils.isEmpty(updatedDescription) || TextUtils.isEmpty(updatedMake) ||
+                TextUtils.isEmpty(updatedModel) || TextUtils.isEmpty(updatedEstimatedValue) ||
+                TextUtils.isEmpty(updatedComment) || TextUtils.isEmpty(updatedDoP)) {
+            Toast.makeText(getActivity(), "All fields except SerialNumber must be filled!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Get the updated images for all three images
         // As of right now this just focuses on deleting images; Future -> add choosing new image functionality
