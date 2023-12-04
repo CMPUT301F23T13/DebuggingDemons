@@ -1,5 +1,7 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.text.TextUtils;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,16 +10,23 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class InventoryViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference itemsRef = db.collection("items");
+    private CollectionReference itemsRef;
 
-    public InventoryViewModel() {
+    public InventoryViewModel(String current_user) {
+        itemsRef = db.collection("users"+"/"+current_user +"/"+ "items");
         items.setValue(new ArrayList<>());
         fetchItems();
     }
@@ -70,6 +79,11 @@ public class InventoryViewModel extends ViewModel {
         return items;
     }
 
+    /**
+     * This sets InventoryViewModel's items to newItems
+     * @param newItems
+     *     List of items to update InventoryViewModel
+     */
     public void setItems(ArrayList<Item> newItems) {
         items.setValue(newItems);
     }
@@ -80,6 +94,9 @@ public class InventoryViewModel extends ViewModel {
         items.setValue(currentItems);
     }
 
+    /**
+     * This fetches Items from database and updates it into InventoryViewModel's items
+     */
     public void fetchItems() {
         itemsRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -101,5 +118,61 @@ public class InventoryViewModel extends ViewModel {
      */
     public CollectionReference getItemsRef() {
         return itemsRef;
+    }
+
+    /**
+     * Filter items by a provided keyword
+     *
+     * @param keyword The keyword to filter items by
+     */
+    public void filterItemByKeyword(String keyword) {
+        if(TextUtils.isEmpty(keyword)) {
+            // If the keyword is empty, fetch all items
+            fetchItems();
+        } else {
+            // Filter items based on the keyword
+            itemsRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        // Check if the item description contains the provided keyword
+                        if (item.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                            filteredItems.add(item);
+                        }
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
+    }
+
+    /**
+     * Filter items by a date range
+     *
+     * @param startDate The start date for filtering
+     * @param endDate The end date for filtering
+     */
+    public void filterItemByDate(Date startDate, Date endDate) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        // Format dates to strings
+        String startStr = dateFormat.format(startDate);
+        String endStr = dateFormat.format(endDate);
+
+        //Filter items based on the date range
+        itemsRef.whereGreaterThanOrEqualTo("dateOfPurchase", startStr)
+                .whereLessThanOrEqualTo("dateOfPurchase", endStr)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<Item> filteredItems = new ArrayList<>();
+                        for (QueryDocumentSnapshot document: task.getResult()) {
+                            Item item = document.toObject(Item.class);
+                            filteredItems.add(item);
+                        }
+                        items.postValue(filteredItems);
+                    }
+                });
     }
 }

@@ -1,9 +1,12 @@
 package com.example.debuggingdemonsapp.ui.inventory;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -15,10 +18,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Photograph;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,8 +63,9 @@ public class AddInventoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         db = FirebaseFirestore.getInstance();
-        itemsRef = db.collection("items");
+        itemsRef = db.collection("users"+"/"+((MainActivity)getActivity()).current_user + "/" + "items");
 
         View view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
@@ -74,9 +81,32 @@ public class AddInventoryFragment extends Fragment {
         addImage2 = view.findViewById(R.id.addImage2);
         addImage3 = view.findViewById(R.id.addImage3);
 
+        EditText dateOfPurchase = view.findViewById(R.id.editTextDateOfPurchase);
+        dateOfPurchase.setFocusable(false);
+        dateOfPurchase.setInputType(InputType.TYPE_NULL);
+        dateOfPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Need to figure out how to make this process more efficient
-        // Had issues with trying to generalize these as the code would result in all three boxes having the same image when one box's image was changed
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                // Format the date and set it to the EditText
+                                String selectedDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                dateOfPurchase.setText(selectedDate);
+                            }
+                        }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+
+        // Sets the image bitmaps of the clicked ImageButton with the image that was selected in the photolist
         liveData1 = Navigation.findNavController(container).getCurrentBackStackEntry()
                 .getSavedStateHandle().getLiveData("image1");
         liveData1.observe(getViewLifecycleOwner(), new Observer<Photograph>() {
@@ -84,6 +114,11 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage1.setImageBitmap(liveData1.getValue().photoBitmap());
                 addImage1.setRotation(90);
+                if(liveData1.getValue().getSerialNumber() != null){
+
+                    editTextSerialNumber.setText(liveData1.getValue().getSerialNumber());
+
+                }
 
             }
         });
@@ -97,6 +132,10 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage2.setImageBitmap(liveData2.getValue().photoBitmap());
                 addImage2.setRotation(90);
+                if(liveData2.getValue().getSerialNumber() != null){
+
+                    editTextSerialNumber.setText(liveData2.getValue().getSerialNumber());
+                }
 
             }
         });
@@ -109,6 +148,11 @@ public class AddInventoryFragment extends Fragment {
             public void onChanged(Photograph photo) {
                 addImage3.setImageBitmap(liveData3.getValue().photoBitmap());
                 addImage3.setRotation(90);
+                if(liveData3.getValue().getSerialNumber() != null){
+                    System.out.println("Serial number found");
+                    editTextSerialNumber.setText(liveData3.getValue().getSerialNumber());
+
+                }
 
             }
         });
@@ -121,7 +165,43 @@ public class AddInventoryFragment extends Fragment {
         });
 
         view.findViewById(R.id.button_ok).setOnClickListener(v -> {
-            addItemToDatabase();
+            boolean isValid = true;
+            if (editTextDescription.getText().toString().trim().isEmpty()) {
+                editTextDescription.setError("Description cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextDateOfPurchase.getText().toString().trim().isEmpty()) {
+                editTextDateOfPurchase.setError("Date of purchase cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextMake.getText().toString().trim().isEmpty()) {
+                editTextMake.setError("Make cannot be empty");
+                isValid = false;
+            }
+            if (editTextModel.getText().toString().trim().isEmpty()) {
+                editTextModel.setError("Description cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextEstimatedValue.getText().toString().trim().isEmpty()) {
+                editTextEstimatedValue.setError("Date of purchase cannot be empty");
+                isValid = false;
+            }
+
+            if (editTextComment.getText().toString().trim().isEmpty()) {
+                editTextComment.setError("Make cannot be empty");
+                isValid = false;
+            }
+            if (!isValid) {
+                // Show a general Toast message
+                Toast.makeText(getContext(), "Please fill out all required fields.", Toast.LENGTH_SHORT).show();
+                return; // Stay on the fragment, do not proceed further
+            } else {
+                // Proceed to add item to database if all fields are valid
+                addItemToDatabase();
+            }
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_inventory);
         });
@@ -149,13 +229,13 @@ public class AddInventoryFragment extends Fragment {
 
         // Gets the storageURI of an image when an image has been added to the ImageButton
         if (liveData1.getValue() != null){
-            image1 = liveData1.getValue().storageURI();
+            image1 = liveData1.getValue().getUri();
         }
         if(liveData2.getValue() != null){
-            image2 = liveData2.getValue().storageURI();
+            image2 = liveData2.getValue().getUri();
         }
         if(liveData3.getValue() != null){
-            image3 = liveData3.getValue().storageURI();
+            image3 = liveData3.getValue().getUri();
         }
 
 
@@ -176,7 +256,8 @@ public class AddInventoryFragment extends Fragment {
                     if (isAdded()) {
                         Toast.makeText(requireContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
-                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity()).get(InventoryViewModel.class);
+                        InventoryViewModel viewModel = new ViewModelProvider(requireActivity(),new InventoryViewModelFactory(((MainActivity)getActivity()).current_user)).get(InventoryViewModel.class);
+
                         viewModel.fetchItems();
 
                         NavController navController = Navigation.findNavController(getView());
@@ -197,7 +278,7 @@ public class AddInventoryFragment extends Fragment {
      * @param container  The container that is created in the onCreateView method
      */
 
-    public void chooseImage(ImageButton imageButton, ViewGroup container){
+    private void chooseImage(ImageButton imageButton, ViewGroup container){
         // Called to listen for a click on the imageButton that is passed as an argument
 
         imageButton.setOnClickListener(new View.OnClickListener() {

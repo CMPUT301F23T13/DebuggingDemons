@@ -2,20 +2,29 @@ package com.example.debuggingdemonsapp;
 
 
 import android.Manifest;
+import android.view.View;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.GrantPermissionRule;
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.hasWindowLayoutParams;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -35,41 +44,51 @@ public class PhotographUITest {
     public GrantPermissionRule permissionCamera = GrantPermissionRule.grant(Manifest.permission.CAMERA);
 
     @Test
-    public void TakePhotoTest(){
+    public void takePhotoTest(){
         // Method tests the photo taking functionality of the application
 
         // Navigate to the camera
         onView(withId(R.id.navigation_camera)).perform(click());
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
        // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
         // Checks whether the fragment has changed to the 'photo preview' page
         //  Does this by checking if a button that is on the 'photo preview' page is displayed
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         onView(withId(R.id.retake_button)).check(matches(isDisplayed()));
 
     }
 
     @Test
-    public void RetakePhotoTest(){
+    public void retakePhotoTest(){
         // Method tests the photo retaking functionality of the application
 
         // Navigate to the camera
         onView(withId(R.id.navigation_camera)).perform(click());
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         // Checks whether the fragment has changed to the 'photo preview' page
         //  Does this by checking if a button that is on the 'photo preview' page is displayed
         onView(withId(R.id.retake_button)).check(matches(isDisplayed()));
 
-        // Makes sure that the appPhotos list is empty as no photo has been saved
-        scenario.getScenario().onActivity(activity -> {
-            assertTrue(activity.appPhotos.isEmpty());
-        });
-
-        try{
-            Thread.sleep(3000);
-        }catch (InterruptedException e){
-            System.out.println(e);
-        }
         // Clicks on the retake button
         onView(withId(R.id.retake_button)).perform(click());
 
@@ -80,22 +99,23 @@ public class PhotographUITest {
     }
 
     @Test
-    public void SavePhotoTest(){
+    public void savePhotoTest(){
         // Method tests the photo saving functionality of the app
 
-        // Makes sure that the appPhotos list is empty as no photos have been saved yet
-        scenario.getScenario().onActivity(activity -> {
-            assertTrue(activity.appPhotos.isEmpty());
-        });
 
         // Navigate to the camera
         onView(withId(R.id.navigation_camera)).perform(click());
+        try{
+            Thread.sleep(2000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
         // Perform click on camera button
         onView(withId(R.id.camera_button)).perform(click());
         // Checks whether the fragment has changed to the 'photo preview' page
         //  Does this by checking if a button that is on the 'photo preview' page is displayed
         try{
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         }catch (InterruptedException e){
             System.out.println(e);
         }
@@ -109,63 +129,6 @@ public class PhotographUITest {
         // Checks whether the page is now the camera page
         onView(withId(R.id.navigation_camera)).check(matches(isDisplayed()));
 
-       // Checks whether photo has been added to the appPhotos list
-        scenario.getScenario().onActivity(activity -> {
-            assertFalse(activity.appPhotos.isEmpty());
-        });
-
-    }
-
-    @Test
-    public void DeletePhotoTest() {
-        // Method to test photo deletion
-
-        // Take a new photo
-        onView(withId(R.id.navigation_camera)).perform(click());
-        // Perform click on camera button
-        onView(withId(R.id.camera_button)).perform(click());
-
-        try{
-            Thread.sleep(3000);
-        }catch (InterruptedException e){
-            System.out.println(e);
-        }
-        onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
-
-        onView(withId(R.id.navigation_inventory)).perform(click());
-
-        onView(withId(R.id.add_button)).perform(click());
-
-        // Checks that photo is added to the imageView of the imagebutton that was pressed on
-        onView(withId(R.id.addImage1)).perform(click());
-
-        onView(withText("Saved Photos")).check(matches(isDisplayed()));
-
-
-        onView(withId(R.id.photoContainer)).perform(click());
-
-        // Change description of item to identify it
-        onView(withId(R.id.editTextDescription)).perform(replaceText("delete"));
-
-        // Save changes
-        onView(withId(R.id.button_ok)).perform(click());
-
-        onView(withId(R.id.navigation_inventory)).check(matches(isDisplayed()));
-
-        // Click on the created item which opens a dialog fragment
-        onView(withText("delete")).perform(click());
-
-        onView(withText("EDIT")).inRoot(isDialog()).check(matches((isDisplayed()))).perform(click());
-
-        onView(withText("EDIT")).check(matches(isDisplayed()));
-
-        // Clicks on item to delete it from the item
-        onView(withId(R.id.editImage1)).perform(click());
-
-        // Checks that after click the 'edit page' is still selected
-        onView(withText("EDIT")).check(matches(isDisplayed()));
-
-        onView(withId(R.id.confirm_button)).check(matches(isDisplayed())).perform(click());
 
 
     }
@@ -221,6 +184,12 @@ public class PhotographUITest {
         // Navigate to the inventory menu
         onView(withId(R.id.navigation_inventory)).perform(click());
 
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
+
         onView(withId(R.id.add_button)).perform(click());
 
         // Checks that photo is added to the imageView of the imagebutton that was pressed on
@@ -228,12 +197,80 @@ public class PhotographUITest {
 
         onView(withText("Saved Photos")).check(matches(isDisplayed()));
 
-        onView(withId(R.id.photoContainer)).perform(click());
+        // Code for new ViewAction() from https://stackoverflow.com/questions/28834579/click-on-not-fully-visible-imagebutton-with-espresso
+        // Used to ensure that the image is clicked on
+        onView(withTagValue(is(0))).perform(new ViewAction() {
+            @Override
+            public String getDescription() {
+                return null;
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+                return ViewMatchers.isEnabled();
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                view.performClick();
+            }
+        });
 
         onView(withId(R.id.addImage1)).check(matches(isDisplayed()));
-        // Need to find a way to check whether the image has changed
-        // So far relying on no error messages occurring to verify that action is successful
 
+
+    }
+
+
+    @Test
+    public void deletePhotoTest(){
+        // Take a new photo
+
+        onView(withId(R.id.navigation_camera)).perform(click());
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
+        // Perform click on camera button
+        onView(withId(R.id.camera_button)).perform(click());
+
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
+        onView(withId(R.id.save_button)).check(matches(isDisplayed())).perform(click());
+
+        onView(withId(R.id.photos_button)).perform(click());
+
+        onView(withTagValue(is(0))).perform(new ViewAction() {
+            @Override
+            public String getDescription() {
+                return null;
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+               return ViewMatchers.isEnabled();
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                view.performLongClick();
+            }
+        });
+
+        onView(withText("Delete Photo")).inRoot(isDialog()).check(matches(isDisplayed()));
+
+        onView(withText("Yes")).perform(click());
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
+
+        onView(withTagValue(is(0))).check(doesNotExist());
     }
 
 }

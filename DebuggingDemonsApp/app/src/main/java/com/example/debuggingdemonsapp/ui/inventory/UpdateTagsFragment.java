@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.debuggingdemonsapp.MainActivity;
 import com.example.debuggingdemonsapp.R;
 import com.example.debuggingdemonsapp.model.Tag;
 import com.example.debuggingdemonsapp.ui.tag.TagViewModel;
@@ -65,7 +66,7 @@ public class UpdateTagsFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        tagViewModel = new ViewModelProvider(this).get(TagViewModel.class);
+        tagViewModel = new TagViewModel(((MainActivity)getActivity()).current_user);
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_tag_equip, null);

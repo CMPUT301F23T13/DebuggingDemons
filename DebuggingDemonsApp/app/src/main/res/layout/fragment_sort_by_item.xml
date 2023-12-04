@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="16dp"
+              tools:context=".ui.inventory.SortByItemFragment">
+
+    <Button
+            android:id="@+id/sort_by_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by_date" />
+
+    <Button
+            android:id="@+id/sort_by_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by_descrioption" />
+
+    <Button
+            android:id="@+id/sort_by_make"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by_make" />
+
+    <Button
+            android:id="@+id/sort_by_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by_value" />
+
+    <Button
+        android:id="@+id/sort_by_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_by_tag" />
+
+
+    <RadioGroup
+            android:id="@+id/sort_order_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <RadioButton
+                android:id="@+id/sort_ascending"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/ascending" />
+
+        <RadioButton
+                android:id="@+id/sort_descending"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/descending" />
+    </RadioGroup>
+
+
+
+</LinearLayout>

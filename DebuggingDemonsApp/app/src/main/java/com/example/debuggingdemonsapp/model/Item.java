@@ -1,6 +1,10 @@
 package com.example.debuggingdemonsapp.model;
 
+import static java.util.Collections.sort;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.drawable.Drawable;
 
 /**
@@ -16,6 +20,8 @@ public class Item {
     private String comment;
     private ArrayList<String> tagNames;
 
+    private List<String> imageUris;
+    // getters and setters for imageUris
     private String image1;
     private String image2;
     private String image3;
@@ -107,14 +113,37 @@ public class Item {
         this.comment = comment;
     }
 
+    /**
+     * This returns the Item's tag names
+     * @return
+     *     Returns tag names
+     */
     public ArrayList<String> getTagNames() {
+        tagNames.sort(String::compareToIgnoreCase);
         return tagNames;
     }
 
+    /**
+     * This returns a string to compare an Item's tag names with
+     * other Item's tag names alphabetically
+     * @return
+     *     Returns string for comparison
+     */
+    public String compareTagNames() {
+        tagNames.sort(String::compareToIgnoreCase);
+        return tagNames.toString().toLowerCase();
+    }
+
+    /**
+     * This adds a tag's name to tag names
+     * @param tag
+     *     Tag to be added
+     */
     public void addTag(Tag tag) {
         String name = tag.getName();
         if (!tagNames.contains(name)) {
             tagNames.add(name);
+            tagNames.sort(String::compareToIgnoreCase);
         }
     }
 

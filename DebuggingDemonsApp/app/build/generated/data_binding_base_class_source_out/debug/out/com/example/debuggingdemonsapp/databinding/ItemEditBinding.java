@@ -50,6 +50,9 @@ public final class ItemEditBinding implements ViewBinding {
   public final EditText estimatedValue;
 
   @NonNull
+  public final LinearLayout fragmentEditItem;
+
+  @NonNull
   public final EditText make;
 
   @NonNull
@@ -68,8 +71,9 @@ public final class ItemEditBinding implements ViewBinding {
       @NonNull EditText comment, @NonNull Button confirmButton, @NonNull EditText dateOfPurchase,
       @NonNull EditText description, @NonNull ImageButton editImage1,
       @NonNull ImageButton editImage2, @NonNull ImageButton editImage3,
-      @NonNull EditText estimatedValue, @NonNull EditText make, @NonNull EditText model,
-      @NonNull TextView photos, @NonNull EditText serialNumber, @NonNull Button updateTagsButton) {
+      @NonNull EditText estimatedValue, @NonNull LinearLayout fragmentEditItem,
+      @NonNull EditText make, @NonNull EditText model, @NonNull TextView photos,
+      @NonNull EditText serialNumber, @NonNull Button updateTagsButton) {
     this.rootView = rootView;
     this.backButton = backButton;
     this.comment = comment;
@@ -80,6 +84,7 @@ public final class ItemEditBinding implements ViewBinding {
     this.editImage2 = editImage2;
     this.editImage3 = editImage3;
     this.estimatedValue = estimatedValue;
+    this.fragmentEditItem = fragmentEditItem;
     this.make = make;
     this.model = model;
     this.photos = photos;
@@ -168,6 +173,8 @@ public final class ItemEditBinding implements ViewBinding {
         break missingId;
       }
 
+      LinearLayout fragmentEditItem = (LinearLayout) rootView;
+
       id = R.id.make;
       EditText make = ViewBindings.findChildViewById(rootView, id);
       if (make == null) {
@@ -199,8 +206,8 @@ public final class ItemEditBinding implements ViewBinding {
       }
 
       return new ItemEditBinding((LinearLayout) rootView, backButton, comment, confirmButton,
-          dateOfPurchase, description, editImage1, editImage2, editImage3, estimatedValue, make,
-          model, photos, serialNumber, updateTagsButton);
+          dateOfPurchase, description, editImage1, editImage2, editImage3, estimatedValue,
+          fragmentEditItem, make, model, photos, serialNumber, updateTagsButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
