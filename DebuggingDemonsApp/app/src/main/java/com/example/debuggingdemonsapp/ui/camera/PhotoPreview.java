@@ -223,7 +223,9 @@ public class PhotoPreview extends Fragment {
                         storageRef.updateMetadata(new StorageMetadata.Builder().setCustomMetadata("serial", newPhoto.getSerialNumber()).build()).addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
                             @Override
                             public void onSuccess(StorageMetadata storageMetadata) {
-                                Toast.makeText(getContext(), "Serial number: " + newPhoto.getSerialNumber(),Toast.LENGTH_SHORT).show();
+                                if(getContext() != null){
+                                    Toast.makeText(getContext(), "Serial number: " + newPhoto.getSerialNumber(),Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -255,16 +257,17 @@ public class PhotoPreview extends Fragment {
                         Map<String, Object> imageInfo = new HashMap<>();
                         imageInfo.put("url", uri.toString());
                         imageInfo.put("timestamp", FieldValue.serverTimestamp());
-
-                        FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        db.collection("images")
-                                .add(imageInfo)
-                                .addOnSuccessListener(documentReference -> {
-                                    Toast.makeText(getContext(), "Photo uploaded and saved.", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(getContext(), "Error saving photo.", Toast.LENGTH_SHORT).show();
-                                });
+                        if (getContext() != null){
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("images")
+                                    .add(imageInfo)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Toast.makeText(getContext(), "Photo uploaded and saved.", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(getContext(), "Error saving photo.", Toast.LENGTH_SHORT).show();
+                                    });
+                        }
                     }
                 });
             }

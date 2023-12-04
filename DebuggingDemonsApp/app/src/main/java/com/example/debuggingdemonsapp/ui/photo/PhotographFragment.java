@@ -153,9 +153,12 @@ public class PhotographFragment extends Fragment {
         imageButton.setRotation(90);
 
         imageButton.setImageBitmap(photo.photoBitmap());
+
         imageButton.setId(View.generateViewId());
 
+
         imageButtons.add(imageButton);
+        imageButton.setTag(imageButtons.indexOf(imageButton));
         binding.photoContainer.addView(imageButton);
     }
 

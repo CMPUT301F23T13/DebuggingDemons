@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.example.debuggingdemonsapp"
     compileSdk = 34
-
+    testOptions{
+        animationsDisabled = true
+    }
     defaultConfig {
         applicationId = "com.example.debuggingdemonsapp"
         minSdk = 24
