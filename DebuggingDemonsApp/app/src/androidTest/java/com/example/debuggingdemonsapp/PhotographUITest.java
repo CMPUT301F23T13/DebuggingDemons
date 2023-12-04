@@ -264,6 +264,11 @@ public class PhotographUITest {
         onView(withText("Delete Photo")).inRoot(isDialog()).check(matches(isDisplayed()));
 
         onView(withText("Yes")).perform(click());
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
 
         onView(withTagValue(is(0))).check(doesNotExist());
     }
