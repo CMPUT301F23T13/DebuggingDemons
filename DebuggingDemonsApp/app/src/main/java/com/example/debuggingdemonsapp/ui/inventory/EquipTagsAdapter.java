@@ -148,5 +148,8 @@ public class EquipTagsAdapter extends RecyclerView.Adapter<EquipTagsAdapter.Equi
             tagCheckBox = tagView.findViewById(R.id.tag_checkbox);
         }
     }
+
+
+
 }
 

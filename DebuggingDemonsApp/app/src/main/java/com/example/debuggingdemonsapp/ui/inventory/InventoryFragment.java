@@ -183,10 +183,29 @@ public class InventoryFragment extends Fragment implements EquipTagsFragment.OnF
                 inventoryViewModel.filterItemByDate(startDate, endDate);
             }
         });
+
+
+        // Set listener for filtering by tag
+        filterFragment.setFilterByTagListener(new FilterFragment.OnFilterByTagListener() {
+            @Override
+            public void filterByTag(String tag) {
+                // Invoke ViewModel method to filter items by keyword
+                inventoryViewModel.filterItemsByTag(tag);
+            }
+        });
+
+        // Set listener for filtering by make
+        filterFragment.setFilterByMakeListener(new FilterFragment.OnFilterByMakeListener() {
+            @Override
+            public void filterByMake(String make) {
+                // Invoke ViewModel method to filter items by keyword
+                inventoryViewModel.filterItemsByMake(make);
+            }
+        });
+
         // Show the FilterFragment dialog
         filterFragment.show(getChildFragmentManager(), "FilterFragment");
     }
-
 
 
 

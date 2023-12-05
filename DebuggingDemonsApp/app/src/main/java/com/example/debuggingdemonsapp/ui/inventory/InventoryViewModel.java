@@ -147,6 +147,65 @@ public class InventoryViewModel extends ViewModel {
         }
     }
 
+
+    /**
+     * Filters items based on the specified make and updates the LiveData.
+     * @param make The make to filter items by.
+     */
+    public void filterItemsByMake(String make) {
+        if (TextUtils.isEmpty(make)) {
+            // If the make string is empty, fetch all items
+            fetchItems();
+        } else {
+            // Filter items based on the make
+            itemsRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        // Check if the item's make matches the provided make
+                        if (item.getMake() != null && item.getMake().equalsIgnoreCase(make)) {
+                            filteredItems.add(item);
+                        }
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
+    }
+
+
+    // In InventoryViewModel.java
+
+    /**
+     * Filters items based on the specified tag and updates the LiveData.
+     * @param tag The tag to filter items by.
+     */
+    public void filterItemsByTag(String tag) {
+        if (TextUtils.isEmpty(tag)) {
+            // If the tag string is empty, fetch all items
+            fetchItems();
+        } else {
+            // Filter items based on the tag
+            itemsRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ArrayList<Item> filteredItems = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Item item = document.toObject(Item.class);
+                        // Check if the item's tags contain the provided tag
+                        if (item.getTagNames() != null && item.getTagNames().contains(tag.toLowerCase())) {
+                            filteredItems.add(item);
+                        }
+                    }
+                    items.postValue(filteredItems);
+                }
+            });
+        }
+    }
+
+
+
+
     /**
      * Filter items by a date range
      *

@@ -5,8 +5,6 @@ import static java.util.Collections.sort;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Model class for an Item object. Holds all properties of a Item object along with getter and setter methods of object
  */
@@ -18,7 +16,13 @@ public class Item {
     private String serialNumber;
     private String estimatedValue;
     private String comment;
+    private String tag;
     private ArrayList<String> tagNames;
+
+
+    public boolean hasTag(String tagName) {
+        return tagNames.contains(tagName.toLowerCase());
+    }
 
     private List<String> imageUris;
     // getters and setters for imageUris
@@ -146,6 +150,20 @@ public class Item {
             tagNames.sort(String::compareToIgnoreCase);
         }
     }
+
+    /**
+     * Checks if the item's make matches the specified make.
+     * @param makeToMatch The make to match.
+     * @return True if the item's make matches the given make, false otherwise.
+     */
+    public boolean matchesMake(String makeToMatch) {
+        if (make == null || makeToMatch == null) {
+            return false;
+        }
+        return make.equalsIgnoreCase(makeToMatch);
+    }
+
+
 
     public String getImage1() {return this.image1;}
 
